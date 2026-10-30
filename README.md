@@ -1,2 +1,278 @@
-# karnataka-explore
-Karnataka Explore - smart local tourism and homestay booking portal for all 31 districts of Karnataka. Flask, SQLite/MySQL, OpenStreetMap, PDF tickets, 3 languages.
+# Karnataka Explore — Smart Local Tourism Business Portal
+
+A complete, working tourism and homestay booking portal for Karnataka, built with
+Flask. It covers all **31 districts** with **116 real destinations**, a homestay
+booking flow, a simulated payment gateway, PDF tickets with QR codes, an itinerary
+planner, three languages (English / हिन्दी / ಕನ್ನಡ), light and dark themes, and a
+separate admin console.
+
+This is a final-year college project: **no real payments are processed anywhere**.
+Every payment screen is a simulator and no card number, UPI PIN, OTP or bank
+password is ever collected.
+
+---
+
+## 1. Quick start
+
+```bash
+# 1. create and activate a virtual environment
+python3 -m venv venv
+source venv/bin/activate          # Windows: venv\Scripts\activate
+
+# 2. install dependencies
+pip install -r requirements.txt
+
+# 3. (optional) copy the environment template
+cp .env.example .env              # edit SECRET_KEY before deploying anywhere
+
+# 4. run it - the database is created and seeded automatically on first run
+python run.py
+```
+
+Open <http://127.0.0.1:5000>.
+
+To rebuild the database from scratch at any time:
+
+```bash
+rm instance/karnataka_explore.db
+python seed.py
+```
+
+### Demo accounts
+
+| Role  | URL            | Email                          | Password    |
+|-------|----------------|--------------------------------|-------------|
+| User  | `/login`       | `demo@karnatakaexplore.in`     | `Demo@1234` |
+| Admin | `/admin/login` | `admin@karnatakaexplore.in`    | `Admin@123` |
+
+Change both from `.env` before the project is shown to anyone else, then re-seed.
+
+---
+
+## 2. What is included
+
+**Visitor side**
+
+- Home page with hero search, districts, popular destinations, homestays,
+  waterfalls, heritage, temples, beaches and hills, an interactive map, reviews
+  and travel tips.
+- Destination listing with keyword search plus district, category and sort
+  filters, and pagination.
+- Destination detail pages: photo gallery with lightbox, description, best time,
+  entry fee, timings, duration, activities, nearby attractions, how to reach,
+  OpenStreetMap embed, "Get directions", reviews and a review form.
+- District directory grouped by region, with a page per district.
+- Homestay listing with district, price and facility filters; detail pages with
+  rooms, facilities, house rules, map and reviews.
+- Tour guides directory and a demo guide-booking flow.
+- Wishlist for destinations and homestays.
+- Itinerary planner: pick up to 12 places, it orders them nearest-neighbour and
+  splits them into days with distances, then exports a PDF.
+- Contact form, newsletter signup, about page.
+
+**Accounts and bookings**
+
+- Separate user registration/login and a completely separate admin login.
+- Passwords hashed with Werkzeug (PBKDF2-SHA256); validation on email, 10-digit
+  Indian mobile numbers and password strength.
+- Password visibility toggle, "remember me", forgot-password flow.
+- Profile view/edit; unauthorised access to user pages redirects to login.
+- Booking flows for destinations (date + visitors), homestays (dates + guests +
+  rooms, with availability and capacity checks) and guides (date + days).
+- Demo payment page with UPI / debit / credit / net-banking choices and explicit
+  success or failure simulation; a demo transaction ID is generated and stored.
+- PDF ticket with logo, booking ID, traveller details, trip details, amount,
+  demo payment status, transaction ID and a QR code that resolves to a public
+  verification page. Download, print or view in the browser.
+- "My Bookings" with search, status filter, ticket view, re-pay and cancellation.
+
+**Admin console** (`/admin`)
+
+- Dashboard: users, destinations, homestays, bookings, demo revenue, pending
+  reviews, unread messages, category and district breakdowns, recent bookings.
+- Destination CRUD with image upload and per-image deletion.
+- Homestay CRUD with image upload, rooms and facilities.
+- Tour guide CRUD.
+- Booking management with status changes, plus a payments ledger.
+- User list and removal.
+- Review moderation (approve / reject / delete).
+- Contact inbox and editable site content (travel tips, emergency numbers).
+- Administrator management.
+
+**Site-wide**
+
+- Three languages via a translation system (`i18n.py`) covering navigation,
+  buttons, forms, booking, payment and admin strings, plus district and category
+  names. Switch from the header; the choice is kept in the session.
+- Light/dark theme with a sun/moon toggle, saved in `localStorage` and applied
+  before first paint (no flash). `?theme=dark` also forces a theme for demos.
+- Fully responsive: desktop, tablet and phone layouts.
+
+---
+
+## 3. Project structure
+
+```
+karnataka-explore/
+├── app.py                  # application factory, filters, error handlers
+├── run.py                  # launcher that seeds on first run
+├── config.py               # configuration read from environment variables
+├── db.py                   # connection handling + SQLite schema
+├── services.py             # read queries shared by public/user/admin pages
+├── security.py             # auth decorators, validation, id generation
+├── i18n.py                 # English / Hindi / Kannada translation tables
+├── tickets.py              # PDF ticket and itinerary generation (ReportLab)
+├── seed.py                 # builds and fills the database
+├── blueprints/
+│   ├── public.py           # home, listings, detail pages, map, contact
+│   ├── auth.py             # register, login, profile, password reset
+│   ├── booking.py          # bookings, demo payment, tickets, wishlist, reviews
+│   └── admin.py            # admin login, dashboard, CRUD, moderation
+├── data/
+│   ├── destinations_data.py    # districts 1-11
+│   ├── destinations_data2.py   # districts 12-21
+│   ├── destinations_data3.py   # districts 22-31
+│   ├── sample_content.py       # sample homestays, guides and reviews
+│   └── enrichment.json         # photo URLs and coordinates per destination
+├── templates/              # Jinja templates (public, auth, booking, admin)
+├── static/
+│   ├── css/style.css       # the whole design system
+│   ├── js/app.js           # theme, nav, lightbox, date guards, confirmations
+│   └── uploads/            # admin-uploaded photographs
+├── schema/
+│   ├── sqlite_schema.sql   # SQLite DDL (what the app uses by default)
+│   └── mysql_schema.sql    # MySQL 8 DDL
+└── tests/smoke.py          # end-to-end route and flow test
+```
+
+---
+
+## 4. Database
+
+SQLite is the default so the project runs with **zero setup** — the file lives at
+`instance/karnataka_explore.db`. All queries use parameter binding.
+
+Tables: `users`, `admins`, `districts`, `destinations`, `destination_images`,
+`homestays`, `homestay_images`, `rooms`, `bookings`, `booking_tickets`,
+`payments`, `tour_guides`, `guide_bookings`, `reviews`, `wishlist`, `languages`,
+`contact_messages`, `newsletter`, `site_content`.
+
+### Switching to MySQL
+
+1. Create the database and load the schema:
+
+   ```bash
+   mysql -u root -p -e "CREATE DATABASE karnataka_explore CHARACTER SET utf8mb4;"
+   mysql -u root -p karnataka_explore < schema/mysql_schema.sql
+   ```
+
+2. Install the driver: `pip install mysql-connector-python`
+
+3. In `.env` set `DB_BACKEND=mysql` and fill in `DB_HOST`, `DB_USER`,
+   `DB_PASSWORD`, `DB_NAME`.
+
+The read/write SQL is written to work on both engines, but this project ships and
+is tested on SQLite — if you switch, run `python tests/smoke.py` afterwards to
+confirm every route on your MySQL setup.
+
+---
+
+## 5. Data: what is real and what is sample
+
+- **Destinations are real.** All 116 places exist, and the descriptions, timings,
+  entry fees, best seasons and travel notes were written from public sources.
+  Coordinates and photographs come from Wikipedia / Wikimedia Commons.
+- **Photographs are hot-linked from Wikimedia Commons.** They load in any browser
+  with internet access. For an offline demo, download them into
+  `static/uploads/` and update `destination_images.image_url`.
+- **Homestay and tour-guide records are sample data** created for this project.
+  The names, tariffs and phone numbers are not real businesses; every such row is
+  flagged `is_sample = 1` and shown as a "Sample" badge in the admin console.
+  Replace them with verified listings before presenting the site as a live
+  product.
+- Reviews shown after seeding are sample reviews, marked approved so the pages
+  have content. New visitor reviews enter as `Pending` and wait for admin
+  moderation.
+
+---
+
+## 6. Languages
+
+`i18n.py` holds three dictionaries. Every string in the templates goes through
+`t('key')`, and a missing key falls back to English, so a partial translation
+never breaks a page.
+
+```python
+# i18n.py
+TRANSLATIONS["kn"]["book_now"] = "ಈಗ ಬುಕ್ ಮಾಡಿ"
+```
+
+District and category names have their own tables (`DISTRICT_NAMES`,
+`CATEGORY_NAMES`) in the same file. The `destinations` table already has
+`description_hi` and `description_kn` columns — fill them from the admin form (or
+directly) to show translated destination descriptions.
+
+---
+
+## 7. Payments and tickets — how the simulation works
+
+`POST /payment/<booking_id>` records a row in `payments` with method, a generated
+demo transaction ID (`DEMO` + 10 digits), amount and a `Success`/`Failed` status,
+then updates the booking. On success a `booking_tickets` row is created and the
+PDF becomes downloadable. Nothing touches a real gateway, and no field on any
+form asks for card numbers, CVV, UPI PINs, OTPs or bank credentials.
+
+PDF tickets are generated with ReportLab and the QR code with `qrcode`; both run
+locally, so no third-party image service is required.
+
+---
+
+## 8. Security notes
+
+- Passwords are hashed with `werkzeug.security` (PBKDF2-SHA256), never stored.
+- Role separation: `session["user_id"]` for visitors, `session["admin_id"]` for
+  administrators; decorators (`login_required`, `admin_required`) guard every
+  private route, and each booking is checked against the signed-in user.
+- All SQL uses bound parameters, so the queries are not open to injection.
+- Uploads are restricted to image extensions with randomised filenames, capped at
+  8 MB, and served from `static/uploads`.
+- Secrets and credentials come from `.env` (see `.env.example`); nothing is
+  hardcoded except the development defaults, which you should change.
+- Templates auto-escape output, which covers the usual XSS cases.
+
+For production you would additionally add CSRF tokens, HTTPS, rate limiting on
+login, and a real email service for password resets.
+
+---
+
+## 9. Testing
+
+```bash
+python tests/smoke.py
+```
+
+The script walks every public route, registers a user, books a destination, a
+homestay and a guide, runs both payment outcomes, downloads and validates the PDF
+tickets, exercises the wishlist, reviews and itinerary, checks that private pages
+redirect when signed out, then logs into the admin console and exercises each
+CRUD screen. It prints one line per check and exits non-zero on failure.
+
+---
+
+## 10. Maps
+
+Leaflet with OpenStreetMap tiles — no API key needed. Destination and homestay
+pages embed an OpenStreetMap frame and a Google Maps "directions" link. To use
+Google Maps instead, replace the tile URL in `config.py` (`MAP_TILE_URL`) or swap
+the map partial in `templates/index.html` / `templates/map.html`.
+
+---
+
+## 11. Credits
+
+- Photographs and coordinates: Wikipedia / Wikimedia Commons contributors.
+- Map tiles: © OpenStreetMap contributors, rendered with Leaflet.
+- Fonts: Plus Jakarta Sans and Fraunces (Google Fonts), with system fallbacks.
+
+Built as an academic project. Check timings, fees and access rules with the
+Karnataka Tourism Department before relying on any detail for a real trip.
