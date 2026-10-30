@@ -280,6 +280,8 @@ the map partial in `templates/index.html` / `templates/map.html`.
 ## 11. Deploying it live
 
 The code lives at <https://github.com/vasanthhg-cloud/karnataka-explore>.
+Step-by-step instructions for Render, Railway, Docker and PythonAnywhere are in
+[DEPLOY.md](DEPLOY.md).
 
 **GitHub Pages will not work for this project.** Pages only serves static files,
 and this is a Flask application with a database, logins and server-rendered

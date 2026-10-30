@@ -1,0 +1,12 @@
+.git
+.github
+docs
+instance
+__pycache__
+*.pyc
+venv
+.venv
+.env
+static/uploads/*
+!static/uploads/.gitkeep
+tests

@@ -1,0 +1,19 @@
+# Karnataka Explore - production image
+FROM python:3.12-slim
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PORT=8000
+
+WORKDIR /app
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+# Bake the seeded database into the image; run.py re-seeds automatically if the
+# mounted volume is empty, so both cases work.
+RUN python seed.py
+
+EXPOSE 8000
+CMD ["sh", "-c", "gunicorn --bind 0.0.0.0:${PORT} --workers 2 --timeout 120 run:app"]
