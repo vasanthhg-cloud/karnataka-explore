@@ -142,7 +142,10 @@ karnataka-explore/
 ├── schema/
 │   ├── sqlite_schema.sql   # SQLite DDL (what the app uses by default)
 │   └── mysql_schema.sql    # MySQL 8 DDL
-└── tests/smoke.py          # end-to-end route and flow test
+├── tests/smoke.py          # end-to-end route and flow test
+├── Procfile                # gunicorn start command for Heroku-style hosts
+├── render.yaml             # one-click Render blueprint
+└── .github/workflows/tests.yml   # CI: seeds and runs the smoke test on push
 ```
 
 ---
@@ -268,7 +271,53 @@ the map partial in `templates/index.html` / `templates/map.html`.
 
 ---
 
-## 11. Credits
+## 11. Deploying it live
+
+The code lives at <https://github.com/vasanthhg-cloud/karnataka-explore>.
+
+**GitHub Pages will not work for this project.** Pages only serves static files,
+and this is a Flask application with a database, logins and server-rendered
+pages. Push to GitHub for the source and version history, then host the running
+app on a Python host.
+
+**Render (free tier, simplest)**
+
+1. Push to GitHub (already done).
+2. On <https://render.com> choose *New → Blueprint* and point it at this repo.
+   `render.yaml` is already in the repo, so the build and start commands are
+   filled in.
+3. Render generates `SECRET_KEY` for you. Wait for the first deploy, then open
+   the URL. `run.py` seeds the database on first boot, so the site is populated
+   immediately.
+
+Caveat: the free tier has an ephemeral disk, so the SQLite file is rebuilt on
+every deploy and any bookings made in a demo disappear. That is fine for a
+college demo. For persistence, point `DB_BACKEND` at a managed MySQL database
+(PlanetScale, Railway, Aiven) and load `schema/mysql_schema.sql`.
+
+**PythonAnywhere**
+
+Create a Flask web app, point the WSGI file at `run:app`, set the same
+environment variables, and use an absolute `SQLITE_PATH` inside your home
+directory (the default path is relative to the project folder).
+
+**Any other host**
+
+```
+pip install -r requirements.txt
+gunicorn --bind 0.0.0.0:$PORT --workers 2 --timeout 120 run:app
+```
+
+`Procfile` carries the same command for Heroku-style platforms.
+
+**Continuous integration**
+
+`.github/workflows/tests.yml` runs `seed.py` and `tests/smoke.py` on every push
+to `main`, so a broken commit is visible on the Actions tab.
+
+---
+
+## 12. Credits
 
 - Photographs and coordinates: Wikipedia / Wikimedia Commons contributors.
 - Map tiles: © OpenStreetMap contributors, rendered with Leaflet.
