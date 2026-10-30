@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}403 - Access denied{% endblock %}
+{% block content %}
+<section class="section"><div class="wrap center" style="max-width:560px">
+  <div style="font-size:4rem;font-weight:800;color:var(--green-600);letter-spacing:-.04em">403</div>
+  <h1 style="font-size:1.7rem">Access denied</h1>
+  <p class="muted">You do not have permission to open this page.</p>
+  <a class="btn btn-primary" href="{{ url_for('public.index') }}">{{ t('nav_home') }}</a>
+</div></section>
+{% endblock %}

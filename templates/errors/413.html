@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}413 - File too large{% endblock %}
+{% block content %}
+<section class="section"><div class="wrap center" style="max-width:560px">
+  <div style="font-size:4rem;font-weight:800;color:var(--green-600);letter-spacing:-.04em">413</div>
+  <h1 style="font-size:1.7rem">File too large</h1>
+  <p class="muted">The upload was larger than the 8 MB limit.</p>
+  <a class="btn btn-primary" href="{{ url_for('public.index') }}">{{ t('nav_home') }}</a>
+</div></section>
+{% endblock %}

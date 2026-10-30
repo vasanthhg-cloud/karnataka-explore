@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin sign in - {{ site_name }}</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body style="background:linear-gradient(135deg,#06231b,#0d3a5f);min-height:100vh;display:grid;place-items:center;padding:24px">
+{% include 'partials/_flash.html' %}
+<div class="auth-card" style="max-width:420px">
+  <span class="eyebrow">Restricted area</span>
+  <h1 style="font-size:1.6rem">Administrator sign in</h1>
+  <p class="muted">This console is separate from visitor accounts.</p>
+  <form method="post">
+    <div class="field"><label for="email">{{ t('email') }}</label><input class="input" id="email" type="email" name="email" required></div>
+    <div class="field"><label for="password">{{ t('password') }}</label>
+      <div class="pw-wrap"><input class="input" id="password" type="password" name="password" required>
+      <button type="button" class="pw-toggle" data-pw-toggle>Show</button></div></div>
+    <button class="btn btn-primary btn-block">Sign in</button>
+  </form>
+  <p class="hint center" style="margin-top:1rem">Default: admin@karnatakaexplore.in / Admin@123</p>
+  <p class="center"><a href="{{ url_for('public.index') }}" style="font-size:.86rem">← {{ t('back') }} to the site</a></p>
+</div>
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

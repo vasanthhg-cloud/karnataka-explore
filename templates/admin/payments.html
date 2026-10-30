@@ -1,0 +1,20 @@
+{% extends "admin/base.html" %}
+{% block title %}{{ t('payments') }}{% endblock %}
+{% block content %}
+<div class="admin-top"><div><h2>{{ t('payments') }}</h2>
+  <p class="muted" style="margin:0">Every entry here is a simulated demo payment - no real money moved.</p></div></div>
+<div class="table-wrap">
+  <table>
+    <thead><tr><th>#</th><th>{{ t('booking_id') }}</th><th>Traveller</th><th>{{ t('payment_method') }}</th>
+      <th>{{ t('txn_id') }}</th><th>Amount</th><th>{{ t('status') }}</th><th>When</th></tr></thead>
+    <tbody>
+    {% for p in payments %}
+      <tr><td>{{ p.id }}</td><td><b>{{ p.booking_ref }}</b></td><td>{{ p.full_name }}</td>
+        <td>{{ p.method }}</td><td><small>{{ p.txn_id }}</small></td><td>{{ p.amount|money }}</td>
+        <td><span class="badge {{ 'ok' if p.status == 'Success' else 'danger' }}">{{ p.status }}</span></td>
+        <td><small>{{ p.created_at|shortdate }}</small></td></tr>
+    {% else %}<tr><td colspan="8" class="muted">No payments recorded.</td></tr>{% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

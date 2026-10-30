@@ -1,0 +1,24 @@
+{% extends "admin/base.html" %}
+{% block title %}{{ t('messages') }}{% endblock %}
+{% block content %}
+<div class="admin-top"><div><h2>{{ t('messages') }}</h2><p class="muted" style="margin:0">Enquiries from the contact form</p></div></div>
+<div class="grid cols-2">
+  {% for m in messages %}
+  <div class="panel">
+    <div style="display:flex;justify-content:space-between;gap:1rem">
+      <b>{{ m.name }}</b>
+      <span class="badge {{ 'warn' if m.status == 'New' else 'ok' }}">{{ m.status }}</span>
+    </div>
+    <p class="muted" style="font-size:.86rem;margin:.3rem 0">{{ m.email }} {% if m.phone %}· {{ m.phone }}{% endif %}</p>
+    {% if m.subject %}<b>{{ m.subject }}</b>{% endif %}
+    <p>{{ m.message }}</p>
+    {% if m.status == 'New' %}
+    <form method="post" action="{{ url_for('admin.message_read', msg_id=m.id) }}">
+      <button class="btn btn-soft btn-sm">Mark as read</button></form>
+    {% endif %}
+  </div>
+  {% else %}
+  <div class="empty"><h3>No messages yet.</h3></div>
+  {% endfor %}
+</div>
+{% endblock %}

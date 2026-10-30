@@ -1,0 +1,26 @@
+{% extends "admin/base.html" %}
+{% block title %}{{ t('reviews') }}{% endblock %}
+{% block content %}
+<div class="admin-top"><div><h2>{{ t('reviews') }}</h2><p class="muted" style="margin:0">Approve reviews before they appear on the site</p></div></div>
+<div class="table-wrap">
+  <table>
+    <thead><tr><th>Traveller</th><th>Place</th><th>{{ t('rating') }}</th><th>Review</th><th>{{ t('status') }}</th><th>{{ t('actions') }}</th></tr></thead>
+    <tbody>
+    {% for r in reviews %}
+      <tr>
+        <td><b>{{ r.full_name }}</b><br><small class="muted">{{ r.created_at|shortdate }}</small></td>
+        <td>{{ r.destination_name or r.homestay_name or '-' }}</td>
+        <td><span class="stars">{{ r.rating|stars }}</span></td>
+        <td style="max-width:380px">{{ r.comment }}</td>
+        <td><span class="badge {{ 'ok' if r.status == 'Approved' else ('danger' if r.status == 'Rejected' else 'warn') }}">{{ r.status }}</span></td>
+        <td><div class="actions">
+          <form method="post" action="{{ url_for('admin.review_action', review_id=r.id, action='approve') }}"><button class="btn btn-soft btn-sm">{{ t('approve') }}</button></form>
+          <form method="post" action="{{ url_for('admin.review_action', review_id=r.id, action='reject') }}"><button class="btn btn-ghost btn-sm">{{ t('reject') }}</button></form>
+          <form method="post" action="{{ url_for('admin.review_action', review_id=r.id, action='delete') }}" data-confirm="Delete this review?"><button class="btn btn-danger btn-sm">✕</button></form>
+        </div></td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

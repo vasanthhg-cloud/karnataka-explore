@@ -1,0 +1,18 @@
+{% extends "admin/base.html" %}
+{% block title %}{{ t('users') }}{% endblock %}
+{% block content %}
+<div class="admin-top"><div><h2>{{ t('users') }}</h2><p class="muted" style="margin:0">{{ users|length }} registered visitors</p></div></div>
+<div class="table-wrap">
+  <table>
+    <thead><tr><th>Name</th><th>{{ t('email') }}</th><th>{{ t('mobile') }}</th><th>{{ t('district') }}</th><th>{{ t('bookings') }}</th><th>Joined</th><th></th></tr></thead>
+    <tbody>
+    {% for u in users %}
+      <tr><td><b>{{ u.full_name }}</b></td><td>{{ u.email }}</td><td>{{ u.mobile }}</td>
+        <td>{{ u.district or '-' }}</td><td>{{ u.bookings }}</td><td><small>{{ u.created_at|shortdate }}</small></td>
+        <td><form method="post" action="{{ url_for('admin.user_delete', user_id=u.id) }}" data-confirm="Remove this user and their bookings?">
+          <button class="btn btn-danger btn-sm">{{ t('delete') }}</button></form></td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
