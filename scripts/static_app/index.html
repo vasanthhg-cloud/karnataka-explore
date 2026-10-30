@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Book a trip - Karnataka Explore</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../static/css/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%230f6b4f'/><path d='M22 68 L42 36 L54 56 L64 44 L80 68 Z' fill='white'/></svg>">
+<script>
+  (function () {
+    try {
+      var saved = localStorage.getItem("kx-theme");
+      if (saved) document.documentElement.setAttribute("data-theme", saved);
+      else if (window.matchMedia("(prefers-color-scheme: dark)").matches)
+        document.documentElement.setAttribute("data-theme", "dark");
+    } catch (e) {}
+  })();
+</script>
+<style>
+  .demo-top { border-bottom:1px solid var(--line); background:var(--bg); }
+  .demo-top .wrap { display:flex; align-items:center; gap:1rem; height:66px; }
+  .demo-head { padding:28px 0 18px; }
+  .demo-head h1 { font-size:clamp(1.6rem,2.6vw,2.2rem); margin:.2rem 0 .3rem; }
+  .demo-back { font-size:.86rem; font-weight:600; color:var(--ink-mute); }
+  .demo-back:hover { color:var(--green-700); }
+  .demo-main { padding:0 0 64px; }
+  #demo-root .qr-box > div:first-child { flex:none; width:110px; height:110px; }
+  #demo-root .qr-box svg { width:110px !important; height:110px !important; display:block; }
+  @media print {
+    .demo-top, .demo-head, #demo-flash, #ticket-actions, .site-foot, .skip { display:none !important; }
+    body { background:#fff; }
+    .demo-main { padding:0; }
+    .ticket { border:1px solid #ccc; box-shadow:none; }
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#demo-root">Skip to content</a>
+
+<header class="demo-top">
+  <div class="wrap">
+    <a class="brand" href="../index.html">
+      <span class="brand-mark" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 19l6-11 4 7 3-4 5 8z"/><circle cx="17" cy="6" r="2"/></svg>
+      </span>
+      <span class="brand-text"><b>Karnataka Explore</b><span>Booking demo</span></span>
+    </a>
+    <div style="margin-left:auto;display:flex;gap:.5rem;align-items:center">
+      <a class="btn btn-ghost btn-sm" href="#/bookings">My bookings</a>
+      <a class="btn btn-ghost btn-sm" href="#/admin">Admin</a>
+      <button class="icon-btn" onclick="(function(){var d=document.documentElement;var n=d.getAttribute('data-theme')==='dark'?'light':'dark';d.setAttribute('data-theme',n);try{localStorage.setItem('kx-theme',n)}catch(e){}})()" aria-label="Toggle theme">◐</button>
+    </div>
+  </div>
+</header>
+
+<main class="demo-main">
+  <div class="wrap" style="max-width:1040px">
+    <div id="demo-flash"></div>
+    <div id="demo-root"></div>
+  </div>
+</main>
+
+<footer class="site-foot" style="padding:28px 0">
+  <div class="wrap" style="display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;font-size:.82rem;color:#9db8ac">
+    <span>Demo mode — accounts, bookings and payments are stored in this browser only.</span>
+    <a href="https://github.com/vasanthhg-cloud/karnataka-explore" style="color:#c3dcd2">Source code</a>
+  </div>
+</footer>
+
+<script src="vendor/qrcode.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

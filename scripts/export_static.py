@@ -8,6 +8,7 @@ login and the admin console need the Python app.
 
     python scripts/export_static.py            -> ../docs
 """
+import json
 import os
 import re
 import shutil
@@ -22,9 +23,33 @@ from db import query                # noqa: E402
 
 OUT = BASE / "docs"
 
-BLOCKED = ("book/", "payment/", "booking/", "my-bookings", "wishlist", "admin",
-           "verify/", "logout", "review", "qr.png", "language/", "itinerary/build",
-           "search", "map/data", "newsletter", "reset-password", "profile")
+# Routes that the browser demo app handles (sign-in, booking, payment, admin).
+DEMO_PREFIX = "app/index.html#"
+
+BLOCKED = ("payment/", "booking/", "wishlist", "verify/", "logout", "review", "qr.png",
+           "language/", "itinerary/build", "search", "map/data", "newsletter",
+           "reset-password")
+
+
+def demo_target(path):
+    """Map a server route to a view in the browser demo app, or None."""
+    if path.startswith("book/destination/"):
+        return DEMO_PREFIX + "/book?type=destination&slug=" + path.split("/")[-1]
+    if path.startswith("book/homestay/"):
+        return DEMO_PREFIX + "/book?type=homestay&slug=" + path.split("/")[-1]
+    if path.startswith("book/guide/"):
+        return DEMO_PREFIX + "/book?type=guide&slug=" + path.split("/")[-1]
+    if path in ("login", "login/"):
+        return DEMO_PREFIX + "/login"
+    if path in ("register", "register/"):
+        return DEMO_PREFIX + "/register"
+    if path in ("my-bookings", "my-bookings/"):
+        return DEMO_PREFIX + "/bookings"
+    if path.startswith("admin"):
+        return DEMO_PREFIX + "/admin"
+    if path.startswith("profile"):
+        return DEMO_PREFIX + "/profile"
+    return None
 
 NOTICE_BANNER = (
     '<div style="background:#0f6b4f;color:#eaf5f0;font:600 13px/1.5 system-ui,sans-serif;'
@@ -60,6 +85,9 @@ def rewrite(html, out_path):
         path = url[1:]
         if path == "":
             return '%s="%s"' % (attr, rel if rel else "./")
+        demo = demo_target(path.split("?")[0].rstrip("/"))
+        if demo:
+            return '%s="%s%s"' % (attr, rel, demo)
         if path.startswith(BLOCKED):
             return '%s="%spreview/"' % (attr, rel)
         if attr == "href" and not has_extension(path) and not path.endswith("/") and "?" not in path:
@@ -81,11 +109,11 @@ NOTICE_PAGE = """<!doctype html>
 <div style="max-width:640px;margin:14vh auto;padding:0 22px;text-align:center">
   <div style="width:56px;height:56px;border-radius:16px;background:#e4f2ec;color:#0f6b4f;display:grid;place-items:center;margin:0 auto 1rem"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></div>
   <h1 style="font-size:1.6rem">This part needs the running app</h1>
-  <p class="muted">Sign-in, bookings, the demo payment gateway, PDF tickets, the wishlist and the
-  admin console all need a Python server and a database. GitHub Pages serves static files only,
-  so they are switched off in this preview.</p>
-  <p class="muted">Everything else &mdash; all 31 districts, 116 destinations with photo galleries and
-  maps, homestays, guides, dark mode and the itinerary planner &mdash; is fully browsable here.</p>
+  <p class="muted">The wishlist, review submission and saving an itinerary need a Python server and a
+  database, so they are switched off in this static preview.</p>
+  <p class="muted">Sign-in, booking, the demo payment step, tickets and the admin console <b>do</b>
+  work here &mdash; they run in your browser in demo mode. Everything else (all 31 districts,
+  116 destinations with galleries and maps, homestays, guides, dark mode) is fully browsable.</p>
   <div style="display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap;margin-top:1.5rem">
     <a class="btn btn-primary" href="../index.html">Back to the home page</a>
     <a class="btn btn-ghost" href="https://github.com/vasanthhg-cloud/karnataka-explore">Run it locally</a>
@@ -140,6 +168,35 @@ def main():
                     ignore=shutil.ignore_patterns("uploads"))
     (OUT / "static" / "uploads").mkdir(exist_ok=True)
     (OUT / ".nojekyll").write_text("")
+
+    # data for the browser demo app
+    with app.app_context():
+        dest_rows = query("""SELECT d.slug, d.name, d.ticket_price AS price, dist.name AS district,
+                                    (SELECT image_url FROM destination_images i WHERE i.destination_id = d.id
+                                     ORDER BY i.sort_order LIMIT 1) AS image
+                             FROM destinations d JOIN districts dist ON dist.id = d.district_id
+                             WHERE d.active = 1 ORDER BY d.name""")
+        stay_rows = query("""SELECT h.slug, h.name, h.price_per_night AS price, h.rooms_available AS rooms,
+                                    h.max_guests, dist.name AS district,
+                                    (SELECT image_url FROM homestay_images i WHERE i.homestay_id = h.id
+                                     ORDER BY i.sort_order LIMIT 1) AS image
+                             FROM homestays h JOIN districts dist ON dist.id = h.district_id
+                             WHERE h.active = 1 ORDER BY h.name""")
+        guide_rows = query("""SELECT g.id, g.name, g.fee_per_day AS fee, dist.name AS district
+                              FROM tour_guides g LEFT JOIN districts dist ON dist.id = g.district_id
+                              WHERE g.active = 1 ORDER BY g.name""")
+    items = {
+        "destinations": [dict(r) for r in dest_rows],
+        "homestays": [dict(r) for r in stay_rows],
+        "guides": [dict(r, slug=str(r["id"])) for r in guide_rows],
+    }
+    (OUT / "data").mkdir(exist_ok=True)
+    (OUT / "data" / "items.json").write_text(json.dumps(items), encoding="utf-8")
+
+    # the browser demo app (sign-in, booking, payment, tickets, admin)
+    app_src = BASE / "scripts" / "static_app"
+    if app_src.exists():
+        shutil.copytree(app_src, OUT / "app")
 
     # the "needs the app" page
     (OUT / "preview").mkdir(exist_ok=True)
