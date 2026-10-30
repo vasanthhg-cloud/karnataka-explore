@@ -148,9 +148,13 @@ karnataka-explore/
 ├── schema/
 │   ├── sqlite_schema.sql   # SQLite DDL (what the app uses by default)
 │   └── mysql_schema.sql    # MySQL 8 DDL
+├── scripts/export_static.py # builds the static site into docs/
 ├── tests/smoke.py          # end-to-end route and flow test
+├── docs/                   # generated static build (GitHub Pages)
+├── Dockerfile              # production image for any container host
 ├── Procfile                # gunicorn start command for Heroku-style hosts
-├── render.yaml             # one-click Render blueprint
+├── railway.json            # Railway deploy settings
+├── DEPLOY.md               # hosting walkthroughs
 └── .github/workflows/tests.yml   # CI: seeds and runs the smoke test on push
 ```
 
@@ -280,7 +284,7 @@ the map partial in `templates/index.html` / `templates/map.html`.
 ## 11. Deploying it live
 
 The code lives at <https://github.com/vasanthhg-cloud/karnataka-explore>.
-Step-by-step instructions for Render, Railway, Docker and PythonAnywhere are in
+Step-by-step instructions for Railway, Docker and PythonAnywhere are in
 [DEPLOY.md](DEPLOY.md).
 
 **GitHub Pages will not work for this project.** Pages only serves static files,
@@ -288,20 +292,20 @@ and this is a Flask application with a database, logins and server-rendered
 pages. Push to GitHub for the source and version history, then host the running
 app on a Python host.
 
-**Render (free tier, simplest)**
+**Railway (free trial credit, no config needed)**
 
 1. Push to GitHub (already done).
-2. On <https://render.com> choose *New → Blueprint* and point it at this repo.
-   `render.yaml` is already in the repo, so the build and start commands are
-   filled in.
-3. Render generates `SECRET_KEY` for you. Wait for the first deploy, then open
-   the URL. `run.py` seeds the database on first boot, so the site is populated
-   immediately.
+2. On <https://railway.app> choose *New Project → Deploy from GitHub repo* and
+   pick this repository. `railway.json` supplies the start command.
+3. Add `SECRET_KEY` under Variables, then generate a domain under
+   Settings → Networking. `run.py` seeds the database on first boot.
 
-Caveat: the free tier has an ephemeral disk, so the SQLite file is rebuilt on
-every deploy and any bookings made in a demo disappear. That is fine for a
-college demo. For persistence, point `DB_BACKEND` at a managed MySQL database
-(PlanetScale, Railway, Aiven) and load `schema/mysql_schema.sql`.
+**Docker (any host: Fly, Koyeb, Cloud Run, a VPS)**
+
+```bash
+docker build -t karnataka-explore .
+docker run -p 8000:8000 -e SECRET_KEY=change-me karnataka-explore
+```
 
 **PythonAnywhere**
 
