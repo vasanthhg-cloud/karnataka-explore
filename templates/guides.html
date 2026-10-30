@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}{{ t('nav_guides') }} - {{ site_name }}{% endblock %}
+{% block content %}
+<section class="section tight" style="background:var(--bg-alt);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <nav class="breadcrumb"><a href="{{ url_for('public.index') }}">{{ t('nav_home') }}</a> / {{ t('nav_guides') }}</nav>
+    <h1 style="font-size:clamp(1.8rem,3vw,2.6rem)">{{ t('nav_guides') }}</h1>
+    <p class="muted" style="max-width:62ch">Local guides who know the roads, the timings and the stories. Book a day or a week.</p>
+  </div>
+</section>
+<section class="section">
+  <div class="wrap">
+    <form class="panel" method="get" style="margin-bottom:26px">
+      <div class="form-grid" style="grid-template-columns:2fr 1fr auto;align-items:end">
+        <div class="field" style="margin:0"><label>{{ t('search') }}</label>
+          <input class="input" name="q" value="{{ q }}" placeholder="Name, language or district"></div>
+        <div class="field" style="margin:0"><label>{{ t('district') }}</label>
+          <select class="select" name="district">
+            <option value="">{{ t('all_districts') }}</option>
+            {% for d in districts %}<option value="{{ d.slug }}" {{ 'selected' if district == d.slug }}>{{ district_label(d.name) }}</option>{% endfor %}
+          </select></div>
+        <button class="btn btn-primary">{{ t('apply_filters') }}</button>
+      </div>
+    </form>
+    <div class="grid cols-3">
+      {% for g in guides %}
+      <div class="card">
+        <div class="card-body">
+          <div class="meta">{{ district_label(g.district_name or '') }}</div>
+          <h3>{{ g.name }}</h3>
+          <div class="stars">{{ g.rating|stars }} <small class="muted">{{ g.rating }}</small></div>
+          <p style="-webkit-line-clamp:4">{{ g.bio }}</p>
+          <div class="tag-list" style="margin-bottom:.7rem">
+            {% for l in g.languages|pipes %}<span class="tag">{{ l }}</span>{% endfor %}
+          </div>
+          <div class="card-foot">
+            <span><b>{{ g.fee_per_day|money }}</b> <small class="muted">/ {{ t('per_day') }}</small><br>
+              <small class="muted">{{ g.experience }} years experience</small></span>
+            <a class="btn btn-primary btn-sm" href="{{ url_for('booking.book_guide', guide_id=g.id) }}">{{ t('book_now') }}</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% if not guides %}<div class="empty"><h3>{{ t('no_results') }}</h3></div>{% endif %}
+    <p class="hint" style="text-align:center;margin-top:22px">Guide records are sample data for the project demo.</p>
+  </div>
+</section>
+{% endblock %}

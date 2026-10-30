@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}{{ t('nav_about') }} - {{ site_name }}{% endblock %}
+{% block content %}
+<section class="section">
+  <div class="wrap split" style="align-items:center">
+    <div>
+      <span class="eyebrow">{{ t('nav_about') }}</span>
+      <h1>{{ site_name }}</h1>
+      <p style="font-size:1.05rem">{{ t('about_text') }}</p>
+      <p class="muted">The portal is organised district-first, because that is how people actually plan a trip in Karnataka: you pick a base, then look for what is within a two-hour drive. Every destination page carries the practical details - timings, entry fees, the best months, how to get there and what is nearby - along with photographs and a map.</p>
+      <p class="muted">Built as a final-year college project with Flask, SQLite, Jinja templates and OpenStreetMap. Photographs are sourced from Wikimedia Commons; destination facts are checked against public sources.</p>
+      <div class="chips" style="margin-top:1rem">
+        <span class="chip">Flask</span><span class="chip">SQLite / MySQL</span>
+        <span class="chip">OpenStreetMap</span><span class="chip">ReportLab PDF</span>
+        <span class="chip">3 languages</span><span class="chip">Dark mode</span>
+      </div>
+    </div>
+    <div class="grid cols-2">
+      <div class="stat-card"><span>{{ t('nav_districts') }}</span><b>31</b><small>all covered</small></div>
+      <div class="stat-card"><span>{{ t('nav_destinations') }}</span><b>{{ districts|sum(attribute='dest_count') }}</b><small>with photos</small></div>
+      <div class="stat-card"><span>{{ t('nav_homestays') }}</span><b>{{ districts|sum(attribute='stay_count') }}</b><small>sample listings</small></div>
+      <div class="stat-card"><span>{{ t('language') }}</span><b>3</b><small>English · हिन्दी · ಕನ್ನಡ</small></div>
+    </div>
+  </div>
+</section>
+<section class="section alt">
+  <div class="wrap">
+    <div class="section-head"><div><span class="eyebrow">How it works</span><h2>Four steps from browsing to a ticket</h2></div></div>
+    <div class="grid cols-4">
+      <div class="panel"><h3>1. Explore</h3><p class="muted">Search by district, category or keyword, or open the map and click a pin.</p></div>
+      <div class="panel"><h3>2. Plan</h3><p class="muted">Add places to an itinerary and the planner orders them into days with distances.</p></div>
+      <div class="panel"><h3>3. Book</h3><p class="muted">Pick a date and party size, then run through the demo payment screen.</p></div>
+      <div class="panel"><h3>4. Carry</h3><p class="muted">Download the PDF ticket with its QR code, or print it from the browser.</p></div>
+    </div>
+  </div>
+</section>
+{% endblock %}

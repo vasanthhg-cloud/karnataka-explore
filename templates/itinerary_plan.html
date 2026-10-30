@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}{{ t('itinerary_title') }} - {{ site_name }}{% endblock %}
+{% block content %}
+<section class="section">
+  <div class="wrap">
+    <nav class="breadcrumb"><a href="{{ url_for('public.index') }}">{{ t('nav_home') }}</a> /
+      <a href="{{ url_for('public.itinerary') }}">{{ t('nav_itinerary') }}</a> / Plan</nav>
+    <div class="section-head">
+      <div><span class="eyebrow">{{ t('itinerary_title') }}</span>
+        <h1 style="font-size:clamp(1.6rem,2.6vw,2.2rem)">{{ plan.title }}</h1>
+        <p class="muted">{{ plan.days|length }} days · approximately {{ plan.total_km|round|int }} km of driving between stops.</p></div>
+      <div class="actions">
+        <a class="btn btn-primary" href="{{ url_for('booking.itinerary_pdf') }}">{{ t('download_itinerary') }}</a>
+        <a class="btn btn-ghost" href="{{ url_for('public.itinerary') }}">{{ t('clear_itinerary') }}</a>
+      </div>
+    </div>
+
+    {% for day in plan.days %}
+    <div class="panel" style="margin-bottom:22px">
+      <h2 style="font-size:1.15rem">{{ t('day') }} {{ loop.index }}</h2>
+      <div class="timeline" style="margin-top:16px">
+        {% for stop in day %}
+        <div class="stop">
+          <b><a href="{{ url_for('public.destination_detail', slug=stop.slug) }}">{{ stop.name }}</a></b>
+          <div class="meta muted">{{ stop.category }} · {{ district_label(stop.district) }} · {{ stop.duration }}</div>
+          <small class="muted">{{ stop.note }}</small>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endfor %}
+    <p class="hint">Distances are straight-line estimates between coordinates, so real driving distance will be longer. Confirm timings locally before you travel.</p>
+  </div>
+</section>
+{% endblock %}

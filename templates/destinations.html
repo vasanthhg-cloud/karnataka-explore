@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% from "partials/_cards.html" import dest_card with context %}
+{% block title %}{{ t('nav_destinations') }} - {{ site_name }}{% endblock %}
+
+{% block content %}
+<section class="section tight" style="background:var(--bg-alt);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <nav class="breadcrumb"><a href="{{ url_for('public.index') }}">{{ t('nav_home') }}</a> / {{ t('nav_destinations') }}</nav>
+    <h1 style="font-size:clamp(1.8rem,3vw,2.6rem)">{{ t('nav_destinations') }}</h1>
+    <p class="muted" style="max-width:62ch">{{ info.total }} {{ t('results') }}{% if q %} for "{{ q }}"{% endif %} across Karnataka. Filter by district or category to narrow things down.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <form class="panel" method="get" style="margin-bottom:28px">
+      <div class="form-grid" style="grid-template-columns:1.6fr 1fr 1fr 1fr auto;align-items:end">
+        <div class="field" style="margin:0">
+          <label for="q">{{ t('search') }}</label>
+          <input class="input" id="q" type="search" name="q" value="{{ q }}" placeholder="{{ t('search_placeholder') }}">
+        </div>
+        <div class="field" style="margin:0">
+          <label for="district">{{ t('district') }}</label>
+          <select class="select" id="district" name="district">
+            <option value="">{{ t('all_districts') }}</option>
+            {% for d in districts %}
+              <option value="{{ d.slug }}" {{ 'selected' if district == d.slug }}>{{ district_label(d.name) }} ({{ d.dest_count }})</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="field" style="margin:0">
+          <label for="category">{{ t('category') }}</label>
+          <select class="select" id="category" name="category">
+            <option value="">{{ t('all_categories') }}</option>
+            {% for c in categories %}
+              <option value="{{ c }}" {{ 'selected' if category == c }}>{{ category_label(c) }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="field" style="margin:0">
+          <label for="sort">{{ t('sort_by') }}</label>
+          <select class="select" id="sort" name="sort">
+            <option value="popular" {{ 'selected' if sort == 'popular' }}>Popular</option>
+            <option value="rating" {{ 'selected' if sort == 'rating' }}>Rating</option>
+            <option value="name" {{ 'selected' if sort == 'name' }}>A - Z</option>
+            <option value="price_low" {{ 'selected' if sort == 'price_low' }}>Entry fee: low to high</option>
+            <option value="price_high" {{ 'selected' if sort == 'price_high' }}>Entry fee: high to low</option>
+          </select>
+        </div>
+        <button class="btn btn-primary" type="submit">{{ t('apply_filters') }}</button>
+      </div>
+      <div class="chips" style="margin-top:14px">
+        <a class="chip {{ 'active' if not category }}" href="{{ url_for('public.destinations', q=q, district=district) }}">All</a>
+        {% for c in categories %}
+          <a class="chip {{ 'active' if category == c }}" href="{{ url_for('public.destinations', q=q, district=district, category=c) }}">{{ category_label(c) }}</a>
+        {% endfor %}
+      </div>
+    </form>
+
+    {% if destinations %}
+      <div class="grid cols-3">{% for d in destinations %}{{ dest_card(d) }}{% endfor %}</div>
+      {% include 'partials/_pagination.html' %}
+    {% else %}
+      <div class="empty">
+        <h3>{{ t('no_results') }}</h3>
+        <a class="btn btn-ghost" href="{{ url_for('public.destinations') }}">{{ t('reset') }}</a>
+      </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

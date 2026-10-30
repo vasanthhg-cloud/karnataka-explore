@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}{{ t('book_now') }} - {{ h.name }}{% endblock %}
+{% block content %}
+<section class="section">
+  <div class="wrap split">
+    <div>
+      <nav class="breadcrumb"><a href="{{ url_for('public.homestay_detail', slug=h.slug) }}">← {{ h.name }}</a></nav>
+      <h1 style="font-size:clamp(1.6rem,2.6vw,2.2rem)">{{ t('book_now') }}</h1>
+      <p class="muted">{{ h.name }}, {{ district_label(h.district_name) }} · {{ h.price_per_night|money }} {{ t('price_per_night') }}</p>
+      <form class="panel" method="post">
+        <div class="form-grid">
+          <div class="field"><label for="checkin">{{ t('checkin') }}</label>
+            <input class="input" id="checkin" type="date" name="checkin" required min="{{ today }}" value="{{ today }}"></div>
+          <div class="field"><label for="checkout">{{ t('checkout') }}</label>
+            <input class="input" id="checkout" type="date" name="checkout" required min="{{ tomorrow }}" value="{{ tomorrow }}"></div>
+          <div class="field"><label for="guests">{{ t('guests') }}</label>
+            <input class="input" id="guests" type="number" name="guests" min="1" max="{{ h.max_guests }}" value="2" required></div>
+          <div class="field"><label for="rooms">{{ t('rooms') }}</label>
+            <input class="input" id="rooms" type="number" name="rooms" min="1" max="{{ h.rooms_available }}" value="1" required></div>
+        </div>
+        <div class="notice info" style="margin-bottom:1rem">
+          Check-in {{ h.checkin_time }}, check-out {{ h.checkout_time }}. Up to {{ h.max_guests }} guests, {{ h.rooms_available }} rooms available.
+        </div>
+        <button class="btn btn-primary" type="submit">{{ t('pay_now') }}</button>
+      </form>
+    </div>
+    <aside class="panel sticky">
+      <h3>{{ t('booking_summary') }}</h3>
+      <div class="summary-row"><span>{{ t('price_per_night') }}</span><span>{{ h.price_per_night|money }}</span></div>
+      <div class="summary-row"><span>{{ t('nights') }}</span><span data-nights>1</span></div>
+      <div class="summary-row"><span>{{ t('taxes') }} (12%)</span><span>added at payment</span></div>
+      <p class="hint">{{ t('demo_notice') }}</p>
+      <hr class="divider">
+      <h3 style="font-size:1rem">{{ t('facilities') }}</h3>
+      <div class="tag-list">{% for f in h.facilities|pipes %}<span class="tag">{{ f }}</span>{% endfor %}</div>
+    </aside>
+  </div>
+</section>
+{% endblock %}

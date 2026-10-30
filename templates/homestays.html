@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% from "partials/_cards.html" import stay_card with context %}
+{% block title %}{{ t('nav_homestays') }} - {{ site_name }}{% endblock %}
+{% block content %}
+<section class="section tight" style="background:var(--bg-alt);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <nav class="breadcrumb"><a href="{{ url_for('public.index') }}">{{ t('nav_home') }}</a> / {{ t('nav_homestays') }}</nav>
+    <h1 style="font-size:clamp(1.8rem,3vw,2.6rem)">{{ t('nav_homestays') }}</h1>
+    <p class="muted" style="max-width:62ch">{{ info.total }} {{ t('results') }}. Filter by district, price and facilities, then pick your dates on the listing page.</p>
+  </div>
+</section>
+<section class="section">
+  <div class="wrap">
+    <form class="panel" method="get" style="margin-bottom:28px">
+      <div class="form-grid" style="grid-template-columns:1.5fr 1fr 1fr 1fr auto;align-items:end">
+        <div class="field" style="margin:0"><label for="q">{{ t('search') }}</label>
+          <input class="input" id="q" name="q" value="{{ q }}" placeholder="Homestay, town or district"></div>
+        <div class="field" style="margin:0"><label for="district">{{ t('district') }}</label>
+          <select class="select" id="district" name="district">
+            <option value="">{{ t('all_districts') }}</option>
+            {% for d in districts %}<option value="{{ d.slug }}" {{ 'selected' if district == d.slug }}>{{ district_label(d.name) }}</option>{% endfor %}
+          </select></div>
+        <div class="field" style="margin:0"><label for="max_price">{{ t('price_range') }}</label>
+          <select class="select" id="max_price" name="max_price">
+            <option value="">Any price</option>
+            {% for p in [1500, 2500, 3500, 5000] %}
+              <option value="{{ p }}" {{ 'selected' if max_price == p }}>Up to {{ p|money }}</option>
+            {% endfor %}
+          </select></div>
+        <div class="field" style="margin:0"><label for="sort">{{ t('sort_by') }}</label>
+          <select class="select" id="sort" name="sort">
+            <option value="rating" {{ 'selected' if sort == 'rating' }}>{{ t('rating') }}</option>
+            <option value="price_low" {{ 'selected' if sort == 'price_low' }}>Price: low to high</option>
+            <option value="price_high" {{ 'selected' if sort == 'price_high' }}>Price: high to low</option>
+          </select></div>
+        <button class="btn btn-primary" type="submit">{{ t('apply_filters') }}</button>
+      </div>
+      <div class="chips" style="margin-top:14px">
+        <a class="chip {{ 'active' if not facility }}" href="{{ url_for('public.homestays', q=q, district=district) }}">All facilities</a>
+        {% for f in facilities %}
+          <a class="chip {{ 'active' if facility == f }}" href="{{ url_for('public.homestays', q=q, district=district, facility=f) }}">{{ f }}</a>
+        {% endfor %}
+      </div>
+    </form>
+
+    {% if stays %}
+      <div class="grid cols-3">{% for h in stays %}{{ stay_card(h) }}{% endfor %}</div>
+      {% include 'partials/_pagination.html' %}
+      <p class="hint" style="text-align:center;margin-top:22px">Homestay records in this build are sample data for the project demo. Add verified listings from the admin dashboard.</p>
+    {% else %}
+      <div class="empty"><h3>{{ t('no_results') }}</h3></div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

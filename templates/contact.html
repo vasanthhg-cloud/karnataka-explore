@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}{{ t('nav_contact') }} - {{ site_name }}{% endblock %}
+{% block content %}
+<section class="section tight" style="background:var(--bg-alt);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <nav class="breadcrumb"><a href="{{ url_for('public.index') }}">{{ t('nav_home') }}</a> / {{ t('nav_contact') }}</nav>
+    <h1 style="font-size:clamp(1.8rem,3vw,2.6rem)">{{ t('nav_contact') }}</h1>
+    <p class="muted">Questions about a destination, a stay or a booking? Write to us.</p>
+  </div>
+</section>
+<section class="section">
+  <div class="wrap split">
+    <form class="panel" method="post">
+      <div class="form-grid">
+        <div class="field"><label for="name">{{ t('full_name') }}</label><input class="input" id="name" name="name" required></div>
+        <div class="field"><label for="email">{{ t('email') }}</label><input class="input" id="email" type="email" name="email" required></div>
+        <div class="field"><label for="phone">{{ t('mobile') }}</label><input class="input" id="phone" name="phone"></div>
+        <div class="field"><label for="subject">{{ t('subject') }}</label><input class="input" id="subject" name="subject"></div>
+        <div class="field full"><label for="message">{{ t('message') }}</label><textarea class="input" id="message" name="message" required></textarea></div>
+      </div>
+      <button class="btn btn-primary" type="submit">{{ t('send_message') }}</button>
+    </form>
+    <aside>
+      <div class="panel" style="margin-bottom:20px">
+        <h3>{{ t('contact_us') }}</h3>
+        <p class="muted" style="margin-bottom:.4rem">{{ contact_email }}</p>
+        <p class="muted">{{ contact_phone }}</p>
+        <p class="muted" style="font-size:.9rem">Karnataka Explore, 4th Cross, MG Road, Bengaluru 560001</p>
+      </div>
+      <div class="panel">
+        <h3>{{ t('emergency') }}</h3>
+        <ul class="list-tick">
+          {% for e in emergency %}<li>{{ e }}</li>{% endfor %}
+        </ul>
+      </div>
+    </aside>
+  </div>
+</section>
+{% endblock %}

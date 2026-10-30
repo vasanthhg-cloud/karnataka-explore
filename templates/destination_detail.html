@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+{% from "partials/_cards.html" import dest_card with context %}
+{% block title %}{{ d.name }} - {{ site_name }}{% endblock %}
+{% block description %}{{ d.description[:150] }}{% endblock %}
+{% block content %}
+<section class="detail-hero">
+  {% if images %}<img src="{{ images[0].image_url }}" alt="{{ d.name }}">{% endif %}
+  <div class="wrap">
+    <span class="badge cat" style="margin-bottom:.7rem">{{ category_label(d.category) }}</span>
+    <h1>{{ d.name }}</h1>
+    <div class="meta-row">
+      <span>{{ d.location }}</span>
+      <span>{{ district_label(d.district_name) }}</span>
+      {% if d.rating %}<span class="stars">{{ d.rating|stars }} {{ d.rating }} ({{ d.review_count }})</span>{% endif %}
+      <span>{{ d.duration }}</span>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap detail-layout">
+    <div>
+      {% if images|length > 1 %}
+      <div class="gallery" style="margin-bottom:28px">
+        {% for img in images %}
+          <button type="button" data-lightbox="{{ img.image_url }}" aria-label="Open photograph {{ loop.index }}">
+            <img src="{{ img.image_url }}" alt="{{ d.name }} photograph {{ loop.index }}" loading="lazy">
+          </button>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      <h2>About {{ d.name }}</h2>
+      <p style="font-size:1.02rem">{{ d.description }}</p>
+
+      <div class="info-grid" style="margin:26px 0">
+        <div class="info-item"><span>{{ t('best_time') }}</span><b>{{ d.best_time }}</b></div>
+        <div class="info-item"><span>{{ t('entry_fee') }}</span><b>{{ d.entry_fee }}</b></div>
+        <div class="info-item"><span>{{ t('timings') }}</span><b>{{ d.timings }}</b></div>
+        <div class="info-item"><span>{{ t('duration') }}</span><b>{{ d.duration }}</b></div>
+        <div class="info-item"><span>{{ t('district') }}</span><b>{{ district_label(d.district_name) }}</b></div>
+        <div class="info-item"><span>{{ t('location') }}</span><b>{{ d.location }}</b></div>
+      </div>
+
+      <h3>{{ t('activities') }}</h3>
+      <div class="tag-list" style="margin-bottom:26px">
+        {% for a in d.activities|pipes %}<span class="tag">{{ a }}</span>{% endfor %}
+      </div>
+
+      <h3>{{ t('travel_info') }}</h3>
+      <p>{{ d.travel_info }}</p>
+
+      <h3>{{ t('nearby') }}</h3>
+      <ul class="list-tick" style="margin-bottom:26px">
+        {% for n in d.nearby|pipes %}<li>{{ n }}</li>{% endfor %}
+      </ul>
+
+      {% if d.latitude and d.longitude %}
+      <h3>{{ t('location') }}</h3>
+      <div class="map-embed" style="margin-bottom:10px">
+        <iframe title="Map of {{ d.name }}" loading="lazy"
+          src="https://www.openstreetmap.org/export/embed.html?bbox={{ d.longitude - 0.02 }},{{ d.latitude - 0.015 }},{{ d.longitude + 0.02 }},{{ d.latitude + 0.015 }}&layer=mapnik&marker={{ d.latitude }},{{ d.longitude }}"></iframe>
+      </div>
+      <a class="btn btn-ghost btn-sm" target="_blank" rel="noopener"
+         href="https://www.google.com/maps/dir/?api=1&destination={{ d.latitude }},{{ d.longitude }}">{{ t('directions') }} →</a>
+      {% endif %}
+
+      <hr class="divider">
+
+      <div class="section-head"><div><span class="eyebrow">{{ t('reviews') }}</span><h2>{{ t('reviews') }} ({{ reviews|length }})</h2></div></div>
+      <div class="grid cols-2" style="margin-bottom:26px">
+        {% for r in reviews %}
+        <div class="review-card">
+          <div class="who"><span class="avatar">{{ r.full_name[:1] }}</span>
+            <div><b>{{ r.full_name }}</b><br><span class="stars">{{ r.rating|stars }}</span></div></div>
+          <p>{{ r.comment }}</p>
+        </div>
+        {% else %}
+        <p class="muted">No reviews yet. Be the first to write one.</p>
+        {% endfor %}
+      </div>
+
+      {% if logged_in %}
+      <form class="panel" method="post" action="{{ url_for('booking.review') }}">
+        <input type="hidden" name="kind" value="destination">
+        <input type="hidden" name="slug" value="{{ d.slug }}">
+        <h3>{{ t('write_review') }}</h3>
+        <div class="field">
+          <label>{{ t('your_rating') }}</label>
+          <div class="rating-input">
+            {% for i in [5,4,3,2,1] %}
+            <input type="radio" id="star{{ i }}" name="rating" value="{{ i }}" {{ 'checked' if i == 5 }}>
+            <label for="star{{ i }}">★</label>
+            {% endfor %}
+          </div>
+        </div>
+        <div class="field"><label for="comment">{{ t('your_review') }}</label>
+          <textarea class="input" id="comment" name="comment" required placeholder="What should other travellers know?"></textarea></div>
+        <button class="btn btn-primary" type="submit">{{ t('submit') }}</button>
+      </form>
+      {% else %}
+      <p class="muted"><a href="{{ url_for('auth.login') }}">{{ t('sign_in') }}</a> {{ t('write_review')|lower }}.</p>
+      {% endif %}
+    </div>
+
+    <aside>
+      <div class="panel sticky">
+        <span class="eyebrow">{{ t('book_now') }}</span>
+        <div class="price-big" style="margin:.4rem 0">
+          {% if d.ticket_price %}{{ d.ticket_price|money }} <small>/ {{ t('per_person') }}</small>{% else %}Free entry{% endif %}
+        </div>
+        <p class="muted" style="font-size:.9rem">{{ d.timings }}</p>
+        {% if d.ticket_price %}
+          <a class="btn btn-primary btn-block" href="{{ url_for('booking.book_destination', slug=d.slug) }}">{{ t('book_now') }}</a>
+        {% else %}
+          <div class="notice info" style="margin-bottom:.8rem">No ticket is needed here. Booking is available for paid attractions.</div>
+        {% endif %}
+        <form method="post" action="{{ url_for('booking.wishlist_toggle') }}" style="margin-top:.6rem">
+          <input type="hidden" name="kind" value="destination">
+          <input type="hidden" name="item_id" value="{{ d.id }}">
+          <button class="btn btn-ghost btn-block" type="submit">{{ t('wishlist') }} {{ '♥' if in_wishlist else '♡' }}</button>
+        </form>
+        <hr class="divider">
+        <h3 style="font-size:1rem">{{ t('best_time') }}</h3>
+        <p class="muted" style="font-size:.9rem;margin:0">{{ d.best_time }}</p>
+        <hr class="divider">
+        <h3 style="font-size:1rem">{{ t('nearby') }}</h3>
+        <ul class="list-tick">
+          {% for n in d.nearby|pipes %}<li style="font-size:.88rem">{{ n }}</li>{% endfor %}
+        </ul>
+      </div>
+    </aside>
+  </div>
+</section>
+
+{% if nearby %}
+<section class="section alt">
+  <div class="wrap">
+    <div class="section-head"><div><span class="eyebrow">{{ t('nearby') }}</span><h2>More around {{ district_label(d.district_name) }}</h2></div></div>
+    <div class="grid cols-4">{% for n in nearby %}{{ dest_card(n) }}{% endfor %}</div>
+  </div>
+</section>
+{% endif %}
+{% endblock %}

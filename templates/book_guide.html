@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}{{ t('book_now') }} - {{ g.name }}{% endblock %}
+{% block content %}
+<section class="section">
+  <div class="wrap split">
+    <div>
+      <nav class="breadcrumb"><a href="{{ url_for('public.guides') }}">← {{ t('nav_guides') }}</a></nav>
+      <h1 style="font-size:clamp(1.6rem,2.6vw,2.2rem)">{{ t('book_now') }}: {{ g.name }}</h1>
+      <p class="muted">{{ district_label(g.district_name or '') }} · {{ g.experience }} years · speaks {{ g.languages }}</p>
+      <form class="panel" method="post">
+        <div class="form-grid">
+          <div class="field"><label for="start_date">{{ t('visit_date') }}</label>
+            <input class="input" id="start_date" type="date" name="start_date" required min="{{ today }}"></div>
+          <div class="field"><label for="days">Days</label>
+            <input class="input" id="days" type="number" name="days" min="1" max="14" value="1" required></div>
+          <div class="field"><label for="visitors">{{ t('visitors') }}</label>
+            <input class="input" id="visitors" type="number" name="visitors" min="1" max="20" value="2" required></div>
+        </div>
+        <div class="notice info" style="margin-bottom:1rem">{{ g.bio }}</div>
+        <button class="btn btn-primary" type="submit">{{ t('pay_now') }}</button>
+      </form>
+    </div>
+    <aside class="panel sticky">
+      <h3>{{ t('booking_summary') }}</h3>
+      <div class="summary-row"><span>{{ t('per_day') }}</span><span>{{ g.fee_per_day|money }}</span></div>
+      <div class="summary-row"><span>{{ t('taxes') }} (18%)</span><span>added at payment</span></div>
+      <p class="hint">{{ t('demo_notice') }}</p>
+    </aside>
+  </div>
+</section>
+{% endblock %}

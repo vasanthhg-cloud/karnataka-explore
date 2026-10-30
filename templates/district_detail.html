@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% from "partials/_cards.html" import dest_card, stay_card with context %}
+{% block title %}{{ district_label(district.name) }} - {{ site_name }}{% endblock %}
+{% block content %}
+<section class="section tight" style="background:var(--bg-alt);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <nav class="breadcrumb"><a href="{{ url_for('public.index') }}">{{ t('nav_home') }}</a> /
+      <a href="{{ url_for('public.districts') }}">{{ t('nav_districts') }}</a> / {{ district_label(district.name) }}</nav>
+    <h1 style="font-size:clamp(1.8rem,3vw,2.6rem)">{{ district_label(district.name) }}</h1>
+    <p class="muted" style="max-width:66ch">{{ district.description }}</p>
+    <div class="chips" style="margin-top:1rem">
+      <span class="chip">{{ district.region }}</span>
+      <span class="chip">{{ info.total }} {{ t('nav_destinations') }}</span>
+      <span class="chip">{{ stays|length }} {{ t('nav_homestays') }}</span>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="wrap">
+    <div class="section-head"><div><span class="eyebrow">{{ t('nav_destinations') }}</span><h2>Places to see</h2></div></div>
+    {% if destinations %}
+      <div class="grid cols-3">{% for d in destinations %}{{ dest_card(d) }}{% endfor %}</div>
+      {% include 'partials/_pagination.html' %}
+    {% else %}
+      <div class="empty"><h3>No destinations added for this district yet.</h3></div>
+    {% endif %}
+  </div>
+</section>
+{% if stays %}
+<section class="section alt">
+  <div class="wrap">
+    <div class="section-head"><div><span class="eyebrow">{{ t('nav_homestays') }}</span><h2>Where to stay</h2></div></div>
+    <div class="grid cols-3">{% for h in stays %}{{ stay_card(h) }}{% endfor %}</div>
+  </div>
+</section>
+{% endif %}
+{% endblock %}

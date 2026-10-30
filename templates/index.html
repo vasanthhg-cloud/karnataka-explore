@@ -1,0 +1,191 @@
+{% extends "base.html" %}
+{% from "partials/_cards.html" import dest_card, stay_card with context %}
+{% block title %}{{ site_name }} - {{ t('site_tagline') }}{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <div class="hero-media">
+    {% if featured and featured[0].image %}<img src="{{ featured[0].image }}" alt="Karnataka landscape">{% endif %}
+  </div>
+  <div class="wrap hero-inner">
+    <span class="eyebrow">{{ t('site_tagline') }}</span>
+    <h1>{{ t('hero_title') }}</h1>
+    <p class="lede">{{ t('hero_sub') }}</p>
+    <form class="searchbar" method="get" action="{{ url_for('public.destinations') }}">
+      <input type="search" name="q" placeholder="{{ t('search_placeholder') }}" aria-label="{{ t('search') }}">
+      <select name="district" aria-label="{{ t('district') }}">
+        <option value="">{{ t('all_districts') }}</option>
+        {% for d in districts %}<option value="{{ d.slug }}">{{ district_label(d.name) }}</option>{% endfor %}
+      </select>
+      <button class="btn btn-primary" type="submit">{{ t('search') }}</button>
+    </form>
+    <div class="hero-stats">
+      <div><b>{{ districts|length }}</b><span>{{ t('nav_districts') }}</span></div>
+      <div><b>{{ total_destinations }}</b><span>{{ t('nav_destinations') }}</span></div>
+      <div><b>{{ stays|length * 12 }}+</b><span>{{ t('nav_homestays') }}</span></div>
+      <div><b>3</b><span>{{ t('language') }}</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- districts -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">{{ t('nav_districts') }}</span>
+        <h2>{{ t('explore_by_district') }}</h2>
+        <p>Every one of Karnataka's 31 districts has something worth the drive.</p>
+      </div>
+      <a class="btn btn-ghost" href="{{ url_for('public.districts') }}">{{ t('view_all') }}</a>
+    </div>
+    <div class="grid cols-4">
+      {% for d in districts[:8] %}
+      <a class="district-card" href="{{ url_for('public.district_detail', slug=d.slug) }}">
+        {% if d.image %}<img src="{{ d.image }}" alt="{{ d.name }}" loading="lazy">{% endif %}
+        <span>{{ district_label(d.name) }}<small>{{ d.dest_count }} destinations</small></span>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- popular -->
+<section class="section alt">
+  <div class="wrap">
+    <div class="section-head">
+      <div><span class="eyebrow">{{ t('recommended') }}</span><h2>{{ t('popular_destinations') }}</h2>
+        <p>The places travellers ask about first - from the Sharavati's plunge to Hampi's boulder fields.</p></div>
+      <a class="btn btn-ghost" href="{{ url_for('public.destinations') }}">{{ t('see_all') }}</a>
+    </div>
+    <div class="grid cols-3">
+      {% for d in featured %}{{ dest_card(d) }}{% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- homestays -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <div><span class="eyebrow">{{ t('nav_homestays') }}</span><h2>{{ t('top_homestays') }}</h2>
+        <p>Plantation bungalows, fort-town courtyard houses and beach cottages across the state.</p></div>
+      <a class="btn btn-ghost" href="{{ url_for('public.homestays') }}">{{ t('see_all') }}</a>
+    </div>
+    <div class="grid cols-3">
+      {% for h in stays %}{{ stay_card(h) }}{% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- waterfalls -->
+<section class="section alt">
+  <div class="wrap">
+    <div class="section-head">
+      <div><span class="eyebrow">{{ t('waterfalls') }}</span><h2>{{ t('waterfalls') }}</h2>
+        <p>Best between July and January, when the Ghats are still running.</p></div>
+      <a class="btn btn-ghost" href="{{ url_for('public.destinations', category='Waterfalls') }}">{{ t('see_all') }}</a>
+    </div>
+    <div class="grid cols-4">{% for d in waterfalls %}{{ dest_card(d) }}{% endfor %}</div>
+  </div>
+</section>
+
+<!-- heritage + temples -->
+<section class="section">
+  <div class="wrap">
+    <div class="split" style="grid-template-columns:1fr 1fr">
+      <div>
+        <div class="section-head"><div><span class="eyebrow">{{ t('historical') }}</span><h2>{{ t('historical') }}</h2></div></div>
+        <div class="grid cols-2">{% for d in historical[:2] %}{{ dest_card(d) }}{% endfor %}</div>
+      </div>
+      <div>
+        <div class="section-head"><div><span class="eyebrow">{{ t('temples') }}</span><h2>{{ t('temples') }}</h2></div></div>
+        <div class="grid cols-2">{% for d in temples[:2] %}{{ dest_card(d) }}{% endfor %}</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- beaches & hills -->
+<section class="section alt">
+  <div class="wrap">
+    <div class="section-head">
+      <div><span class="eyebrow">{{ t('beaches_hills') }}</span><h2>{{ t('beaches_hills') }}</h2>
+        <p>From the Arabian Sea to the highest peak in the state.</p></div>
+    </div>
+    <div class="grid cols-4">{% for d in beaches_hills %}{{ dest_card(d) }}{% endfor %}</div>
+  </div>
+</section>
+
+<!-- map -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <div><span class="eyebrow">{{ t('nav_map') }}</span><h2>{{ t('tourism_map') }}</h2>
+        <p>Every destination in the portal, plotted. Click a pin to open the place.</p></div>
+      <a class="btn btn-ghost" href="{{ url_for('public.tourism_map') }}">{{ t('view_all') }}</a>
+    </div>
+    <div id="home-map" class="map-embed" style="height:420px"></div>
+  </div>
+</section>
+
+<!-- reviews -->
+<section class="section alt">
+  <div class="wrap">
+    <div class="section-head"><div><span class="eyebrow">{{ t('reviews') }}</span><h2>{{ t('customer_reviews') }}</h2></div></div>
+    <div class="grid cols-3">
+      {% for r in reviews %}
+      <div class="review-card">
+        <div class="who"><span class="avatar">{{ r.full_name[:1] }}</span>
+          <div><b>{{ r.full_name }}</b><br><span class="stars">{{ r.rating|stars }}</span></div></div>
+        <p>"{{ r.comment }}"</p>
+        {% if r.destination_name %}<small class="muted">- {{ r.destination_name }}</small>{% endif %}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- tips -->
+<section class="section">
+  <div class="wrap">
+    <div class="split">
+      <div>
+        <span class="eyebrow">{{ t('travel_tips') }}</span>
+        <h2>{{ t('travel_tips') }}</h2>
+        <ul class="list-tick">
+          {% for tip in tips %}<li>{{ tip }}</li>{% endfor %}
+        </ul>
+      </div>
+      <div class="panel">
+        <h3>{{ t('itinerary_title') }}</h3>
+        <p class="muted">Choose the places you want to see and the planner orders them into days with distances.</p>
+        <a class="btn btn-primary" href="{{ url_for('public.itinerary') }}">{{ t('itinerary_title') }}</a>
+        <hr class="divider">
+        <h3>{{ t('emergency') }}</h3>
+        <ul class="list-tick">
+          <li>Police 100 · Ambulance 108 · Tourist helpline 1363</li>
+          <li>Karnataka Tourism: 080-2235 2828</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  var points = {{ map_points|tojson }};
+  var map = L.map('home-map', { scrollWheelZoom: false }).setView([15.1, 75.9], 6.4);
+  L.tileLayer('{{ config.MAP_TILE_URL }}', { attribution: '{{ config.MAP_ATTRIBUTION|safe }}', maxZoom: 18 }).addTo(map);
+  var group = [];
+  points.forEach(function (p) {
+    var m = L.marker([p.latitude, p.longitude]).addTo(map);
+    m.bindPopup('<b>' + p.name + '</b><br>' + p.district_name + '<br><a href="/destination/' + p.slug + '">View details →</a>');
+    group.push(m);
+  });
+  if (group.length) map.fitBounds(L.featureGroup(group).getBounds().pad(0.05));
+</script>
+{% endblock %}

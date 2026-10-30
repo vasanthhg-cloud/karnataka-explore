@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+{% block title %}{{ h.name }} - {{ site_name }}{% endblock %}
+{% block content %}
+<section class="detail-hero" style="height:min(48vh,440px)">
+  {% if images %}<img src="{{ images[0].image_url }}" alt="{{ h.name }}">{% endif %}
+  <div class="wrap">
+    <span class="badge blue" style="margin-bottom:.7rem">{{ district_label(h.district_name) }}</span>
+    <h1>{{ h.name }}</h1>
+    <div class="meta-row">
+      <span class="stars">{{ (h.review_avg or h.rating)|stars }} {{ h.review_avg or h.rating }}</span>
+      <span>{{ h.rooms_available }} {{ t('rooms') }}</span>
+      <span>{{ t('guests') }} up to {{ h.max_guests }}</span>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap detail-layout">
+    <div>
+      {% if images|length > 1 %}
+      <div class="gallery" style="margin-bottom:26px">
+        {% for img in images %}
+        <button type="button" data-lightbox="{{ img.image_url }}"><img src="{{ img.image_url }}" alt="{{ h.name }} {{ loop.index }}" loading="lazy"></button>
+        {% endfor %}
+      </div>
+      {% endif %}
+      <h2>About the stay</h2>
+      <p style="font-size:1.02rem">{{ h.description }}</p>
+
+      <div class="info-grid" style="margin:24px 0">
+        <div class="info-item"><span>{{ t('checkin') }}</span><b>{{ h.checkin_time }}</b></div>
+        <div class="info-item"><span>{{ t('checkout') }}</span><b>{{ h.checkout_time }}</b></div>
+        <div class="info-item"><span>{{ t('guests') }}</span><b>Up to {{ h.max_guests }}</b></div>
+        <div class="info-item"><span>{{ t('rooms') }}</span><b>{{ h.rooms_available }} available</b></div>
+        <div class="info-item"><span>{{ t('location') }}</span><b>{{ h.address }}</b></div>
+        <div class="info-item"><span>{{ t('contact') }}</span><b>{{ h.contact_phone }}</b></div>
+      </div>
+
+      <h3>{{ t('facilities') }}</h3>
+      <div class="tag-list" style="margin-bottom:26px">
+        {% for f in h.facilities|pipes %}<span class="tag">{{ f }}</span>{% endfor %}
+      </div>
+
+      {% if rooms %}
+      <h3>{{ t('rooms') }}</h3>
+      <div class="table-wrap" style="margin-bottom:26px">
+        <table>
+          <thead><tr><th>Room type</th><th>Capacity</th><th>Rooms</th><th>Price</th></tr></thead>
+          <tbody>
+          {% for r in rooms %}
+            <tr><td>{{ r.room_type }}</td><td>{{ r.capacity }} guests</td><td>{{ r.total_rooms }}</td>
+                <td><b>{{ r.price|money }}</b> / night</td></tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% endif %}
+
+      {% if h.latitude and h.longitude %}
+      <h3>{{ t('location') }}</h3>
+      <div class="map-embed" style="margin-bottom:10px">
+        <iframe title="Map" loading="lazy"
+          src="https://www.openstreetmap.org/export/embed.html?bbox={{ h.longitude - 0.02 }},{{ h.latitude - 0.015 }},{{ h.longitude + 0.02 }},{{ h.latitude + 0.015 }}&layer=mapnik&marker={{ h.latitude }},{{ h.longitude }}"></iframe>
+      </div>
+      <a class="btn btn-ghost btn-sm" target="_blank" rel="noopener"
+         href="https://www.google.com/maps/dir/?api=1&destination={{ h.latitude }},{{ h.longitude }}">{{ t('directions') }} →</a>
+      {% endif %}
+
+      <hr class="divider">
+      <div class="section-head"><div><span class="eyebrow">{{ t('reviews') }}</span><h2>{{ t('reviews') }}</h2></div></div>
+      <div class="grid cols-2" style="margin-bottom:24px">
+        {% for r in reviews %}
+        <div class="review-card">
+          <div class="who"><span class="avatar">{{ r.full_name[:1] }}</span>
+            <div><b>{{ r.full_name }}</b><br><span class="stars">{{ r.rating|stars }}</span></div></div>
+          <p>{{ r.comment }}</p>
+        </div>
+        {% else %}<p class="muted">No reviews yet.</p>{% endfor %}
+      </div>
+      {% if logged_in %}
+      <form class="panel" method="post" action="{{ url_for('booking.review') }}">
+        <input type="hidden" name="kind" value="homestay">
+        <input type="hidden" name="slug" value="{{ h.slug }}">
+        <h3>{{ t('write_review') }}</h3>
+        <div class="field"><label>{{ t('your_rating') }}</label>
+          <div class="rating-input">
+            {% for i in [5,4,3,2,1] %}
+            <input type="radio" id="hstar{{ i }}" name="rating" value="{{ i }}" {{ 'checked' if i == 5 }}>
+            <label for="hstar{{ i }}">★</label>
+            {% endfor %}
+          </div></div>
+        <div class="field"><label>{{ t('your_review') }}</label>
+          <textarea class="input" name="comment" required></textarea></div>
+        <button class="btn btn-primary">{{ t('submit') }}</button>
+      </form>
+      {% endif %}
+    </div>
+
+    <aside>
+      <div class="panel sticky">
+        <span class="eyebrow">{{ t('price_per_night') }}</span>
+        <div class="price-big" style="margin:.4rem 0">{{ h.price_per_night|money }} <small>/ {{ t('nights')|lower }}</small></div>
+        <p class="muted" style="font-size:.88rem">Check-in {{ h.checkin_time }} · Check-out {{ h.checkout_time }}</p>
+        <a class="btn btn-primary btn-block" href="{{ url_for('booking.book_homestay', slug=h.slug) }}">{{ t('book_now') }}</a>
+        <form method="post" action="{{ url_for('booking.wishlist_toggle') }}" style="margin-top:.6rem">
+          <input type="hidden" name="kind" value="homestay">
+          <input type="hidden" name="item_id" value="{{ h.id }}">
+          <button class="btn btn-ghost btn-block">{{ t('wishlist') }} {{ '♥' if in_wishlist else '♡' }}</button>
+        </form>
+        <hr class="divider">
+        <h3 style="font-size:1rem">{{ t('facilities') }}</h3>
+        <ul class="list-tick">
+          {% for f in h.facilities|pipes %}<li style="font-size:.88rem">{{ f }}</li>{% endfor %}
+        </ul>
+        <hr class="divider">
+        <h3 style="font-size:1rem">{{ t('contact') }}</h3>
+        <p class="muted" style="font-size:.88rem;margin:0">{{ h.contact_name }}<br>{{ h.contact_phone }}<br>{{ h.contact_email }}</p>
+      </div>
+    </aside>
+  </div>
+</section>
+{% endblock %}

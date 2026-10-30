@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}{{ t('book_now') }} - {{ d.name }}{% endblock %}
+{% block content %}
+<section class="section">
+  <div class="wrap split">
+    <div>
+      <nav class="breadcrumb"><a href="{{ url_for('public.destination_detail', slug=d.slug) }}">← {{ d.name }}</a></nav>
+      <h1 style="font-size:clamp(1.6rem,2.6vw,2.2rem)">{{ t('book_now') }}</h1>
+      <p class="muted">{{ d.name }}, {{ district_label(d.district_name) }}</p>
+      <form class="panel" method="post" data-calc data-price="{{ d.ticket_price }}">
+        <div class="form-grid">
+          <div class="field"><label for="visit_date">{{ t('visit_date') }}</label>
+            <input class="input" id="visit_date" type="date" name="visit_date" required data-min-today min="{{ today }}"></div>
+          <div class="field"><label for="visitors">{{ t('visitors') }}</label>
+            <input class="input" id="visitors" type="number" name="visitors" min="1" max="20" value="2" required data-qty></div>
+        </div>
+        <div class="notice info" style="margin-bottom:1rem">
+          Entry is {{ d.ticket_price|money }} per person. {{ d.timings }}. Best time: {{ d.best_time }}.
+        </div>
+        <button class="btn btn-primary" type="submit">{{ t('pay_now') }}</button>
+      </form>
+    </div>
+    <aside class="panel sticky">
+      <h3>{{ t('booking_summary') }}</h3>
+      <div class="summary-row"><span>{{ t('entry_fee') }}</span><span>{{ d.ticket_price|money }} × <span data-qty>2</span></span></div>
+      <div class="summary-row"><span>{{ t('subtotal') }}</span><span data-total-out>{{ (d.ticket_price * 2)|money }}</span></div>
+      <div class="summary-row"><span>{{ t('taxes') }} (5%)</span><span>added at payment</span></div>
+      <p class="hint">{{ t('demo_notice') }}</p>
+    </aside>
+  </div>
+</section>
+{% endblock %}

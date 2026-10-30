@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}{{ t('nav_districts') }} - {{ site_name }}{% endblock %}
+{% block content %}
+<section class="section tight" style="background:var(--bg-alt);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <nav class="breadcrumb"><a href="{{ url_for('public.index') }}">{{ t('nav_home') }}</a> / {{ t('nav_districts') }}</nav>
+    <h1 style="font-size:clamp(1.8rem,3vw,2.6rem)">{{ t('explore_by_district') }}</h1>
+    <p class="muted" style="max-width:62ch">All 31 districts of Karnataka, with the destinations and homestays we cover in each.</p>
+  </div>
+</section>
+<section class="section">
+  <div class="wrap">
+    {% for region in ['Coastal Karnataka','Malnad','Southern Karnataka','Central Karnataka','North Karnataka','Kalyana Karnataka','Bengaluru region'] %}
+      {% set group = districts | selectattr('region','equalto',region) | list %}
+      {% if group %}
+        <h2 style="margin:34px 0 18px;font-size:1.3rem">{{ region }}</h2>
+        <div class="grid cols-4">
+          {% for d in group %}
+          <a class="district-card" href="{{ url_for('public.district_detail', slug=d.slug) }}">
+            {% if d.image %}<img src="{{ d.image }}" alt="{{ d.name }}" loading="lazy">{% endif %}
+            <span>{{ district_label(d.name) }}<small>{{ d.dest_count }} destinations · {{ d.stay_count }} stays</small></span>
+          </a>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}
