@@ -1,0 +1,1489 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Build your itinerary - Karnataka Explore</title>
+<meta name="description" content="Explore Karnataka district by district: waterfalls, beaches, hill stations, temples, forts, homestays and local guides.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../static/css/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%230f6b4f'/><path d='M22 68 L42 36 L54 56 L64 44 L80 68 Z' fill='white'/></svg>">
+<script>
+  (function () {
+    try {
+      if (new URLSearchParams(location.search).get("theme")) return;
+      var saved = localStorage.getItem("kx-theme");
+      if (saved) document.documentElement.setAttribute("data-theme", saved);
+      else if (window.matchMedia("(prefers-color-scheme: dark)").matches)
+        document.documentElement.setAttribute("data-theme", "dark");
+    } catch (e) {}
+  })();
+</script>
+
+</head>
+<body><div style="background:#0f6b4f;color:#eaf5f0;font:600 13px/1.5 system-ui,sans-serif;padding:10px 18px;text-align:center;position:relative;z-index:100">Static preview of Karnataka Explore &mdash; every destination, homestay and guide is browsable. Booking, sign-in, payments and the admin console run in the Python app: <a href="https://github.com/vasanthhg-cloud/karnataka-explore" style="color:#fff;text-decoration:underline">see the repository</a>.</div>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-head">
+  <div class="wrap nav-wrap">
+    <a class="brand" href="../">
+      <span class="brand-mark" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 19l6-11 4 7 3-4 5 8z"/><circle cx="17" cy="6" r="2"/></svg>
+      </span>
+      <span class="brand-text"><b>Karnataka Explore</b><span>Discover Karnataka</span></span>
+    </a>
+
+    <nav class="nav" id="nav">
+      <a href="../" class="">Home</a>
+      <a href="../destinations/" class="">Destinations</a>
+      <a href="../districts/" class="">Districts</a>
+      <a href="../homestays/" class="">Homestays</a>
+      <a href="../guides/" class="">Tour Guides</a>
+      <a href="../map/" class="">Tourism Map</a>
+      <a href="../itinerary/" class="active">Plan a Trip</a>
+      <a href="../about/" class="">About Us</a>
+      <a href="../contact/" class="">Contact Us</a>
+      
+        <a class="mobile-auth" style="display:none" href="../login/">Login</a>
+        <a class="mobile-auth" style="display:none" href="../register/">Register</a>
+      
+    </nav>
+
+    <div class="nav-actions">
+      <div class="dropdown">
+        <button class="icon-btn" data-dropdown aria-label="Language" title="Language">EN</button>
+        <div class="dropdown-panel">
+          
+            <a href="../preview/">English ✓</a>
+          
+            <a href="../preview/">हिन्दी</a>
+          
+            <a href="../preview/">ಕನ್ನಡ</a>
+          
+        </div>
+      </div>
+      <button class="icon-btn" onclick="toggleTheme()" aria-label="Theme" title="Theme">
+        <span data-theme-icon aria-hidden="true">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.8A8.5 8.5 0 1 1 11.2 3a6.6 6.6 0 0 0 9.8 9.8z"/></svg>
+        </span>
+      </button>
+      
+        <a class="btn btn-ghost btn-sm" href="../login/">Login</a>
+        <a class="btn btn-primary btn-sm" href="../register/">Register</a>
+      
+      <button class="icon-btn nav-toggle" data-nav-toggle aria-label="Menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+
+  
+
+
+<main id="main">
+
+<section class="section tight" style="background:var(--bg-alt);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <nav class="breadcrumb"><a href="../">Home</a> / Plan a Trip</nav>
+    <h1 style="font-size:clamp(1.8rem,3vw,2.6rem)">Build your itinerary</h1>
+    <p class="muted" style="max-width:64ch">Pick the places you want to visit and we will put them in order with an estimated travel plan.</p>
+  </div>
+</section>
+<section class="section">
+  <div class="wrap">
+    <form method="post" onsubmit="alert('This is the static preview. Run the Flask app (python run.py) for sign-in, booking, payments and admin.');return false;" action="../preview/">
+      <div class="panel" style="margin-bottom:22px">
+        <div class="chips" style="margin-bottom:14px">
+          
+            <button type="button" class="chip" data-cat="Waterfalls">Waterfalls</button>
+          
+            <button type="button" class="chip" data-cat="Hill Stations">Hill Stations</button>
+          
+            <button type="button" class="chip" data-cat="Beaches">Beaches</button>
+          
+            <button type="button" class="chip" data-cat="Historical Places">Historical Places</button>
+          
+            <button type="button" class="chip" data-cat="Temples">Temples</button>
+          
+            <button type="button" class="chip" data-cat="Forts">Forts</button>
+          
+            <button type="button" class="chip" data-cat="Wildlife Sanctuaries">Wildlife Sanctuaries</button>
+          
+            <button type="button" class="chip" data-cat="National Parks">National Parks</button>
+          
+            <button type="button" class="chip" data-cat="Museums">Museums</button>
+          
+            <button type="button" class="chip" data-cat="Adventure Tourism">Adventure Tourism</button>
+          
+            <button type="button" class="chip" data-cat="Nature and Eco-Tourism">Nature and Eco-Tourism</button>
+          
+            <button type="button" class="chip" data-cat="Cultural Heritage">Cultural Heritage</button>
+          
+        </div>
+        <p class="hint">Selected: <b data-count-selected>0</b> places (up to 12)</p>
+      </div>
+      <div class="grid cols-3">
+        
+        <label class="card" style="cursor:pointer" data-cat="Temples">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="aihole-durga-temple-complex" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Aihole Durga Temple Complex</b>
+              <div class="meta">Bagalkote</div>
+              <div class="meta">Temples · 2 hours</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Historical Places">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="badami-cave-temples" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Badami Cave Temples</b>
+              <div class="meta">Bagalkote</div>
+              <div class="meta">Historical Places · 2-3 hours</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Temples">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="kudala-sangama" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Kudala Sangama</b>
+              <div class="meta">Bagalkote</div>
+              <div class="meta">Temples · 1-2 hours</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Cultural Heritage">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="pattadakal-group-of-monuments" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Pattadakal Group of Monuments</b>
+              <div class="meta">Bagalkote</div>
+              <div class="meta">Cultural Heritage · 1.5-2 hours</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Forts">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="ballari-fort" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Ballari Fort</b>
+              <div class="meta">Ballari</div>
+              <div class="meta">Forts · 1-2 hours</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Wildlife Sanctuaries">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="daroji-sloth-bear-sanctuary" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Daroji Sloth Bear Sanctuary</b>
+              <div class="meta">Ballari</div>
+              <div class="meta">Wildlife Sanctuaries · 2-3 hours</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Temples">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="kumaraswamy-temple-sanduru" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Kumaraswamy Temple, Sanduru</b>
+              <div class="meta">Ballari</div>
+              <div class="meta">Temples · 1 hour</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Forts">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="belagavi-fort" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Belagavi Fort</b>
+              <div class="meta">Belagavi</div>
+              <div class="meta">Forts · 1-2 hours</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Waterfalls">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="godchinamalaki-falls" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Godchinamalaki Falls</b>
+              <div class="meta">Belagavi</div>
+              <div class="meta">Waterfalls · 1-2 hours</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Waterfalls">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="gokak-falls" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Gokak Falls</b>
+              <div class="meta">Belagavi</div>
+              <div class="meta">Waterfalls · 1-2 hours</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Historical Places">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="kittur-fort-and-palace" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Kittur Fort and Palace</b>
+              <div class="meta">Belagavi</div>
+              <div class="meta">Historical Places · 1-2 hours</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Forts">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="devanahalli-fort" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Devanahalli Fort</b>
+              <div class="meta">Bengaluru Rural</div>
+              <div class="meta">Forts · 1-2 hours</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Nature and Eco-Tourism">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="hessarghatta-lake" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Hessarghatta Lake</b>
+              <div class="meta">Bengaluru Rural</div>
+              <div class="meta">Nature and Eco-Tourism · 2-3 hours</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Cultural Heritage">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="nrityagram-dance-village" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Nrityagram Dance Village</b>
+              <div class="meta">Bengaluru Rural</div>
+              <div class="meta">Cultural Heritage · 1-2 hours</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Historical Places">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="bangalore-palace" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Bangalore Palace</b>
+              <div class="meta">Bengaluru Urban</div>
+              <div class="meta">Historical Places · 1-2 hours</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Nature and Eco-Tourism">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="cubbon-park" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Cubbon Park</b>
+              <div class="meta">Bengaluru Urban</div>
+              <div class="meta">Nature and Eco-Tourism · 1-2 hours</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Nature and Eco-Tourism">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="lalbagh-botanical-garden" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Lalbagh Botanical Garden</b>
+              <div class="meta">Bengaluru Urban</div>
+              <div class="meta">Nature and Eco-Tourism · 2-3 hours</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Historical Places">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="tipu-sultan-s-summer-palace" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Tipu Sultan&#39;s Summer Palace</b>
+              <div class="meta">Bengaluru Urban</div>
+              <div class="meta">Historical Places · 45 minutes - 1 hour</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Historical Places">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="bahmani-tombs-ashtur" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Bahmani Tombs, Ashtur</b>
+              <div class="meta">Bidar</div>
+              <div class="meta">Historical Places · 1 hour</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Forts">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="bidar-fort" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Bidar Fort</b>
+              <div class="meta">Bidar</div>
+              <div class="meta">Forts · 2-3 hours</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Temples">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="guru-nanak-jhira-sahib" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Guru Nanak Jhira Sahib</b>
+              <div class="meta">Bidar</div>
+              <div class="meta">Temples · 1 hour</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="National Parks">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="bandipur-national-park" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Bandipur National Park</b>
+              <div class="meta">Chamarajanagara</div>
+              <div class="meta">National Parks · 3 hours (safari)</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Waterfalls">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="bharachukki-falls" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Bharachukki Falls</b>
+              <div class="meta">Chamarajanagara</div>
+              <div class="meta">Waterfalls · 2 hours</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Hill Stations">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="biligirirangan-hills-br-hills" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Biligirirangan Hills (BR Hills)</b>
+              <div class="meta">Chamarajanagara</div>
+              <div class="meta">Hill Stations · Half day</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Hill Stations">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="himavad-gopalaswamy-betta" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Himavad Gopalaswamy Betta</b>
+              <div class="meta">Chamarajanagara</div>
+              <div class="meta">Hill Stations · 1-2 hours</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Temples">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="bhoga-nandishwara-temple" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Bhoga Nandishwara Temple</b>
+              <div class="meta">Chikkaballapura</div>
+              <div class="meta">Temples · 1 hour</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Forts">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="gudibande-fort" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Gudibande Fort</b>
+              <div class="meta">Chikkaballapura</div>
+              <div class="meta">Forts · 2-3 hours</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Hill Stations">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="nandi-hills" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Nandi Hills</b>
+              <div class="meta">Chikkaballapura</div>
+              <div class="meta">Hill Stations · 2-3 hours</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Adventure Tourism">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="skandagiri-kalavara-durga" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Skandagiri (Kalavara Durga)</b>
+              <div class="meta">Chikkaballapura</div>
+              <div class="meta">Adventure Tourism · 5-6 hours (trek)</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Hill Stations">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="baba-budangiri" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Baba Budangiri</b>
+              <div class="meta">Chikkamagaluru</div>
+              <div class="meta">Hill Stations · 2 hours</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Waterfalls">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="hebbe-falls" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Hebbe Falls</b>
+              <div class="meta">Chikkamagaluru</div>
+              <div class="meta">Waterfalls · Half day</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Nature and Eco-Tourism">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="hirekolale-lake" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Hirekolale Lake</b>
+              <div class="meta">Chikkamagaluru</div>
+              <div class="meta">Nature and Eco-Tourism · 1 hour</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="National Parks">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="kudremukh-national-park" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Kudremukh National Park</b>
+              <div class="meta">Chikkamagaluru</div>
+              <div class="meta">National Parks · Full day (trek)</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Hill Stations">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="mullayanagiri-peak" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Mullayanagiri Peak</b>
+              <div class="meta">Chikkamagaluru</div>
+              <div class="meta">Hill Stations · 2-3 hours</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Historical Places">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="chandravalli" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Chandravalli</b>
+              <div class="meta">Chitradurga</div>
+              <div class="meta">Historical Places · 1 hour</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Forts">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="chitradurga-fort" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Chitradurga Fort</b>
+              <div class="meta">Chitradurga</div>
+              <div class="meta">Forts · 3-4 hours</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Nature and Eco-Tourism">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="vani-vilas-sagar-dam" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Vani Vilas Sagar Dam</b>
+              <div class="meta">Chitradurga</div>
+              <div class="meta">Nature and Eco-Tourism · 1-2 hours</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Temples">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="kadri-manjunath-temple" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Kadri Manjunath Temple</b>
+              <div class="meta">Dakshina Kannada</div>
+              <div class="meta">Temples · 45 minutes</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Beaches">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="panambur-beach" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Panambur Beach</b>
+              <div class="meta">Dakshina Kannada</div>
+              <div class="meta">Beaches · 2 hours</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Historical Places">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="sultan-battery" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Sultan Battery</b>
+              <div class="meta">Dakshina Kannada</div>
+              <div class="meta">Historical Places · 45 minutes</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Temples">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="harihareshwara-temple-harihar" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Harihareshwara Temple, Harihar</b>
+              <div class="meta">Davanagere</div>
+              <div class="meta">Temples · 1 hour</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Temples">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="kalleshwara-temple-malebennur" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Kalleshwara Temple, Malebennur</b>
+              <div class="meta">Davanagere</div>
+              <div class="meta">Temples · 1 hour</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Nature and Eco-Tourism">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="kunduvada-lake" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Kunduvada Lake</b>
+              <div class="meta">Davanagere</div>
+              <div class="meta">Nature and Eco-Tourism · 1 hour</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Cultural Heritage">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="murugha-math-dharwad" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Murugha Math, Dharwad</b>
+              <div class="meta">Dharwad</div>
+              <div class="meta">Cultural Heritage · 1 hour</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Hill Stations">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="nrupatunga-betta" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Nrupatunga Betta</b>
+              <div class="meta">Dharwad</div>
+              <div class="meta">Hill Stations · 1 hour</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Nature and Eco-Tourism">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="unkal-lake" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Unkal Lake</b>
+              <div class="meta">Dharwad</div>
+              <div class="meta">Nature and Eco-Tourism · 1 hour</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Temples">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="doddabasappa-temple-dambal" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Doddabasappa Temple, Dambal</b>
+              <div class="meta">Gadag</div>
+              <div class="meta">Temples · 1 hour</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Temples">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="lakkundi-temples" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Lakkundi Temples</b>
+              <div class="meta">Gadag</div>
+              <div class="meta">Temples · 2 hours</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Temples">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="trikuteshwara-temple-gadag" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Trikuteshwara Temple, Gadag</b>
+              <div class="meta">Gadag</div>
+              <div class="meta">Temples · 1 hour</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Temples">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="chennakeshava-temple-belur" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Chennakeshava Temple, Belur</b>
+              <div class="meta">Hassan</div>
+              <div class="meta">Temples · 2 hours</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Temples">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="hoysaleswara-temple-halebidu" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Hoysaleswara Temple, Halebidu</b>
+              <div class="meta">Hassan</div>
+              <div class="meta">Temples · 2 hours</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Historical Places">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="shettihalli-rosary-church" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Shettihalli Rosary Church</b>
+              <div class="meta">Hassan</div>
+              <div class="meta">Historical Places · 1 hour</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Cultural Heritage">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="shravanabelagola" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Shravanabelagola</b>
+              <div class="meta">Hassan</div>
+              <div class="meta">Cultural Heritage · 3 hours</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Temples">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="nagareshwara-temple-bankapura" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Nagareshwara Temple, Bankapura</b>
+              <div class="meta">Haveri</div>
+              <div class="meta">Temples · 1 hour</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Wildlife Sanctuaries">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="ranebennur-blackbuck-sanctuary" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Ranebennur Blackbuck Sanctuary</b>
+              <div class="meta">Haveri</div>
+              <div class="meta">Wildlife Sanctuaries · 2 hours</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Temples">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="tarakeshwara-temple-hangal" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Tarakeshwara Temple, Hangal</b>
+              <div class="meta">Haveri</div>
+              <div class="meta">Temples · 1-2 hours</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Cultural Heritage">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="buddha-vihar-kalaburagi" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Buddha Vihar, Kalaburagi</b>
+              <div class="meta">Kalaburagi</div>
+              <div class="meta">Cultural Heritage · 45 minutes</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Forts">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="gulbarga-fort" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Gulbarga Fort</b>
+              <div class="meta">Kalaburagi</div>
+              <div class="meta">Forts · 2 hours</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Cultural Heritage">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="khwaja-bande-nawaz-dargah" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Khwaja Bande Nawaz Dargah</b>
+              <div class="meta">Kalaburagi</div>
+              <div class="meta">Cultural Heritage · 1 hour</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Temples">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="sharana-basaveshwara-temple" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Sharana Basaveshwara Temple</b>
+              <div class="meta">Kalaburagi</div>
+              <div class="meta">Temples · 45 minutes</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Waterfalls">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="abbey-falls" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Abbey Falls</b>
+              <div class="meta">Kodagu</div>
+              <div class="meta">Waterfalls · 1 hour</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Adventure Tourism">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="dubare-elephant-camp" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Dubare Elephant Camp</b>
+              <div class="meta">Kodagu</div>
+              <div class="meta">Adventure Tourism · 2 hours</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Hill Stations">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="mandalpatti" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Mandalpatti</b>
+              <div class="meta">Kodagu</div>
+              <div class="meta">Hill Stations · 3 hours</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Hill Stations">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="raja-s-seat" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Raja&#39;s Seat</b>
+              <div class="meta">Kodagu</div>
+              <div class="meta">Hill Stations · 1 hour</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Temples">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="talakaveri" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Talakaveri</b>
+              <div class="meta">Kodagu</div>
+              <div class="meta">Temples · 1-2 hours</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Temples">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="antara-gange" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Antara Gange</b>
+              <div class="meta">Kolar</div>
+              <div class="meta">Temples · 1-2 hours</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Temples">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="kolaramma-temple" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Kolaramma Temple</b>
+              <div class="meta">Kolar</div>
+              <div class="meta">Temples · 45 minutes</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Temples">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="someshwara-temple-kolar" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Someshwara Temple, Kolar</b>
+              <div class="meta">Kolar</div>
+              <div class="meta">Temples · 1 hour</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Cultural Heritage">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="gavimath" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Gavimath</b>
+              <div class="meta">Koppal</div>
+              <div class="meta">Cultural Heritage · 1 hour</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Temples">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="kanakagiri-jain-temple" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Kanakagiri Jain Temple</b>
+              <div class="meta">Koppal</div>
+              <div class="meta">Temples · 1-2 hours</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Forts">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="koppal-fort" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Koppal Fort</b>
+              <div class="meta">Koppal</div>
+              <div class="meta">Forts · 2 hours</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Temples">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="mahadeva-temple-itagi" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Mahadeva Temple, Itagi</b>
+              <div class="meta">Koppal</div>
+              <div class="meta">Temples · 1 hour</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Nature and Eco-Tourism">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="brindavan-gardens-krs" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Brindavan Gardens, KRS</b>
+              <div class="meta">Mandya</div>
+              <div class="meta">Nature and Eco-Tourism · 2-3 hours</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Temples">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="melukote" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Melukote</b>
+              <div class="meta">Mandya</div>
+              <div class="meta">Temples · 3 hours</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Wildlife Sanctuaries">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="ranganathittu-bird-sanctuary" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Ranganathittu Bird Sanctuary</b>
+              <div class="meta">Mandya</div>
+              <div class="meta">Wildlife Sanctuaries · 2 hours</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Historical Places">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="srirangapatna" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Srirangapatna</b>
+              <div class="meta">Mandya</div>
+              <div class="meta">Historical Places · Half day</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Temples">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="chamundi-hills" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Chamundi Hills</b>
+              <div class="meta">Mysuru</div>
+              <div class="meta">Temples · 2 hours</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Historical Places">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="mysore-palace" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Mysore Palace</b>
+              <div class="meta">Mysuru</div>
+              <div class="meta">Historical Places · 2-3 hours</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Nature and Eco-Tourism">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="mysore-zoo-sri-chamarajendra-zoological-gardens" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Mysore Zoo (Sri Chamarajendra Zoological Gardens)</b>
+              <div class="meta">Mysuru</div>
+              <div class="meta">Nature and Eco-Tourism · 2-3 hours</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Historical Places">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="st-philomena-s-cathedral" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>St. Philomena&#39;s Cathedral</b>
+              <div class="meta">Mysuru</div>
+              <div class="meta">Historical Places · 45 minutes</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Historical Places">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="maski" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Maski</b>
+              <div class="meta">Raichur</div>
+              <div class="meta">Historical Places · 1-2 hours</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Forts">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="mudgal-fort" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Mudgal Fort</b>
+              <div class="meta">Raichur</div>
+              <div class="meta">Forts · 1-2 hours</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Forts">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="raichur-fort" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Raichur Fort</b>
+              <div class="meta">Raichur</div>
+              <div class="meta">Forts · 2 hours</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Cultural Heritage">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="channapatna" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Channapatna</b>
+              <div class="meta">Ramanagara</div>
+              <div class="meta">Cultural Heritage · 1-2 hours</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Nature and Eco-Tourism">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="mekedatu" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Mekedatu</b>
+              <div class="meta">Ramanagara</div>
+              <div class="meta">Nature and Eco-Tourism · 2 hours</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Hill Stations">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="ramadevara-betta" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Ramadevara Betta</b>
+              <div class="meta">Ramanagara</div>
+              <div class="meta">Hill Stations · 1-2 hours</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Adventure Tourism">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="savandurga" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Savandurga</b>
+              <div class="meta">Ramanagara</div>
+              <div class="meta">Adventure Tourism · 4-5 hours</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Nature and Eco-Tourism">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="agumbe" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Agumbe</b>
+              <div class="meta">Shivamogga</div>
+              <div class="meta">Nature and Eco-Tourism · Half day</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Waterfalls">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="jog-falls" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Jog Falls</b>
+              <div class="meta">Shivamogga</div>
+              <div class="meta">Waterfalls · 2 hours</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Cultural Heritage">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="kuppalli-kuvempu-s-home" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Kuppalli (Kuvempu&#39;s home)</b>
+              <div class="meta">Shivamogga</div>
+              <div class="meta">Cultural Heritage · 1 hour</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Adventure Tourism">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="sakrebailu-elephant-camp" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Sakrebailu Elephant Camp</b>
+              <div class="meta">Shivamogga</div>
+              <div class="meta">Adventure Tourism · 1 hour</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Hill Stations">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="devarayanadurga" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Devarayanadurga</b>
+              <div class="meta">Tumakuru</div>
+              <div class="meta">Hill Stations · 2 hours</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Forts">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="madhugiri-fort" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Madhugiri Fort</b>
+              <div class="meta">Tumakuru</div>
+              <div class="meta">Forts · 3-4 hours</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Nature and Eco-Tourism">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="namada-chilume" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Namada Chilume</b>
+              <div class="meta">Tumakuru</div>
+              <div class="meta">Nature and Eco-Tourism · 1 hour</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Cultural Heritage">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="siddaganga-math" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Siddaganga Math</b>
+              <div class="meta">Tumakuru</div>
+              <div class="meta">Cultural Heritage · 1 hour</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Beaches">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="kaup-beach-and-lighthouse" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Kaup Beach and Lighthouse</b>
+              <div class="meta">Udupi</div>
+              <div class="meta">Beaches · 1-2 hours</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Waterfalls">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="kudlu-theertha-falls" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Kudlu Theertha Falls</b>
+              <div class="meta">Udupi</div>
+              <div class="meta">Waterfalls · Half day</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Temples">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="sri-krishna-temple-udupi" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Sri Krishna Temple, Udupi</b>
+              <div class="meta">Udupi</div>
+              <div class="meta">Temples · 1 hour</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Beaches">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="st-mary-s-island" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>St. Mary&#39;s Island</b>
+              <div class="meta">Udupi</div>
+              <div class="meta">Beaches · 2-3 hours</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Wildlife Sanctuaries">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="dandeli-wildlife-sanctuary" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Dandeli Wildlife Sanctuary</b>
+              <div class="meta">Uttara Kannada</div>
+              <div class="meta">Wildlife Sanctuaries · Full day</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Temples">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="murudeshwar-temple" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Murudeshwar Temple</b>
+              <div class="meta">Uttara Kannada</div>
+              <div class="meta">Temples · 2 hours</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Beaches">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="om-beach-gokarna" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Om Beach, Gokarna</b>
+              <div class="meta">Uttara Kannada</div>
+              <div class="meta">Beaches · Half day</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Waterfalls">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="unchalli-falls-lushington-falls" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Unchalli Falls (Lushington Falls)</b>
+              <div class="meta">Uttara Kannada</div>
+              <div class="meta">Waterfalls · 2 hours</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Adventure Tourism">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="yana-caves" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Yana Caves</b>
+              <div class="meta">Uttara Kannada</div>
+              <div class="meta">Adventure Tourism · 3 hours</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Cultural Heritage">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="anegundi" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Anegundi</b>
+              <div class="meta">Vijayanagara</div>
+              <div class="meta">Cultural Heritage · Half day</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Historical Places">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="lotus-mahal-and-zenana-enclosure" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Lotus Mahal and Zenana Enclosure</b>
+              <div class="meta">Vijayanagara</div>
+              <div class="meta">Historical Places · 1 hour</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Nature and Eco-Tourism">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="tungabhadra-dam-and-garden-hosapete" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Tungabhadra Dam and Garden, Hosapete</b>
+              <div class="meta">Vijayanagara</div>
+              <div class="meta">Nature and Eco-Tourism · 1-2 hours</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Temples">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="virupaksha-temple-hampi" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Virupaksha Temple, Hampi</b>
+              <div class="meta">Vijayanagara</div>
+              <div class="meta">Temples · 1-2 hours</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Cultural Heritage">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="vittala-temple-and-stone-chariot" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Vittala Temple and Stone Chariot</b>
+              <div class="meta">Vijayanagara</div>
+              <div class="meta">Cultural Heritage · 1-2 hours</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Historical Places">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="gol-gumbaz" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Gol Gumbaz</b>
+              <div class="meta">Vijayapura</div>
+              <div class="meta">Historical Places · 1-2 hours</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Historical Places">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="ibrahim-rauza" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Ibrahim Rauza</b>
+              <div class="meta">Vijayapura</div>
+              <div class="meta">Historical Places · 1 hour</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Cultural Heritage">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="jumma-masjid-vijayapura" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Jumma Masjid, Vijayapura</b>
+              <div class="meta">Vijayapura</div>
+              <div class="meta">Cultural Heritage · 45 minutes</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Historical Places">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="malik-e-maidan" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Malik-e-Maidan</b>
+              <div class="meta">Vijayapura</div>
+              <div class="meta">Historical Places · 30 minutes</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Historical Places">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="kanaganahalli-sannati-buddhist-site" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Kanaganahalli (Sannati) Buddhist Site</b>
+              <div class="meta">Yadgir</div>
+              <div class="meta">Historical Places · 1-2 hours</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Nature and Eco-Tourism">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="narayanpur-dam-basava-sagar" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Narayanpur Dam (Basava Sagar)</b>
+              <div class="meta">Yadgir</div>
+              <div class="meta">Nature and Eco-Tourism · 1 hour</div>
+            </div>
+          </div>
+        </label>
+        
+        <label class="card" style="cursor:pointer" data-cat="Forts">
+          <div class="card-body" style="flex-direction:row;align-items:flex-start;gap:.7rem">
+            <input type="checkbox" name="places" value="yadgir-fort" data-place-check style="margin-top:.35rem;width:18px;height:18px;accent-color:var(--green-600)">
+            <div>
+              <b>Yadgir Fort</b>
+              <div class="meta">Yadgir</div>
+              <div class="meta">Forts · 1-2 hours</div>
+            </div>
+          </div>
+        </label>
+        
+      </div>
+      <div style="margin-top:26px;display:flex;gap:.7rem;flex-wrap:wrap">
+        <button class="btn btn-primary" type="submit">Generate itinerary</button>
+        <a class="btn btn-ghost" href="../itinerary/">Clear</a>
+      </div>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="brand" href="../" style="color:#fff">
+          <span class="brand-mark" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 19l6-11 4 7 3-4 5 8z"/><circle cx="17" cy="6" r="2"/></svg>
+          </span>
+          <span class="brand-text"><b style="color:#fff">Karnataka Explore</b><span style="color:#9db8ac">Discover Karnataka</span></span>
+        </a>
+        <p style="margin-top:1rem;font-size:.9rem;color:#b6cdc2;max-width:34ch">Karnataka Explore is a tourism portal that brings the state&#39;s destinations, homestays and local guides into one place, district by district.</p>
+        <div class="socials">
+          <a href="#" aria-label="Instagram">◎</a><a href="#" aria-label="Facebook">f</a>
+          <a href="#" aria-label="YouTube">▷</a><a href="#" aria-label="X">✕</a>
+        </div>
+      </div>
+      <div>
+        <h4>Quick links</h4>
+        <ul>
+          <li><a href="../destinations/">Destinations</a></li>
+          <li><a href="../districts/">Districts</a></li>
+          <li><a href="../homestays/">Homestays</a></li>
+          <li><a href="../guides/">Tour Guides</a></li>
+          <li><a href="../map/">Tourism Map</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact us</h4>
+        <ul>
+          <li><a href="mailto:hello@karnatakaexplore.in">hello@karnatakaexplore.in</a></li>
+          <li><a href="tel:+91 80 2222 3344">+91 80 2222 3344</a></li>
+          <li><a href="../contact/">Contact Us</a></li>
+          <li><a href="../preview/">Admin Panel</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Travel notes, once a month</h4>
+        <p style="font-size:.9rem;color:#b6cdc2;margin-bottom:0">One email a month with routes, festivals and new stays.</p>
+        <form class="newsletter-form" method="post" onsubmit="alert('This is the static preview. Run the Flask app (python run.py) for sign-in, booking, payments and admin.');return false;" action="../preview/">
+          <input type="email" name="email" placeholder="you@example.com" required aria-label="Email">
+          <button class="btn btn-primary btn-sm" type="submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Karnataka Explore. All rights reserved.</span>
+      <span>A student project built with Flask, SQLite and OpenStreetMap. Demo project - payments are simulated and no money is deducted.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="../static/js/app.js"></script>
+
+<script>
+  document.querySelectorAll('[data-cat][data-cat]').forEach(function (b) {
+    if (b.tagName !== 'BUTTON') return;
+    b.addEventListener('click', function () {
+      var cat = b.getAttribute('data-cat');
+      var on = b.classList.toggle('active');
+      document.querySelectorAll('label[data-cat="' + cat + '"]').forEach(function (card) {
+        card.style.display = on ? 'none' : '';
+        var cb = card.querySelector('input'); if (cb) cb.checked = false;
+      });
+      document.querySelectorAll('[data-place-check]').forEach(function(){});
+      var c = document.querySelector('[data-count-selected]');
+      if (c) c.textContent = document.querySelectorAll('[data-place-check]:checked').length;
+    });
+  });
+</script>
+
+</body>
+</html>

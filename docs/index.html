@@ -1,0 +1,756 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Karnataka Explore - Discover Karnataka</title>
+<meta name="description" content="Explore Karnataka district by district: waterfalls, beaches, hill stations, temples, forts, homestays and local guides.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="static/css/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%230f6b4f'/><path d='M22 68 L42 36 L54 56 L64 44 L80 68 Z' fill='white'/></svg>">
+<script>
+  (function () {
+    try {
+      if (new URLSearchParams(location.search).get("theme")) return;
+      var saved = localStorage.getItem("kx-theme");
+      if (saved) document.documentElement.setAttribute("data-theme", saved);
+      else if (window.matchMedia("(prefers-color-scheme: dark)").matches)
+        document.documentElement.setAttribute("data-theme", "dark");
+    } catch (e) {}
+  })();
+</script>
+
+</head>
+<body><div style="background:#0f6b4f;color:#eaf5f0;font:600 13px/1.5 system-ui,sans-serif;padding:10px 18px;text-align:center;position:relative;z-index:100">Static preview of Karnataka Explore &mdash; every destination, homestay and guide is browsable. Booking, sign-in, payments and the admin console run in the Python app: <a href="https://github.com/vasanthhg-cloud/karnataka-explore" style="color:#fff;text-decoration:underline">see the repository</a>.</div>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-head">
+  <div class="wrap nav-wrap">
+    <a class="brand" href="./">
+      <span class="brand-mark" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 19l6-11 4 7 3-4 5 8z"/><circle cx="17" cy="6" r="2"/></svg>
+      </span>
+      <span class="brand-text"><b>Karnataka Explore</b><span>Discover Karnataka</span></span>
+    </a>
+
+    <nav class="nav" id="nav">
+      <a href="./" class="active">Home</a>
+      <a href="destinations/" class="">Destinations</a>
+      <a href="districts/" class="">Districts</a>
+      <a href="homestays/" class="">Homestays</a>
+      <a href="guides/" class="">Tour Guides</a>
+      <a href="map/" class="">Tourism Map</a>
+      <a href="itinerary/" class="">Plan a Trip</a>
+      <a href="about/" class="">About Us</a>
+      <a href="contact/" class="">Contact Us</a>
+      
+        <a class="mobile-auth" style="display:none" href="login/">Login</a>
+        <a class="mobile-auth" style="display:none" href="register/">Register</a>
+      
+    </nav>
+
+    <div class="nav-actions">
+      <div class="dropdown">
+        <button class="icon-btn" data-dropdown aria-label="Language" title="Language">EN</button>
+        <div class="dropdown-panel">
+          
+            <a href="preview/">English ✓</a>
+          
+            <a href="preview/">हिन्दी</a>
+          
+            <a href="preview/">ಕನ್ನಡ</a>
+          
+        </div>
+      </div>
+      <button class="icon-btn" onclick="toggleTheme()" aria-label="Theme" title="Theme">
+        <span data-theme-icon aria-hidden="true">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.8A8.5 8.5 0 1 1 11.2 3a6.6 6.6 0 0 0 9.8 9.8z"/></svg>
+        </span>
+      </button>
+      
+        <a class="btn btn-ghost btn-sm" href="login/">Login</a>
+        <a class="btn btn-primary btn-sm" href="register/">Register</a>
+      
+      <button class="icon-btn nav-toggle" data-nav-toggle aria-label="Menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+
+  
+
+
+<main id="main">
+
+<section class="hero">
+  <div class="hero-media">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Abbey_Falls_New.jpg/1280px-Abbey_Falls_New.jpg" alt="Karnataka landscape">
+  </div>
+  <div class="wrap hero-inner">
+    <span class="eyebrow">Discover Karnataka</span>
+    <h1>Explore the many worlds of Karnataka</h1>
+    <p class="lede">Waterfalls, beaches, hill stations, temples and living heritage across all 31 districts.</p>
+    <form class="searchbar" method="get" action="destinations">
+      <input type="search" name="q" placeholder="Search destinations, districts, homestays, guides..." aria-label="Search">
+      <select name="district" aria-label="District">
+        <option value="">All districts</option>
+        <option value="bagalkote">Bagalkote</option><option value="ballari">Ballari</option><option value="belagavi">Belagavi</option><option value="bengaluru-rural">Bengaluru Rural</option><option value="bengaluru-urban">Bengaluru Urban</option><option value="bidar">Bidar</option><option value="chamarajanagara">Chamarajanagara</option><option value="chikkaballapura">Chikkaballapura</option><option value="chikkamagaluru">Chikkamagaluru</option><option value="chitradurga">Chitradurga</option><option value="dakshina-kannada">Dakshina Kannada</option><option value="davanagere">Davanagere</option><option value="dharwad">Dharwad</option><option value="gadag">Gadag</option><option value="hassan">Hassan</option><option value="haveri">Haveri</option><option value="kalaburagi">Kalaburagi</option><option value="kodagu">Kodagu</option><option value="kolar">Kolar</option><option value="koppal">Koppal</option><option value="mandya">Mandya</option><option value="mysuru">Mysuru</option><option value="raichur">Raichur</option><option value="ramanagara">Ramanagara</option><option value="shivamogga">Shivamogga</option><option value="tumakuru">Tumakuru</option><option value="udupi">Udupi</option><option value="uttara-kannada">Uttara Kannada</option><option value="vijayanagara">Vijayanagara</option><option value="vijayapura">Vijayapura</option><option value="yadgir">Yadgir</option>
+      </select>
+      <button class="btn btn-primary" type="submit">Search</button>
+    </form>
+    <div class="hero-stats">
+      <div><b>31</b><span>Districts</span></div>
+      <div><b>116</b><span>Destinations</span></div>
+      <div><b>36+</b><span>Homestays</span></div>
+      <div><b>3</b><span>Language</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- districts -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Districts</span>
+        <h2>Explore Karnataka by district</h2>
+        <p>Every one of Karnataka's 31 districts has something worth the drive.</p>
+      </div>
+      <a class="btn btn-ghost" href="districts/">View all</a>
+    </div>
+    <div class="grid cols-4">
+      
+      <a class="district-card" href="district/bagalkote/">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Vishnu_image_inside_cave_number_3_in_Badami.jpg/1280px-Vishnu_image_inside_cave_number_3_in_Badami.jpg" alt="Bagalkote" loading="lazy">
+        <span>Bagalkote<small>4 destinations</small></span>
+      </a>
+      
+      <a class="district-card" href="district/ballari/">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Bellary_Fort3.jpg/1280px-Bellary_Fort3.jpg" alt="Ballari" loading="lazy">
+        <span>Ballari<small>3 destinations</small></span>
+      </a>
+      
+      <a class="district-card" href="district/belagavi/">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Gokak_Falls_During_Night.jpg/1280px-Gokak_Falls_During_Night.jpg" alt="Belagavi" loading="lazy">
+        <span>Belagavi<small>4 destinations</small></span>
+      </a>
+      
+      <a class="district-card" href="district/bengaluru-rural/">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Devanahalli_fort_entrance_2007.jpg/1280px-Devanahalli_fort_entrance_2007.jpg" alt="Bengaluru Rural" loading="lazy">
+        <span>Bengaluru Rural<small>3 destinations</small></span>
+      </a>
+      
+      <a class="district-card" href="district/bengaluru-urban/">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Glasshouse_and_fountain_at_lalbagh.jpg/1280px-Glasshouse_and_fountain_at_lalbagh.jpg" alt="Bengaluru Urban" loading="lazy">
+        <span>Bengaluru Urban<small>4 destinations</small></span>
+      </a>
+      
+      <a class="district-card" href="district/bidar/">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Gumbaz_Darwaza_of_the_Bidar_fort_%28cropped%29.jpg/1280px-Gumbaz_Darwaza_of_the_Bidar_fort_%28cropped%29.jpg" alt="Bidar" loading="lazy">
+        <span>Bidar<small>3 destinations</small></span>
+      </a>
+      
+      <a class="district-card" href="district/chamarajanagara/">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Prince_in_the_Jungle_crop.jpg/1280px-Prince_in_the_Jungle_crop.jpg" alt="Chamarajanagara" loading="lazy">
+        <span>Chamarajanagara<small>4 destinations</small></span>
+      </a>
+      
+      <a class="district-card" href="district/chikkaballapura/">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Sunrise_at_Nandi_Hills.jpg/1280px-Sunrise_at_Nandi_Hills.jpg" alt="Chikkaballapura" loading="lazy">
+        <span>Chikkaballapura<small>4 destinations</small></span>
+      </a>
+      
+    </div>
+  </div>
+</section>
+
+<!-- popular -->
+<section class="section alt">
+  <div class="wrap">
+    <div class="section-head">
+      <div><span class="eyebrow">Recommended for you</span><h2>Popular destinations</h2>
+        <p>The places travellers ask about first - from the Sharavati's plunge to Hampi's boulder fields.</p></div>
+      <a class="btn btn-ghost" href="destinations/">See all</a>
+    </div>
+    <div class="grid cols-3">
+      
+<a class="card" href="destination/abbey-falls/">
+  <div class="card-media">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Abbey_Falls_New.jpg/1280px-Abbey_Falls_New.jpg" alt="Abbey Falls" loading="lazy">
+    <span class="badge cat">Waterfalls</span>
+    <span class="price-tag">₹30</span>
+  </div>
+  <div class="card-body">
+    <div class="meta">Kodagu</div>
+    <h3>Abbey Falls</h3>
+    <p>A waterfall on the Kaveri&#39;s tributary about 9 km from Madikeri, where the stream drops through coffee and spice plantations into a rocky pool. A hanging bridge opposite the falls gives a full view, and the walk down passes through cardamom and pepper vines. It is at its heaviest in the monsoon.</p>
+    <div class="card-foot">
+      <span class="stars">★★★★☆ <small class="muted">4.5</small></span>
+      <span class="btn btn-soft btn-sm">View details</span>
+    </div>
+  </div>
+</a>
+
+<a class="card" href="destination/jog-falls/">
+  <div class="card-media">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Jog_Falls_05092016.jpg/1280px-Jog_Falls_05092016.jpg" alt="Jog Falls" loading="lazy">
+    <span class="badge cat">Waterfalls</span>
+    <span class="price-tag">₹20</span>
+  </div>
+  <div class="card-body">
+    <div class="meta">Shivamogga</div>
+    <h3>Jog Falls</h3>
+    <p>India&#39;s second-highest plunge waterfall, where the Sharavati drops about 253 metres in four distinct cascades named Raja, Rani, Roarer and Rocket. It is spectacular in the monsoon when the falls run full, and in the dry season the river is diverted to the Linganamakki reservoir and the flow is much reduced. A long flight of steps leads from the viewpoint down to the base.</p>
+    <div class="card-foot">
+      <span class="stars">★★★★☆ <small class="muted">4.0</small></span>
+      <span class="btn btn-soft btn-sm">View details</span>
+    </div>
+  </div>
+</a>
+
+<a class="card" href="destination/nandi-hills/">
+  <div class="card-media">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Sunrise_at_Nandi_Hills.jpg/1280px-Sunrise_at_Nandi_Hills.jpg" alt="Nandi Hills" loading="lazy">
+    <span class="badge cat">Hill Stations</span>
+    <span class="price-tag">₹15</span>
+  </div>
+  <div class="card-body">
+    <div class="meta">Chikkaballapura</div>
+    <h3>Nandi Hills</h3>
+    <p>A 1,478-metre granite hill that was Tipu Sultan&#39;s summer retreat and is now Bengaluru&#39;s favourite sunrise drive. Tipu&#39;s Drop, a 600-metre cliff, the old summer palace, the Bhoga Nandishwara temple at the foot and the mist that settles on the ridge at dawn are the main draws. The hill fort has been restored and the road to the top is now metalled.</p>
+    <div class="card-foot">
+      <span class="stars">★★★★☆ <small class="muted">4.5</small></span>
+      <span class="btn btn-soft btn-sm">View details</span>
+    </div>
+  </div>
+</a>
+
+<a class="card" href="destination/badami-cave-temples/">
+  <div class="card-media">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Vishnu_image_inside_cave_number_3_in_Badami.jpg/1280px-Vishnu_image_inside_cave_number_3_in_Badami.jpg" alt="Badami Cave Temples" loading="lazy">
+    <span class="badge cat">Historical Places</span>
+    <span class="price-tag">₹25</span>
+  </div>
+  <div class="card-body">
+    <div class="meta">Bagalkote</div>
+    <h3>Badami Cave Temples</h3>
+    <p>Four rock-cut cave temples carved into the sandstone cliffs above Agastya Lake between the 6th and 8th centuries, when Badami was the capital of the Early Chalukyas. Cave 1 is Shaiva, Caves 2 and 3 are Vaishnava and Cave 4 is Jain. Cave 3, dated 578 CE, holds some of the finest early Indian sculpture, including the eighteen-armed Nataraja and Vishnu seated on Ananta. The red sandstone cliffs and the lake below make the whole complex remarkably photogenic.</p>
+    <div class="card-foot">
+      <span class="stars">★★★★★ <small class="muted">5.0</small></span>
+      <span class="btn btn-soft btn-sm">View details</span>
+    </div>
+  </div>
+</a>
+
+<a class="card" href="destination/gol-gumbaz/">
+  <div class="card-media">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Gol_Gumbaz_-4%2C_Bijapur%2C_Karnataka.jpg/1280px-Gol_Gumbaz_-4%2C_Bijapur%2C_Karnataka.jpg" alt="Gol Gumbaz" loading="lazy">
+    <span class="badge cat">Historical Places</span>
+    <span class="price-tag">₹25</span>
+  </div>
+  <div class="card-body">
+    <div class="meta">Vijayapura</div>
+    <h3>Gol Gumbaz</h3>
+    <p>The mausoleum of Muhammad Adil Shah, completed in 1656, with the second-largest pre-modern dome in the world after St. Peter&#39;s. The Whispering Gallery at the base of the dome carries a whisper across 37 metres, and the building&#39;s dark basalt and simple geometry make it one of the finest pieces of Deccan architecture.</p>
+    <div class="card-foot">
+      <span class="stars">★★★☆☆ <small class="muted">3.0</small></span>
+      <span class="btn btn-soft btn-sm">View details</span>
+    </div>
+  </div>
+</a>
+
+<a class="card" href="destination/murudeshwar-temple/">
+  <div class="card-media">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Shiva_Statue_Murdeshwara_Temple.jpg/1280px-Shiva_Statue_Murdeshwara_Temple.jpg" alt="Murudeshwar Temple" loading="lazy">
+    <span class="badge cat">Temples</span>
+    <span class="price-tag">₹10</span>
+  </div>
+  <div class="card-body">
+    <div class="meta">Uttara Kannada</div>
+    <h3>Murudeshwar Temple</h3>
+    <p>A temple town on the coast where a 37-metre statue of Shiva stands on a hill above the sea, with a 20-storey gopura behind it. The temple is believed to hold a piece of the Atma Linga from the Ramayana story, and the lift inside the gopura takes visitors up for a view along the coastline.</p>
+    <div class="card-foot">
+      <span class="stars">★★★★★ <small class="muted">5.0</small></span>
+      <span class="btn btn-soft btn-sm">View details</span>
+    </div>
+  </div>
+</a>
+
+    </div>
+  </div>
+</section>
+
+<!-- homestays -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <div><span class="eyebrow">Homestays</span><h2>Top homestays</h2>
+        <p>Plantation bungalows, fort-town courtyard houses and beach cottages across the state.</p></div>
+      <a class="btn btn-ghost" href="homestays/">See all</a>
+    </div>
+    <div class="grid cols-3">
+      
+<a class="card" href="homestay/kodagu-mist-cottage/">
+  <div class="card-media">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Abbey_Falls_New.jpg/1280px-Abbey_Falls_New.jpg" alt="Kodagu Mist Cottage" loading="lazy">
+    <span class="badge blue">Kodagu</span>
+    <span class="price-tag">₹4,500 <small class="muted">/Nights</small></span>
+  </div>
+  <div class="card-body">
+    <h3>Kodagu Mist Cottage</h3>
+    <div class="meta">Guests 12 · 5 Rooms</div>
+    <p>A colonial-era planter&#39;s house restored with five guest rooms, a verandah facing the misty valley and an open kitchen serving Kodava pandi curry. Abbey Falls is a short walk down the estate road.</p>
+    <div class="card-foot">
+      <span class="stars">★★★★★ <small class="muted">4.7</small></span>
+      <span class="btn btn-soft btn-sm">View details</span>
+    </div>
+  </div>
+</a>
+
+<a class="card" href="homestay/coffee-blossom-estate-stay/">
+  <div class="card-media">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Mullayanagiri1.JPG/1280px-Mullayanagiri1.JPG" alt="Coffee Blossom Estate Stay" loading="lazy">
+    <span class="badge blue">Chikkamagaluru</span>
+    <span class="price-tag">₹3,200 <small class="muted">/Nights</small></span>
+  </div>
+  <div class="card-body">
+    <h3>Coffee Blossom Estate Stay</h3>
+    <div class="meta">Guests 10 · 4 Rooms</div>
+    <p>A working coffee estate bungalow with four rooms looking over the Arabica slopes, ten minutes from the town. Meals are cooked by the family, filtered coffee comes from the estate, and the caretaker walks guests to the viewpoint at sunrise.</p>
+    <div class="card-foot">
+      <span class="stars">★★★★★ <small class="muted">4.6</small></span>
+      <span class="btn btn-soft btn-sm">View details</span>
+    </div>
+  </div>
+</a>
+
+<a class="card" href="homestay/kabini-fringe-homestay/">
+  <div class="card-media">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Mysore_Palace_Morning.jpg/1280px-Mysore_Palace_Morning.jpg" alt="Kabini Fringe Homestay" loading="lazy">
+    <span class="badge blue">Mysuru</span>
+    <span class="price-tag">₹5,200 <small class="muted">/Nights</small></span>
+  </div>
+  <div class="card-body">
+    <h3>Kabini Fringe Homestay</h3>
+    <div class="meta">Guests 8 · 4 Rooms</div>
+    <p>At the edge of the Nagarahole buffer zone, with four cottages, a small pool and a naturalist who takes guests on bird walks and night drives to the forest gate.</p>
+    <div class="card-foot">
+      <span class="stars">★★★★★ <small class="muted">4.6</small></span>
+      <span class="btn btn-soft btn-sm">View details</span>
+    </div>
+  </div>
+</a>
+
+    </div>
+  </div>
+</section>
+
+<!-- waterfalls -->
+<section class="section alt">
+  <div class="wrap">
+    <div class="section-head">
+      <div><span class="eyebrow">Famous waterfalls</span><h2>Famous waterfalls</h2>
+        <p>Best between July and January, when the Ghats are still running.</p></div>
+      <a class="btn btn-ghost" href="destinations?category=Waterfalls">See all</a>
+    </div>
+    <div class="grid cols-4">
+<a class="card" href="destination/abbey-falls/">
+  <div class="card-media">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Abbey_Falls_New.jpg/1280px-Abbey_Falls_New.jpg" alt="Abbey Falls" loading="lazy">
+    <span class="badge cat">Waterfalls</span>
+    <span class="price-tag">₹30</span>
+  </div>
+  <div class="card-body">
+    <div class="meta">Kodagu</div>
+    <h3>Abbey Falls</h3>
+    <p>A waterfall on the Kaveri&#39;s tributary about 9 km from Madikeri, where the stream drops through coffee and spice plantations into a rocky pool. A hanging bridge opposite the falls gives a full view, and the walk down passes through cardamom and pepper vines. It is at its heaviest in the monsoon.</p>
+    <div class="card-foot">
+      <span class="stars">★★★★☆ <small class="muted">4.5</small></span>
+      <span class="btn btn-soft btn-sm">View details</span>
+    </div>
+  </div>
+</a>
+
+<a class="card" href="destination/jog-falls/">
+  <div class="card-media">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Jog_Falls_05092016.jpg/1280px-Jog_Falls_05092016.jpg" alt="Jog Falls" loading="lazy">
+    <span class="badge cat">Waterfalls</span>
+    <span class="price-tag">₹20</span>
+  </div>
+  <div class="card-body">
+    <div class="meta">Shivamogga</div>
+    <h3>Jog Falls</h3>
+    <p>India&#39;s second-highest plunge waterfall, where the Sharavati drops about 253 metres in four distinct cascades named Raja, Rani, Roarer and Rocket. It is spectacular in the monsoon when the falls run full, and in the dry season the river is diverted to the Linganamakki reservoir and the flow is much reduced. A long flight of steps leads from the viewpoint down to the base.</p>
+    <div class="card-foot">
+      <span class="stars">★★★★☆ <small class="muted">4.0</small></span>
+      <span class="btn btn-soft btn-sm">View details</span>
+    </div>
+  </div>
+</a>
+
+<a class="card" href="destination/godchinamalaki-falls/">
+  <div class="card-media">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Gokak_Falls_During_Night.jpg/1280px-Gokak_Falls_During_Night.jpg" alt="Godchinamalaki Falls" loading="lazy">
+    <span class="badge cat">Waterfalls</span>
+    <span class="price-tag">Free entry</span>
+  </div>
+  <div class="card-body">
+    <div class="meta">Belagavi</div>
+    <h3>Godchinamalaki Falls</h3>
+    <p>A two-tier waterfall on the Markandeya river about 16 km from Gokak, where the stream falls roughly 25 metres in two stages into a wooded gorge. It is quieter than Gokak Falls and far less visited, with a short forest walk to the viewpoint and a temple at the top of the falls.</p>
+    <div class="card-foot">
+      <span class="stars">★★★☆☆ <small class="muted">3.0</small></span>
+      <span class="btn btn-soft btn-sm">View details</span>
+    </div>
+  </div>
+</a>
+
+<a class="card" href="destination/gokak-falls/">
+  <div class="card-media">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Gokak_Falls_During_Night.jpg/1280px-Gokak_Falls_During_Night.jpg" alt="Gokak Falls" loading="lazy">
+    <span class="badge cat">Waterfalls</span>
+    <span class="price-tag">₹20</span>
+  </div>
+  <div class="card-body">
+    <div class="meta">Belagavi</div>
+    <h3>Gokak Falls</h3>
+    <p>The Ghataprabha river drops about 52 metres over a horseshoe-shaped sandstone cliff just outside Gokak town, giving one of the widest waterfalls in Karnataka. It is at its best in the monsoon and immediately after, when the whole rock face is white with water. A hanging suspension bridge over the gorge, a Chalukyan temple on the cliff, and the 1887 Gokak Mills hydro-electric station add interest.</p>
+    <div class="card-foot">
+      <span class="stars">★★★★★ <small class="muted">5.0</small></span>
+      <span class="btn btn-soft btn-sm">View details</span>
+    </div>
+  </div>
+</a>
+</div>
+  </div>
+</section>
+
+<!-- heritage + temples -->
+<section class="section">
+  <div class="wrap">
+    <div class="split" style="grid-template-columns:1fr 1fr">
+      <div>
+        <div class="section-head"><div><span class="eyebrow">Historical places</span><h2>Historical places</h2></div></div>
+        <div class="grid cols-2">
+<a class="card" href="destination/badami-cave-temples/">
+  <div class="card-media">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Vishnu_image_inside_cave_number_3_in_Badami.jpg/1280px-Vishnu_image_inside_cave_number_3_in_Badami.jpg" alt="Badami Cave Temples" loading="lazy">
+    <span class="badge cat">Historical Places</span>
+    <span class="price-tag">₹25</span>
+  </div>
+  <div class="card-body">
+    <div class="meta">Bagalkote</div>
+    <h3>Badami Cave Temples</h3>
+    <p>Four rock-cut cave temples carved into the sandstone cliffs above Agastya Lake between the 6th and 8th centuries, when Badami was the capital of the Early Chalukyas. Cave 1 is Shaiva, Caves 2 and 3 are Vaishnava and Cave 4 is Jain. Cave 3, dated 578 CE, holds some of the finest early Indian sculpture, including the eighteen-armed Nataraja and Vishnu seated on Ananta. The red sandstone cliffs and the lake below make the whole complex remarkably photogenic.</p>
+    <div class="card-foot">
+      <span class="stars">★★★★★ <small class="muted">5.0</small></span>
+      <span class="btn btn-soft btn-sm">View details</span>
+    </div>
+  </div>
+</a>
+
+<a class="card" href="destination/gol-gumbaz/">
+  <div class="card-media">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Gol_Gumbaz_-4%2C_Bijapur%2C_Karnataka.jpg/1280px-Gol_Gumbaz_-4%2C_Bijapur%2C_Karnataka.jpg" alt="Gol Gumbaz" loading="lazy">
+    <span class="badge cat">Historical Places</span>
+    <span class="price-tag">₹25</span>
+  </div>
+  <div class="card-body">
+    <div class="meta">Vijayapura</div>
+    <h3>Gol Gumbaz</h3>
+    <p>The mausoleum of Muhammad Adil Shah, completed in 1656, with the second-largest pre-modern dome in the world after St. Peter&#39;s. The Whispering Gallery at the base of the dome carries a whisper across 37 metres, and the building&#39;s dark basalt and simple geometry make it one of the finest pieces of Deccan architecture.</p>
+    <div class="card-foot">
+      <span class="stars">★★★☆☆ <small class="muted">3.0</small></span>
+      <span class="btn btn-soft btn-sm">View details</span>
+    </div>
+  </div>
+</a>
+</div>
+      </div>
+      <div>
+        <div class="section-head"><div><span class="eyebrow">Famous temples</span><h2>Famous temples</h2></div></div>
+        <div class="grid cols-2">
+<a class="card" href="destination/murudeshwar-temple/">
+  <div class="card-media">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Shiva_Statue_Murdeshwara_Temple.jpg/1280px-Shiva_Statue_Murdeshwara_Temple.jpg" alt="Murudeshwar Temple" loading="lazy">
+    <span class="badge cat">Temples</span>
+    <span class="price-tag">₹10</span>
+  </div>
+  <div class="card-body">
+    <div class="meta">Uttara Kannada</div>
+    <h3>Murudeshwar Temple</h3>
+    <p>A temple town on the coast where a 37-metre statue of Shiva stands on a hill above the sea, with a 20-storey gopura behind it. The temple is believed to hold a piece of the Atma Linga from the Ramayana story, and the lift inside the gopura takes visitors up for a view along the coastline.</p>
+    <div class="card-foot">
+      <span class="stars">★★★★★ <small class="muted">5.0</small></span>
+      <span class="btn btn-soft btn-sm">View details</span>
+    </div>
+  </div>
+</a>
+
+<a class="card" href="destination/virupaksha-temple-hampi/">
+  <div class="card-media">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Complex_of_Virupaksha_Temple%2C_Hampi_%2804%29.jpg/1280px-Complex_of_Virupaksha_Temple%2C_Hampi_%2804%29.jpg" alt="Virupaksha Temple, Hampi" loading="lazy">
+    <span class="badge cat">Temples</span>
+    <span class="price-tag">Free entry</span>
+  </div>
+  <div class="card-body">
+    <div class="meta">Vijayanagara</div>
+    <h3>Virupaksha Temple, Hampi</h3>
+    <p>The oldest and most important temple at Hampi, in continuous worship since the 7th century and enlarged by the Vijayanagara emperors into a complex with a 50-metre gopura, colonnaded bazaars and a riverside ghat. It is the only major temple at Hampi never abandoned, and the evening puja with the temple elephant is a daily ritual.</p>
+    <div class="card-foot">
+      <span class="stars">★★★★★ <small class="muted">5.0</small></span>
+      <span class="btn btn-soft btn-sm">View details</span>
+    </div>
+  </div>
+</a>
+</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- beaches & hills -->
+<section class="section alt">
+  <div class="wrap">
+    <div class="section-head">
+      <div><span class="eyebrow">Beaches and hill stations</span><h2>Beaches and hill stations</h2>
+        <p>From the Arabian Sea to the highest peak in the state.</p></div>
+    </div>
+    <div class="grid cols-4">
+<a class="card" href="destination/om-beach-gokarna/">
+  <div class="card-media">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Delight_india.jpg/1280px-Delight_india.jpg" alt="Om Beach, Gokarna" loading="lazy">
+    <span class="badge cat">Beaches</span>
+    <span class="price-tag">Free entry</span>
+  </div>
+  <div class="card-body">
+    <div class="meta">Uttara Kannada</div>
+    <h3>Om Beach, Gokarna</h3>
+    <p>A beach shaped like the Om symbol, with two crescents of sand and rocky headlands, reached by a short walk from Gokarna town. It is the most accessible of Gokarna&#39;s five beaches, with shacks, water sports and a steady flow of travellers, and the cliff path to Half Moon and Paradise beaches is a fine walk.</p>
+    <div class="card-foot">
+      <span class="stars">☆☆☆☆☆ <small class="muted">New</small></span>
+      <span class="btn btn-soft btn-sm">View details</span>
+    </div>
+  </div>
+</a>
+
+<a class="card" href="destination/st-mary-s-island/">
+  <div class="card-media">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/St._Mary%27s_islands%2C_Udupi_1767.jpg/1280px-St._Mary%27s_islands%2C_Udupi_1767.jpg" alt="St. Mary&#39;s Island" loading="lazy">
+    <span class="badge cat">Beaches</span>
+    <span class="price-tag">₹300</span>
+  </div>
+  <div class="card-body">
+    <div class="meta">Udupi</div>
+    <h3>St. Mary&#39;s Island</h3>
+    <p>A small island of columnar basalt rocks off Malpe beach, formed by volcanic activity and compared to the Giant&#39;s Causeway in Northern Ireland. Reached by a 15-minute boat ride, it has a shell-strewn beach and a lighthouse, and the hexagonal rock columns are best seen at low tide. Snoopy Island nearby offers snorkelling.</p>
+    <div class="card-foot">
+      <span class="stars">★★★☆☆ <small class="muted">3.0</small></span>
+      <span class="btn btn-soft btn-sm">View details</span>
+    </div>
+  </div>
+</a>
+
+<a class="card" href="destination/nandi-hills/">
+  <div class="card-media">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Sunrise_at_Nandi_Hills.jpg/1280px-Sunrise_at_Nandi_Hills.jpg" alt="Nandi Hills" loading="lazy">
+    <span class="badge cat">Hill Stations</span>
+    <span class="price-tag">₹15</span>
+  </div>
+  <div class="card-body">
+    <div class="meta">Chikkaballapura</div>
+    <h3>Nandi Hills</h3>
+    <p>A 1,478-metre granite hill that was Tipu Sultan&#39;s summer retreat and is now Bengaluru&#39;s favourite sunrise drive. Tipu&#39;s Drop, a 600-metre cliff, the old summer palace, the Bhoga Nandishwara temple at the foot and the mist that settles on the ridge at dawn are the main draws. The hill fort has been restored and the road to the top is now metalled.</p>
+    <div class="card-foot">
+      <span class="stars">★★★★☆ <small class="muted">4.5</small></span>
+      <span class="btn btn-soft btn-sm">View details</span>
+    </div>
+  </div>
+</a>
+
+<a class="card" href="destination/biligirirangan-hills-br-hills/">
+  <div class="card-media">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Hokkubare_Honnebare_peaks_BR_Hills.jpeg/1280px-Hokkubare_Honnebare_peaks_BR_Hills.jpeg" alt="Biligirirangan Hills (BR Hills)" loading="lazy">
+    <span class="badge cat">Hill Stations</span>
+    <span class="price-tag">Free entry</span>
+  </div>
+  <div class="card-body">
+    <div class="meta">Chamarajanagara</div>
+    <h3>Biligirirangan Hills (BR Hills)</h3>
+    <p>A hill range where the Western and Eastern Ghats meet, covered in dry deciduous forest and home to the Soliga tribal community. The BRT Tiger Reserve protects tiger, elephant and gaur, and the hill-top Biligiri Ranganatha temple draws pilgrims. The drive up from Yelandur through the forest is one of the prettiest in Karnataka.</p>
+    <div class="card-foot">
+      <span class="stars">★★★★☆ <small class="muted">4.0</small></span>
+      <span class="btn btn-soft btn-sm">View details</span>
+    </div>
+  </div>
+</a>
+</div>
+  </div>
+</section>
+
+<!-- map -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <div><span class="eyebrow">Tourism Map</span><h2>Karnataka tourism map</h2>
+        <p>Every destination in the portal, plotted. Click a pin to open the place.</p></div>
+      <a class="btn btn-ghost" href="map/">View all</a>
+    </div>
+    <div id="home-map" class="map-embed" style="height:420px"></div>
+  </div>
+</section>
+
+<!-- reviews -->
+<section class="section alt">
+  <div class="wrap">
+    <div class="section-head"><div><span class="eyebrow">Reviews</span><h2>What travellers say</h2></div></div>
+    <div class="grid cols-3">
+      
+      <div class="review-card">
+        <div class="who"><span class="avatar">S</span>
+          <div><b>Smoke Tester</b><br><span class="stars">★★★★★</span></div></div>
+        <p>"Lovely place, worth the drive."</p>
+        <small class="muted">- Abbey Falls</small>
+      </div>
+      
+      <div class="review-card">
+        <div class="who"><span class="avatar">D</span>
+          <div><b>Demo Traveller</b><br><span class="stars">★★★★★</span></div></div>
+        <p>"Well maintained and easy to reach. We spent longer here than planned."</p>
+        <small class="muted">- Virupaksha Temple, Hampi</small>
+      </div>
+      
+      <div class="review-card">
+        <div class="who"><span class="avatar">D</span>
+          <div><b>Demo Traveller</b><br><span class="stars">★★★★★</span></div></div>
+        <p>"Go early in the morning; by noon it gets crowded and hot."</p>
+        <small class="muted">- Murugha Math, Dharwad</small>
+      </div>
+      
+      <div class="review-card">
+        <div class="who"><span class="avatar">D</span>
+          <div><b>Demo Traveller</b><br><span class="stars">★★★★★</span></div></div>
+        <p>"Cave 3 alone is worth the trip. Go early, the sandstone glows at sunrise."</p>
+        <small class="muted">- Badami Cave Temples</small>
+      </div>
+      
+      <div class="review-card">
+        <div class="who"><span class="avatar">D</span>
+          <div><b>Demo Traveller</b><br><span class="stars">★★★★★</span></div></div>
+        <p>"The Sunday evening illumination is magical. Give yourself at least two hours inside."</p>
+        <small class="muted">- Mysore Palace</small>
+      </div>
+      
+      <div class="review-card">
+        <div class="who"><span class="avatar">D</span>
+          <div><b>Demo Traveller</b><br><span class="stars">★★★★★</span></div></div>
+        <p>"The Shiva statue against the sea is stunning. The lift inside the gopura is a nice surprise."</p>
+        <small class="muted">- Murudeshwar Temple</small>
+      </div>
+      
+    </div>
+  </div>
+</section>
+
+<!-- tips -->
+<section class="section">
+  <div class="wrap">
+    <div class="split">
+      <div>
+        <span class="eyebrow">Travel tips</span>
+        <h2>Travel tips</h2>
+        <ul class="list-tick">
+          <li>Tip one</li><li>Tip two</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h3>Build your itinerary</h3>
+        <p class="muted">Choose the places you want to see and the planner orders them into days with distances.</p>
+        <a class="btn btn-primary" href="itinerary/">Build your itinerary</a>
+        <hr class="divider">
+        <h3>Emergency and tourist help</h3>
+        <ul class="list-tick">
+          <li>Police 100 · Ambulance 108 · Tourist helpline 1363</li>
+          <li>Karnataka Tourism: 080-2235 2828</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="brand" href="./" style="color:#fff">
+          <span class="brand-mark" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 19l6-11 4 7 3-4 5 8z"/><circle cx="17" cy="6" r="2"/></svg>
+          </span>
+          <span class="brand-text"><b style="color:#fff">Karnataka Explore</b><span style="color:#9db8ac">Discover Karnataka</span></span>
+        </a>
+        <p style="margin-top:1rem;font-size:.9rem;color:#b6cdc2;max-width:34ch">Karnataka Explore is a tourism portal that brings the state&#39;s destinations, homestays and local guides into one place, district by district.</p>
+        <div class="socials">
+          <a href="#" aria-label="Instagram">◎</a><a href="#" aria-label="Facebook">f</a>
+          <a href="#" aria-label="YouTube">▷</a><a href="#" aria-label="X">✕</a>
+        </div>
+      </div>
+      <div>
+        <h4>Quick links</h4>
+        <ul>
+          <li><a href="destinations/">Destinations</a></li>
+          <li><a href="districts/">Districts</a></li>
+          <li><a href="homestays/">Homestays</a></li>
+          <li><a href="guides/">Tour Guides</a></li>
+          <li><a href="map/">Tourism Map</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact us</h4>
+        <ul>
+          <li><a href="mailto:hello@karnatakaexplore.in">hello@karnatakaexplore.in</a></li>
+          <li><a href="tel:+91 80 2222 3344">+91 80 2222 3344</a></li>
+          <li><a href="contact/">Contact Us</a></li>
+          <li><a href="preview/">Admin Panel</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Travel notes, once a month</h4>
+        <p style="font-size:.9rem;color:#b6cdc2;margin-bottom:0">One email a month with routes, festivals and new stays.</p>
+        <form class="newsletter-form" method="post" onsubmit="alert('This is the static preview. Run the Flask app (python run.py) for sign-in, booking, payments and admin.');return false;" action="preview/">
+          <input type="email" name="email" placeholder="you@example.com" required aria-label="Email">
+          <button class="btn btn-primary btn-sm" type="submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Karnataka Explore. All rights reserved.</span>
+      <span>A student project built with Flask, SQLite and OpenStreetMap. Demo project - payments are simulated and no money is deducted.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="static/js/app.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  var points = [{"category": "Historical Places", "district_name": "Bagalkote", "latitude": 15.91833333, "longitude": 75.68416667, "name": "Badami Cave Temples", "slug": "badami-cave-temples"}, {"category": "Cultural Heritage", "district_name": "Bagalkote", "latitude": 15.95138889, "longitude": 75.81472222, "name": "Pattadakal Group of Monuments", "slug": "pattadakal-group-of-monuments"}, {"category": "Temples", "district_name": "Bagalkote", "latitude": 16.01888889, "longitude": 75.88194444, "name": "Aihole Durga Temple Complex", "slug": "aihole-durga-temple-complex"}, {"category": "Temples", "district_name": "Bagalkote", "latitude": 16.20361111, "longitude": 76.06, "name": "Kudala Sangama", "slug": "kudala-sangama"}, {"category": "Forts", "district_name": "Ballari", "latitude": 15.1394, "longitude": 76.9214, "name": "Ballari Fort", "slug": "ballari-fort"}, {"category": "Wildlife Sanctuaries", "district_name": "Ballari", "latitude": 15.23333333, "longitude": 76.51666667, "name": "Daroji Sloth Bear Sanctuary", "slug": "daroji-sloth-bear-sanctuary"}, {"category": "Temples", "district_name": "Ballari", "latitude": 15.1, "longitude": 76.55, "name": "Kumaraswamy Temple, Sanduru", "slug": "kumaraswamy-temple-sanduru"}, {"category": "Waterfalls", "district_name": "Belagavi", "latitude": 16.19166667, "longitude": 74.7765, "name": "Gokak Falls", "slug": "gokak-falls"}, {"category": "Forts", "district_name": "Belagavi", "latitude": 15.8527, "longitude": 74.5045, "name": "Belagavi Fort", "slug": "belagavi-fort"}, {"category": "Historical Places", "district_name": "Belagavi", "latitude": 15.60125, "longitude": 74.79144167, "name": "Kittur Fort and Palace", "slug": "kittur-fort-and-palace"}, {"category": "Waterfalls", "district_name": "Belagavi", "latitude": 16.15, "longitude": 74.75, "name": "Godchinamalaki Falls", "slug": "godchinamalaki-falls"}, {"category": "Forts", "district_name": "Bengaluru Rural", "latitude": 13.2496, "longitude": 77.70939, "name": "Devanahalli Fort", "slug": "devanahalli-fort"}, {"category": "Cultural Heritage", "district_name": "Bengaluru Rural", "latitude": 13.161, "longitude": 77.45, "name": "Nrityagram Dance Village", "slug": "nrityagram-dance-village"}, {"category": "Nature and Eco-Tourism", "district_name": "Bengaluru Rural", "latitude": 13.15, "longitude": 77.49, "name": "Hessarghatta Lake", "slug": "hessarghatta-lake"}, {"category": "Nature and Eco-Tourism", "district_name": "Bengaluru Urban", "latitude": 12.9507, "longitude": 77.5848, "name": "Lalbagh Botanical Garden", "slug": "lalbagh-botanical-garden"}, {"category": "Historical Places", "district_name": "Bengaluru Urban", "latitude": 12.9987, "longitude": 77.5921, "name": "Bangalore Palace", "slug": "bangalore-palace"}, {"category": "Nature and Eco-Tourism", "district_name": "Bengaluru Urban", "latitude": 12.975, "longitude": 77.59333333, "name": "Cubbon Park", "slug": "cubbon-park"}, {"category": "Historical Places", "district_name": "Bengaluru Urban", "latitude": 12.95949444, "longitude": 77.57357222, "name": "Tipu Sultan\u0027s Summer Palace", "slug": "tipu-sultan-s-summer-palace"}, {"category": "Forts", "district_name": "Bidar", "latitude": 17.92444444, "longitude": 77.52666667, "name": "Bidar Fort", "slug": "bidar-fort"}, {"category": "Temples", "district_name": "Bidar", "latitude": 17.9279, "longitude": 77.5079, "name": "Guru Nanak Jhira Sahib", "slug": "guru-nanak-jhira-sahib"}, {"category": "Historical Places", "district_name": "Bidar", "latitude": 17.925, "longitude": 77.55, "name": "Bahmani Tombs, Ashtur", "slug": "bahmani-tombs-ashtur"}, {"category": "National Parks", "district_name": "Chamarajanagara", "latitude": 11.66166667, "longitude": 76.62722222, "name": "Bandipur National Park", "slug": "bandipur-national-park"}, {"category": "Hill Stations", "district_name": "Chamarajanagara", "latitude": 11.71666667, "longitude": 76.58333333, "name": "Himavad Gopalaswamy Betta", "slug": "himavad-gopalaswamy-betta"}, {"category": "Waterfalls", "district_name": "Chamarajanagara", "latitude": 12.29166667, "longitude": 77.175, "name": "Bharachukki Falls", "slug": "bharachukki-falls"}, {"category": "Hill Stations", "district_name": "Chamarajanagara", "latitude": 11.99388889, "longitude": 77.14055556, "name": "Biligirirangan Hills (BR Hills)", "slug": "biligirirangan-hills-br-hills"}, {"category": "Hill Stations", "district_name": "Chikkaballapura", "latitude": 13.38626, "longitude": 77.70093, "name": "Nandi Hills", "slug": "nandi-hills"}, {"category": "Adventure Tourism", "district_name": "Chikkaballapura", "latitude": 13.4175, "longitude": 77.68277778, "name": "Skandagiri (Kalavara Durga)", "slug": "skandagiri-kalavara-durga"}, {"category": "Temples", "district_name": "Chikkaballapura", "latitude": 13.3833, "longitude": 77.6833, "name": "Bhoga Nandishwara Temple", "slug": "bhoga-nandishwara-temple"}, {"category": "Forts", "district_name": "Chikkaballapura", "latitude": 13.6167, "longitude": 77.75, "name": "Gudibande Fort", "slug": "gudibande-fort"}, {"category": "Hill Stations", "district_name": "Chikkamagaluru", "latitude": 13.39097222, "longitude": 75.72138889, "name": "Mullayanagiri Peak", "slug": "mullayanagiri-peak"}, {"category": "Hill Stations", "district_name": "Chikkamagaluru", "latitude": 13.421, "longitude": 75.763, "name": "Baba Budangiri", "slug": "baba-budangiri"}, {"category": "Waterfalls", "district_name": "Chikkamagaluru", "latitude": 13.55, "longitude": 75.7333, "name": "Hebbe Falls", "slug": "hebbe-falls"}, {"category": "National Parks", "district_name": "Chikkamagaluru", "latitude": 13.12951111, "longitude": 75.26855278, "name": "Kudremukh National Park", "slug": "kudremukh-national-park"}, {"category": "Nature and Eco-Tourism", "district_name": "Chikkamagaluru", "latitude": 13.3167, "longitude": 75.7333, "name": "Hirekolale Lake", "slug": "hirekolale-lake"}, {"category": "Forts", "district_name": "Chitradurga", "latitude": 14.2315, "longitude": 76.3983, "name": "Chitradurga Fort", "slug": "chitradurga-fort"}, {"category": "Historical Places", "district_name": "Chitradurga", "latitude": 14.20888889, "longitude": 76.38611111, "name": "Chandravalli", "slug": "chandravalli"}, {"category": "Nature and Eco-Tourism", "district_name": "Chitradurga", "latitude": 13.89055556, "longitude": 76.47694444, "name": "Vani Vilas Sagar Dam", "slug": "vani-vilas-sagar-dam"}, {"category": "Beaches", "district_name": "Dakshina Kannada", "latitude": 12.95, "longitude": 74.8, "name": "Panambur Beach", "slug": "panambur-beach"}, {"category": "Temples", "district_name": "Dakshina Kannada", "latitude": 12.88577778, "longitude": 74.85558333, "name": "Kadri Manjunath Temple", "slug": "kadri-manjunath-temple"}, {"category": "Historical Places", "district_name": "Dakshina Kannada", "latitude": 11.67, "longitude": 76.28, "name": "Sultan Battery", "slug": "sultan-battery"}, {"category": "Temples", "district_name": "Davanagere", "latitude": 14.51166667, "longitude": 75.80194444, "name": "Harihareshwara Temple, Harihar", "slug": "harihareshwara-temple-harihar"}, {"category": "Temples", "district_name": "Davanagere", "latitude": 14.35, "longitude": 75.733, "name": "Kalleshwara Temple, Malebennur", "slug": "kalleshwara-temple-malebennur"}, {"category": "Nature and Eco-Tourism", "district_name": "Davanagere", "latitude": 14.4666, "longitude": 75.9242, "name": "Kunduvada Lake", "slug": "kunduvada-lake"}, {"category": "Nature and Eco-Tourism", "district_name": "Dharwad", "latitude": 15.3667, "longitude": 75.1333, "name": "Unkal Lake", "slug": "unkal-lake"}, {"category": "Hill Stations", "district_name": "Dharwad", "latitude": 15.35, "longitude": 75.15, "name": "Nrupatunga Betta", "slug": "nrupatunga-betta"}, {"category": "Cultural Heritage", "district_name": "Dharwad", "latitude": 15.45833333, "longitude": 75.00833333, "name": "Murugha Math, Dharwad", "slug": "murugha-math-dharwad"}, {"category": "Temples", "district_name": "Gadag", "latitude": 15.38972222, "longitude": 75.71833333, "name": "Lakkundi Temples", "slug": "lakkundi-temples"}, {"category": "Temples", "district_name": "Gadag", "latitude": 15.42455556, "longitude": 75.62666667, "name": "Trikuteshwara Temple, Gadag", "slug": "trikuteshwara-temple-gadag"}, {"category": "Temples", "district_name": "Gadag", "latitude": 15.32805556, "longitude": 75.81027778, "name": "Doddabasappa Temple, Dambal", "slug": "doddabasappa-temple-dambal"}, {"category": "Temples", "district_name": "Hassan", "latitude": 13.16293, "longitude": 75.860593, "name": "Chennakeshava Temple, Belur", "slug": "chennakeshava-temple-belur"}, {"category": "Temples", "district_name": "Hassan", "latitude": 13.21319444, "longitude": 75.995, "name": "Hoysaleswara Temple, Halebidu", "slug": "hoysaleswara-temple-halebidu"}, {"category": "Cultural Heritage", "district_name": "Hassan", "latitude": 12.859, "longitude": 76.489, "name": "Shravanabelagola", "slug": "shravanabelagola"}, {"category": "Historical Places", "district_name": "Hassan", "latitude": 12.95, "longitude": 76.0, "name": "Shettihalli Rosary Church", "slug": "shettihalli-rosary-church"}, {"category": "Temples", "district_name": "Haveri", "latitude": 14.767, "longitude": 75.126, "name": "Tarakeshwara Temple, Hangal", "slug": "tarakeshwara-temple-hangal"}, {"category": "Temples", "district_name": "Haveri", "latitude": 14.9167, "longitude": 75.2667, "name": "Nagareshwara Temple, Bankapura", "slug": "nagareshwara-temple-bankapura"}, {"category": "Wildlife Sanctuaries", "district_name": "Haveri", "latitude": 14.6167, "longitude": 75.6167, "name": "Ranebennur Blackbuck Sanctuary", "slug": "ranebennur-blackbuck-sanctuary"}, {"category": "Forts", "district_name": "Kalaburagi", "latitude": 17.3405, "longitude": 76.8311, "name": "Gulbarga Fort", "slug": "gulbarga-fort"}, {"category": "Cultural Heritage", "district_name": "Kalaburagi", "latitude": 17.34, "longitude": 76.83, "name": "Khwaja Bande Nawaz Dargah", "slug": "khwaja-bande-nawaz-dargah"}, {"category": "Temples", "district_name": "Kalaburagi", "latitude": 17.325, "longitude": 76.84, "name": "Sharana Basaveshwara Temple", "slug": "sharana-basaveshwara-temple"}, {"category": "Cultural Heritage", "district_name": "Kalaburagi", "latitude": 17.306803, "longitude": 76.892781, "name": "Buddha Vihar, Kalaburagi", "slug": "buddha-vihar-kalaburagi"}, {"category": "Waterfalls", "district_name": "Kodagu", "latitude": 12.459205, "longitude": 75.719668, "name": "Abbey Falls", "slug": "abbey-falls"}, {"category": "Hill Stations", "district_name": "Kodagu", "latitude": 12.41442778, "longitude": 75.73693611, "name": "Raja\u0027s Seat", "slug": "raja-s-seat"}, {"category": "Adventure Tourism", "district_name": "Kodagu", "latitude": 12.3685, "longitude": 75.9049, "name": "Dubare Elephant Camp", "slug": "dubare-elephant-camp"}, {"category": "Temples", "district_name": "Kodagu", "latitude": 12.38548, "longitude": 75.491432, "name": "Talakaveri", "slug": "talakaveri"}, {"category": "Hill Stations", "district_name": "Kodagu", "latitude": 12.58333333, "longitude": 75.66666667, "name": "Mandalpatti", "slug": "mandalpatti"}, {"category": "Temples", "district_name": "Kolar", "latitude": 13.1333, "longitude": 78.1333, "name": "Kolaramma Temple", "slug": "kolaramma-temple"}, {"category": "Temples", "district_name": "Kolar", "latitude": 13.13, "longitude": 78.14, "name": "Someshwara Temple, Kolar", "slug": "someshwara-temple-kolar"}, {"category": "Temples", "district_name": "Kolar", "latitude": 13.142425, "longitude": 78.10056111, "name": "Antara Gange", "slug": "antara-gange"}, {"category": "Forts", "district_name": "Koppal", "latitude": 15.35, "longitude": 76.15, "name": "Koppal Fort", "slug": "koppal-fort"}, {"category": "Temples", "district_name": "Koppal", "latitude": 15.49, "longitude": 75.995, "name": "Mahadeva Temple, Itagi", "slug": "mahadeva-temple-itagi"}, {"category": "Cultural Heritage", "district_name": "Koppal", "latitude": 15.3372926, "longitude": 76.1621377, "name": "Gavimath", "slug": "gavimath"}, {"category": "Temples", "district_name": "Koppal", "latitude": 15.55, "longitude": 76.4, "name": "Kanakagiri Jain Temple", "slug": "kanakagiri-jain-temple"}, {"category": "Nature and Eco-Tourism", "district_name": "Mandya", "latitude": 12.42611111, "longitude": 76.57611111, "name": "Brindavan Gardens, KRS", "slug": "brindavan-gardens-krs"}, {"category": "Wildlife Sanctuaries", "district_name": "Mandya", "latitude": 12.4, "longitude": 76.65, "name": "Ranganathittu Bird Sanctuary", "slug": "ranganathittu-bird-sanctuary"}, {"category": "Historical Places", "district_name": "Mandya", "latitude": 12.414, "longitude": 76.704, "name": "Srirangapatna", "slug": "srirangapatna"}, {"category": "Temples", "district_name": "Mandya", "latitude": 12.65944444, "longitude": 76.64833333, "name": "Melukote", "slug": "melukote"}, {"category": "Historical Places", "district_name": "Mysuru", "latitude": 12.30388889, "longitude": 76.65444444, "name": "Mysore Palace", "slug": "mysore-palace"}, {"category": "Temples", "district_name": "Mysuru", "latitude": 12.273, "longitude": 76.67, "name": "Chamundi Hills", "slug": "chamundi-hills"}, {"category": "Nature and Eco-Tourism", "district_name": "Mysuru", "latitude": 12.3008, "longitude": 76.6677, "name": "Mysore Zoo (Sri Chamarajendra Zoological Gardens)", "slug": "mysore-zoo-sri-chamarajendra-zoological-gardens"}, {"category": "Historical Places", "district_name": "Mysuru", "latitude": 12.32113889, "longitude": 76.65827778, "name": "St. Philomena\u0027s Cathedral", "slug": "st-philomena-s-cathedral"}, {"category": "Forts", "district_name": "Raichur", "latitude": 16.2, "longitude": 77.35, "name": "Raichur Fort", "slug": "raichur-fort"}, {"category": "Forts", "district_name": "Raichur", "latitude": 16.02, "longitude": 76.43, "name": "Mudgal Fort", "slug": "mudgal-fort"}, {"category": "Historical Places", "district_name": "Raichur", "latitude": 15.96, "longitude": 76.65, "name": "Maski", "slug": "maski"}, {"category": "Adventure Tourism", "district_name": "Ramanagara", "latitude": 12.9195, "longitude": 77.2921, "name": "Savandurga", "slug": "savandurga"}, {"category": "Nature and Eco-Tourism", "district_name": "Ramanagara", "latitude": 12.25818, "longitude": 77.44866, "name": "Mekedatu", "slug": "mekedatu"}, {"category": "Hill Stations", "district_name": "Ramanagara", "latitude": 12.7167, "longitude": 77.2833, "name": "Ramadevara Betta", "slug": "ramadevara-betta"}, {"category": "Cultural Heritage", "district_name": "Ramanagara", "latitude": 12.653, "longitude": 77.205, "name": "Channapatna", "slug": "channapatna"}, {"category": "Waterfalls", "district_name": "Shivamogga", "latitude": 14.2286, "longitude": 74.8139, "name": "Jog Falls", "slug": "jog-falls"}, {"category": "Nature and Eco-Tourism", "district_name": "Shivamogga", "latitude": 13.5087, "longitude": 75.0959, "name": "Agumbe", "slug": "agumbe"}, {"category": "Adventure Tourism", "district_name": "Shivamogga", "latitude": 13.95, "longitude": 75.55, "name": "Sakrebailu Elephant Camp", "slug": "sakrebailu-elephant-camp"}, {"category": "Cultural Heritage", "district_name": "Shivamogga", "latitude": 13.6167, "longitude": 75.2833, "name": "Kuppalli (Kuvempu\u0027s home)", "slug": "kuppalli-kuvempu-s-home"}, {"category": "Hill Stations", "district_name": "Tumakuru", "latitude": 13.375, "longitude": 77.213, "name": "Devarayanadurga", "slug": "devarayanadurga"}, {"category": "Nature and Eco-Tourism", "district_name": "Tumakuru", "latitude": 13.4, "longitude": 77.2167, "name": "Namada Chilume", "slug": "namada-chilume"}, {"category": "Forts", "district_name": "Tumakuru", "latitude": 13.66, "longitude": 77.21, "name": "Madhugiri Fort", "slug": "madhugiri-fort"}, {"category": "Cultural Heritage", "district_name": "Tumakuru", "latitude": 13.321745, "longitude": 77.148596, "name": "Siddaganga Math", "slug": "siddaganga-math"}, {"category": "Temples", "district_name": "Udupi", "latitude": 13.33222222, "longitude": 74.74611111, "name": "Sri Krishna Temple, Udupi", "slug": "sri-krishna-temple-udupi"}, {"category": "Beaches", "district_name": "Udupi", "latitude": 13.3667, "longitude": 74.6833, "name": "St. Mary\u0027s Island", "slug": "st-mary-s-island"}, {"category": "Beaches", "district_name": "Udupi", "latitude": 13.2167, "longitude": 74.75, "name": "Kaup Beach and Lighthouse", "slug": "kaup-beach-and-lighthouse"}, {"category": "Waterfalls", "district_name": "Udupi", "latitude": 13.45, "longitude": 74.9833, "name": "Kudlu Theertha Falls", "slug": "kudlu-theertha-falls"}, {"category": "Temples", "district_name": "Uttara Kannada", "latitude": 14.09361667, "longitude": 74.483825, "name": "Murudeshwar Temple", "slug": "murudeshwar-temple"}, {"category": "Beaches", "district_name": "Uttara Kannada", "latitude": 14.5167, "longitude": 74.3167, "name": "Om Beach, Gokarna", "slug": "om-beach-gokarna"}, {"category": "Adventure Tourism", "district_name": "Uttara Kannada", "latitude": 14.5833, "longitude": 74.55, "name": "Yana Caves", "slug": "yana-caves"}, {"category": "Waterfalls", "district_name": "Uttara Kannada", "latitude": 14.40944444, "longitude": 74.7475, "name": "Unchalli Falls (Lushington Falls)", "slug": "unchalli-falls-lushington-falls"}, {"category": "Wildlife Sanctuaries", "district_name": "Uttara Kannada", "latitude": 15.25, "longitude": 74.6167, "name": "Dandeli Wildlife Sanctuary", "slug": "dandeli-wildlife-sanctuary"}, {"category": "Historical Places", "district_name": "Vijayapura", "latitude": 16.83003056, "longitude": 75.73609722, "name": "Gol Gumbaz", "slug": "gol-gumbaz"}, {"category": "Historical Places", "district_name": "Vijayapura", "latitude": 16.82694444, "longitude": 75.70194444, "name": "Ibrahim Rauza", "slug": "ibrahim-rauza"}, {"category": "Historical Places", "district_name": "Vijayapura", "latitude": 16.8167, "longitude": 75.7333, "name": "Malik-e-Maidan", "slug": "malik-e-maidan"}, {"category": "Cultural Heritage", "district_name": "Vijayapura", "latitude": 16.825, "longitude": 75.72, "name": "Jumma Masjid, Vijayapura", "slug": "jumma-masjid-vijayapura"}, {"category": "Temples", "district_name": "Vijayanagara", "latitude": 15.335167, "longitude": 76.458722, "name": "Virupaksha Temple, Hampi", "slug": "virupaksha-temple-hampi"}, {"category": "Cultural Heritage", "district_name": "Vijayanagara", "latitude": 15.3422, "longitude": 76.4758, "name": "Vittala Temple and Stone Chariot", "slug": "vittala-temple-and-stone-chariot"}, {"category": "Historical Places", "district_name": "Vijayanagara", "latitude": 15.3203, "longitude": 76.4713, "name": "Lotus Mahal and Zenana Enclosure", "slug": "lotus-mahal-and-zenana-enclosure"}, {"category": "Nature and Eco-Tourism", "district_name": "Vijayanagara", "latitude": 15.3, "longitude": 76.33333333, "name": "Tungabhadra Dam and Garden, Hosapete", "slug": "tungabhadra-dam-and-garden-hosapete"}, {"category": "Cultural Heritage", "district_name": "Vijayanagara", "latitude": 15.3527, "longitude": 76.4919, "name": "Anegundi", "slug": "anegundi"}, {"category": "Forts", "district_name": "Yadgir", "latitude": 16.77, "longitude": 77.13, "name": "Yadgir Fort", "slug": "yadgir-fort"}, {"category": "Historical Places", "district_name": "Yadgir", "latitude": 16.835433, "longitude": 76.932541, "name": "Kanaganahalli (Sannati) Buddhist Site", "slug": "kanaganahalli-sannati-buddhist-site"}, {"category": "Nature and Eco-Tourism", "district_name": "Yadgir", "latitude": 16.17833333, "longitude": 76.22444444, "name": "Narayanpur Dam (Basava Sagar)", "slug": "narayanpur-dam-basava-sagar"}];
+  var map = L.map('home-map', { scrollWheelZoom: false }).setView([15.1, 75.9], 6.4);
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OpenStreetMap contributors', maxZoom: 18 }).addTo(map);
+  var group = [];
+  points.forEach(function (p) {
+    var m = L.marker([p.latitude, p.longitude]).addTo(map);
+    m.bindPopup('<b>' + p.name + '</b><br>' + p.district_name + '<br><a href="destination/' + p.slug + '">View details →</a>');
+    group.push(m);
+  });
+  if (group.length) map.fitBounds(L.featureGroup(group).getBounds().pad(0.05));
+</script>
+
+</body>
+</html>

@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Karnataka tourism map - Karnataka Explore</title>
+<meta name="description" content="Explore Karnataka district by district: waterfalls, beaches, hill stations, temples, forts, homestays and local guides.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../static/css/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%230f6b4f'/><path d='M22 68 L42 36 L54 56 L64 44 L80 68 Z' fill='white'/></svg>">
+<script>
+  (function () {
+    try {
+      if (new URLSearchParams(location.search).get("theme")) return;
+      var saved = localStorage.getItem("kx-theme");
+      if (saved) document.documentElement.setAttribute("data-theme", saved);
+      else if (window.matchMedia("(prefers-color-scheme: dark)").matches)
+        document.documentElement.setAttribute("data-theme", "dark");
+    } catch (e) {}
+  })();
+</script>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+</head>
+<body><div style="background:#0f6b4f;color:#eaf5f0;font:600 13px/1.5 system-ui,sans-serif;padding:10px 18px;text-align:center;position:relative;z-index:100">Static preview of Karnataka Explore &mdash; every destination, homestay and guide is browsable. Booking, sign-in, payments and the admin console run in the Python app: <a href="https://github.com/vasanthhg-cloud/karnataka-explore" style="color:#fff;text-decoration:underline">see the repository</a>.</div>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-head">
+  <div class="wrap nav-wrap">
+    <a class="brand" href="../">
+      <span class="brand-mark" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 19l6-11 4 7 3-4 5 8z"/><circle cx="17" cy="6" r="2"/></svg>
+      </span>
+      <span class="brand-text"><b>Karnataka Explore</b><span>Discover Karnataka</span></span>
+    </a>
+
+    <nav class="nav" id="nav">
+      <a href="../" class="">Home</a>
+      <a href="../destinations/" class="">Destinations</a>
+      <a href="../districts/" class="">Districts</a>
+      <a href="../homestays/" class="">Homestays</a>
+      <a href="../guides/" class="">Tour Guides</a>
+      <a href="../map/" class="active">Tourism Map</a>
+      <a href="../itinerary/" class="">Plan a Trip</a>
+      <a href="../about/" class="">About Us</a>
+      <a href="../contact/" class="">Contact Us</a>
+      
+        <a class="mobile-auth" style="display:none" href="../login/">Login</a>
+        <a class="mobile-auth" style="display:none" href="../register/">Register</a>
+      
+    </nav>
+
+    <div class="nav-actions">
+      <div class="dropdown">
+        <button class="icon-btn" data-dropdown aria-label="Language" title="Language">EN</button>
+        <div class="dropdown-panel">
+          
+            <a href="../preview/">English ✓</a>
+          
+            <a href="../preview/">हिन्दी</a>
+          
+            <a href="../preview/">ಕನ್ನಡ</a>
+          
+        </div>
+      </div>
+      <button class="icon-btn" onclick="toggleTheme()" aria-label="Theme" title="Theme">
+        <span data-theme-icon aria-hidden="true">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.8A8.5 8.5 0 1 1 11.2 3a6.6 6.6 0 0 0 9.8 9.8z"/></svg>
+        </span>
+      </button>
+      
+        <a class="btn btn-ghost btn-sm" href="../login/">Login</a>
+        <a class="btn btn-primary btn-sm" href="../register/">Register</a>
+      
+      <button class="icon-btn nav-toggle" data-nav-toggle aria-label="Menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+
+  
+
+
+<main id="main">
+
+<section class="section tight" style="background:var(--bg-alt);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <nav class="breadcrumb"><a href="../">Home</a> / Tourism Map</nav>
+    <h1 style="font-size:clamp(1.8rem,3vw,2.6rem)">Karnataka tourism map</h1>
+    <p class="muted">Click any pin for the place name and a link to its full page. Toggle layers on the right.</p>
+  </div>
+</section>
+<section class="section">
+  <div class="wrap">
+    <div class="chips" style="margin-bottom:18px">
+      <button class="chip active" data-filter="all">All</button>
+      <button class="chip" data-filter="Waterfalls">Waterfalls</button><button class="chip" data-filter="Hill Stations">Hill Stations</button><button class="chip" data-filter="Beaches">Beaches</button><button class="chip" data-filter="Historical Places">Historical Places</button><button class="chip" data-filter="Temples">Temples</button><button class="chip" data-filter="Forts">Forts</button><button class="chip" data-filter="Wildlife Sanctuaries">Wildlife Sanctuaries</button><button class="chip" data-filter="National Parks">National Parks</button><button class="chip" data-filter="Museums">Museums</button><button class="chip" data-filter="Adventure Tourism">Adventure Tourism</button><button class="chip" data-filter="Nature and Eco-Tourism">Nature and Eco-Tourism</button><button class="chip" data-filter="Cultural Heritage">Cultural Heritage</button>
+    </div>
+    <div id="big-map" class="map-embed" style="height:640px"></div>
+    <p class="hint" style="margin-top:12px">Map data © OpenStreetMap contributors. Homestay pins are shown in blue.</p>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="brand" href="../" style="color:#fff">
+          <span class="brand-mark" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 19l6-11 4 7 3-4 5 8z"/><circle cx="17" cy="6" r="2"/></svg>
+          </span>
+          <span class="brand-text"><b style="color:#fff">Karnataka Explore</b><span style="color:#9db8ac">Discover Karnataka</span></span>
+        </a>
+        <p style="margin-top:1rem;font-size:.9rem;color:#b6cdc2;max-width:34ch">Karnataka Explore is a tourism portal that brings the state&#39;s destinations, homestays and local guides into one place, district by district.</p>
+        <div class="socials">
+          <a href="#" aria-label="Instagram">◎</a><a href="#" aria-label="Facebook">f</a>
+          <a href="#" aria-label="YouTube">▷</a><a href="#" aria-label="X">✕</a>
+        </div>
+      </div>
+      <div>
+        <h4>Quick links</h4>
+        <ul>
+          <li><a href="../destinations/">Destinations</a></li>
+          <li><a href="../districts/">Districts</a></li>
+          <li><a href="../homestays/">Homestays</a></li>
+          <li><a href="../guides/">Tour Guides</a></li>
+          <li><a href="../map/">Tourism Map</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact us</h4>
+        <ul>
+          <li><a href="mailto:hello@karnatakaexplore.in">hello@karnatakaexplore.in</a></li>
+          <li><a href="tel:+91 80 2222 3344">+91 80 2222 3344</a></li>
+          <li><a href="../contact/">Contact Us</a></li>
+          <li><a href="../preview/">Admin Panel</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Travel notes, once a month</h4>
+        <p style="font-size:.9rem;color:#b6cdc2;margin-bottom:0">One email a month with routes, festivals and new stays.</p>
+        <form class="newsletter-form" method="post" onsubmit="alert('This is the static preview. Run the Flask app (python run.py) for sign-in, booking, payments and admin.');return false;" action="../preview/">
+          <input type="email" name="email" placeholder="you@example.com" required aria-label="Email">
+          <button class="btn btn-primary btn-sm" type="submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Karnataka Explore. All rights reserved.</span>
+      <span>A student project built with Flask, SQLite and OpenStreetMap. Demo project - payments are simulated and no money is deducted.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="../static/js/app.js"></script>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  var dests = [{"category": "Historical Places", "district_name": "Bagalkote", "latitude": 15.91833333, "longitude": 75.68416667, "name": "Badami Cave Temples", "slug": "badami-cave-temples"}, {"category": "Cultural Heritage", "district_name": "Bagalkote", "latitude": 15.95138889, "longitude": 75.81472222, "name": "Pattadakal Group of Monuments", "slug": "pattadakal-group-of-monuments"}, {"category": "Temples", "district_name": "Bagalkote", "latitude": 16.01888889, "longitude": 75.88194444, "name": "Aihole Durga Temple Complex", "slug": "aihole-durga-temple-complex"}, {"category": "Temples", "district_name": "Bagalkote", "latitude": 16.20361111, "longitude": 76.06, "name": "Kudala Sangama", "slug": "kudala-sangama"}, {"category": "Forts", "district_name": "Ballari", "latitude": 15.1394, "longitude": 76.9214, "name": "Ballari Fort", "slug": "ballari-fort"}, {"category": "Wildlife Sanctuaries", "district_name": "Ballari", "latitude": 15.23333333, "longitude": 76.51666667, "name": "Daroji Sloth Bear Sanctuary", "slug": "daroji-sloth-bear-sanctuary"}, {"category": "Temples", "district_name": "Ballari", "latitude": 15.1, "longitude": 76.55, "name": "Kumaraswamy Temple, Sanduru", "slug": "kumaraswamy-temple-sanduru"}, {"category": "Waterfalls", "district_name": "Belagavi", "latitude": 16.19166667, "longitude": 74.7765, "name": "Gokak Falls", "slug": "gokak-falls"}, {"category": "Forts", "district_name": "Belagavi", "latitude": 15.8527, "longitude": 74.5045, "name": "Belagavi Fort", "slug": "belagavi-fort"}, {"category": "Historical Places", "district_name": "Belagavi", "latitude": 15.60125, "longitude": 74.79144167, "name": "Kittur Fort and Palace", "slug": "kittur-fort-and-palace"}, {"category": "Waterfalls", "district_name": "Belagavi", "latitude": 16.15, "longitude": 74.75, "name": "Godchinamalaki Falls", "slug": "godchinamalaki-falls"}, {"category": "Forts", "district_name": "Bengaluru Rural", "latitude": 13.2496, "longitude": 77.70939, "name": "Devanahalli Fort", "slug": "devanahalli-fort"}, {"category": "Cultural Heritage", "district_name": "Bengaluru Rural", "latitude": 13.161, "longitude": 77.45, "name": "Nrityagram Dance Village", "slug": "nrityagram-dance-village"}, {"category": "Nature and Eco-Tourism", "district_name": "Bengaluru Rural", "latitude": 13.15, "longitude": 77.49, "name": "Hessarghatta Lake", "slug": "hessarghatta-lake"}, {"category": "Nature and Eco-Tourism", "district_name": "Bengaluru Urban", "latitude": 12.9507, "longitude": 77.5848, "name": "Lalbagh Botanical Garden", "slug": "lalbagh-botanical-garden"}, {"category": "Historical Places", "district_name": "Bengaluru Urban", "latitude": 12.9987, "longitude": 77.5921, "name": "Bangalore Palace", "slug": "bangalore-palace"}, {"category": "Nature and Eco-Tourism", "district_name": "Bengaluru Urban", "latitude": 12.975, "longitude": 77.59333333, "name": "Cubbon Park", "slug": "cubbon-park"}, {"category": "Historical Places", "district_name": "Bengaluru Urban", "latitude": 12.95949444, "longitude": 77.57357222, "name": "Tipu Sultan\u0027s Summer Palace", "slug": "tipu-sultan-s-summer-palace"}, {"category": "Forts", "district_name": "Bidar", "latitude": 17.92444444, "longitude": 77.52666667, "name": "Bidar Fort", "slug": "bidar-fort"}, {"category": "Temples", "district_name": "Bidar", "latitude": 17.9279, "longitude": 77.5079, "name": "Guru Nanak Jhira Sahib", "slug": "guru-nanak-jhira-sahib"}, {"category": "Historical Places", "district_name": "Bidar", "latitude": 17.925, "longitude": 77.55, "name": "Bahmani Tombs, Ashtur", "slug": "bahmani-tombs-ashtur"}, {"category": "National Parks", "district_name": "Chamarajanagara", "latitude": 11.66166667, "longitude": 76.62722222, "name": "Bandipur National Park", "slug": "bandipur-national-park"}, {"category": "Hill Stations", "district_name": "Chamarajanagara", "latitude": 11.71666667, "longitude": 76.58333333, "name": "Himavad Gopalaswamy Betta", "slug": "himavad-gopalaswamy-betta"}, {"category": "Waterfalls", "district_name": "Chamarajanagara", "latitude": 12.29166667, "longitude": 77.175, "name": "Bharachukki Falls", "slug": "bharachukki-falls"}, {"category": "Hill Stations", "district_name": "Chamarajanagara", "latitude": 11.99388889, "longitude": 77.14055556, "name": "Biligirirangan Hills (BR Hills)", "slug": "biligirirangan-hills-br-hills"}, {"category": "Hill Stations", "district_name": "Chikkaballapura", "latitude": 13.38626, "longitude": 77.70093, "name": "Nandi Hills", "slug": "nandi-hills"}, {"category": "Adventure Tourism", "district_name": "Chikkaballapura", "latitude": 13.4175, "longitude": 77.68277778, "name": "Skandagiri (Kalavara Durga)", "slug": "skandagiri-kalavara-durga"}, {"category": "Temples", "district_name": "Chikkaballapura", "latitude": 13.3833, "longitude": 77.6833, "name": "Bhoga Nandishwara Temple", "slug": "bhoga-nandishwara-temple"}, {"category": "Forts", "district_name": "Chikkaballapura", "latitude": 13.6167, "longitude": 77.75, "name": "Gudibande Fort", "slug": "gudibande-fort"}, {"category": "Hill Stations", "district_name": "Chikkamagaluru", "latitude": 13.39097222, "longitude": 75.72138889, "name": "Mullayanagiri Peak", "slug": "mullayanagiri-peak"}, {"category": "Hill Stations", "district_name": "Chikkamagaluru", "latitude": 13.421, "longitude": 75.763, "name": "Baba Budangiri", "slug": "baba-budangiri"}, {"category": "Waterfalls", "district_name": "Chikkamagaluru", "latitude": 13.55, "longitude": 75.7333, "name": "Hebbe Falls", "slug": "hebbe-falls"}, {"category": "National Parks", "district_name": "Chikkamagaluru", "latitude": 13.12951111, "longitude": 75.26855278, "name": "Kudremukh National Park", "slug": "kudremukh-national-park"}, {"category": "Nature and Eco-Tourism", "district_name": "Chikkamagaluru", "latitude": 13.3167, "longitude": 75.7333, "name": "Hirekolale Lake", "slug": "hirekolale-lake"}, {"category": "Forts", "district_name": "Chitradurga", "latitude": 14.2315, "longitude": 76.3983, "name": "Chitradurga Fort", "slug": "chitradurga-fort"}, {"category": "Historical Places", "district_name": "Chitradurga", "latitude": 14.20888889, "longitude": 76.38611111, "name": "Chandravalli", "slug": "chandravalli"}, {"category": "Nature and Eco-Tourism", "district_name": "Chitradurga", "latitude": 13.89055556, "longitude": 76.47694444, "name": "Vani Vilas Sagar Dam", "slug": "vani-vilas-sagar-dam"}, {"category": "Beaches", "district_name": "Dakshina Kannada", "latitude": 12.95, "longitude": 74.8, "name": "Panambur Beach", "slug": "panambur-beach"}, {"category": "Temples", "district_name": "Dakshina Kannada", "latitude": 12.88577778, "longitude": 74.85558333, "name": "Kadri Manjunath Temple", "slug": "kadri-manjunath-temple"}, {"category": "Historical Places", "district_name": "Dakshina Kannada", "latitude": 11.67, "longitude": 76.28, "name": "Sultan Battery", "slug": "sultan-battery"}, {"category": "Temples", "district_name": "Davanagere", "latitude": 14.51166667, "longitude": 75.80194444, "name": "Harihareshwara Temple, Harihar", "slug": "harihareshwara-temple-harihar"}, {"category": "Temples", "district_name": "Davanagere", "latitude": 14.35, "longitude": 75.733, "name": "Kalleshwara Temple, Malebennur", "slug": "kalleshwara-temple-malebennur"}, {"category": "Nature and Eco-Tourism", "district_name": "Davanagere", "latitude": 14.4666, "longitude": 75.9242, "name": "Kunduvada Lake", "slug": "kunduvada-lake"}, {"category": "Nature and Eco-Tourism", "district_name": "Dharwad", "latitude": 15.3667, "longitude": 75.1333, "name": "Unkal Lake", "slug": "unkal-lake"}, {"category": "Hill Stations", "district_name": "Dharwad", "latitude": 15.35, "longitude": 75.15, "name": "Nrupatunga Betta", "slug": "nrupatunga-betta"}, {"category": "Cultural Heritage", "district_name": "Dharwad", "latitude": 15.45833333, "longitude": 75.00833333, "name": "Murugha Math, Dharwad", "slug": "murugha-math-dharwad"}, {"category": "Temples", "district_name": "Gadag", "latitude": 15.38972222, "longitude": 75.71833333, "name": "Lakkundi Temples", "slug": "lakkundi-temples"}, {"category": "Temples", "district_name": "Gadag", "latitude": 15.42455556, "longitude": 75.62666667, "name": "Trikuteshwara Temple, Gadag", "slug": "trikuteshwara-temple-gadag"}, {"category": "Temples", "district_name": "Gadag", "latitude": 15.32805556, "longitude": 75.81027778, "name": "Doddabasappa Temple, Dambal", "slug": "doddabasappa-temple-dambal"}, {"category": "Temples", "district_name": "Hassan", "latitude": 13.16293, "longitude": 75.860593, "name": "Chennakeshava Temple, Belur", "slug": "chennakeshava-temple-belur"}, {"category": "Temples", "district_name": "Hassan", "latitude": 13.21319444, "longitude": 75.995, "name": "Hoysaleswara Temple, Halebidu", "slug": "hoysaleswara-temple-halebidu"}, {"category": "Cultural Heritage", "district_name": "Hassan", "latitude": 12.859, "longitude": 76.489, "name": "Shravanabelagola", "slug": "shravanabelagola"}, {"category": "Historical Places", "district_name": "Hassan", "latitude": 12.95, "longitude": 76.0, "name": "Shettihalli Rosary Church", "slug": "shettihalli-rosary-church"}, {"category": "Temples", "district_name": "Haveri", "latitude": 14.767, "longitude": 75.126, "name": "Tarakeshwara Temple, Hangal", "slug": "tarakeshwara-temple-hangal"}, {"category": "Temples", "district_name": "Haveri", "latitude": 14.9167, "longitude": 75.2667, "name": "Nagareshwara Temple, Bankapura", "slug": "nagareshwara-temple-bankapura"}, {"category": "Wildlife Sanctuaries", "district_name": "Haveri", "latitude": 14.6167, "longitude": 75.6167, "name": "Ranebennur Blackbuck Sanctuary", "slug": "ranebennur-blackbuck-sanctuary"}, {"category": "Forts", "district_name": "Kalaburagi", "latitude": 17.3405, "longitude": 76.8311, "name": "Gulbarga Fort", "slug": "gulbarga-fort"}, {"category": "Cultural Heritage", "district_name": "Kalaburagi", "latitude": 17.34, "longitude": 76.83, "name": "Khwaja Bande Nawaz Dargah", "slug": "khwaja-bande-nawaz-dargah"}, {"category": "Temples", "district_name": "Kalaburagi", "latitude": 17.325, "longitude": 76.84, "name": "Sharana Basaveshwara Temple", "slug": "sharana-basaveshwara-temple"}, {"category": "Cultural Heritage", "district_name": "Kalaburagi", "latitude": 17.306803, "longitude": 76.892781, "name": "Buddha Vihar, Kalaburagi", "slug": "buddha-vihar-kalaburagi"}, {"category": "Waterfalls", "district_name": "Kodagu", "latitude": 12.459205, "longitude": 75.719668, "name": "Abbey Falls", "slug": "abbey-falls"}, {"category": "Hill Stations", "district_name": "Kodagu", "latitude": 12.41442778, "longitude": 75.73693611, "name": "Raja\u0027s Seat", "slug": "raja-s-seat"}, {"category": "Adventure Tourism", "district_name": "Kodagu", "latitude": 12.3685, "longitude": 75.9049, "name": "Dubare Elephant Camp", "slug": "dubare-elephant-camp"}, {"category": "Temples", "district_name": "Kodagu", "latitude": 12.38548, "longitude": 75.491432, "name": "Talakaveri", "slug": "talakaveri"}, {"category": "Hill Stations", "district_name": "Kodagu", "latitude": 12.58333333, "longitude": 75.66666667, "name": "Mandalpatti", "slug": "mandalpatti"}, {"category": "Temples", "district_name": "Kolar", "latitude": 13.1333, "longitude": 78.1333, "name": "Kolaramma Temple", "slug": "kolaramma-temple"}, {"category": "Temples", "district_name": "Kolar", "latitude": 13.13, "longitude": 78.14, "name": "Someshwara Temple, Kolar", "slug": "someshwara-temple-kolar"}, {"category": "Temples", "district_name": "Kolar", "latitude": 13.142425, "longitude": 78.10056111, "name": "Antara Gange", "slug": "antara-gange"}, {"category": "Forts", "district_name": "Koppal", "latitude": 15.35, "longitude": 76.15, "name": "Koppal Fort", "slug": "koppal-fort"}, {"category": "Temples", "district_name": "Koppal", "latitude": 15.49, "longitude": 75.995, "name": "Mahadeva Temple, Itagi", "slug": "mahadeva-temple-itagi"}, {"category": "Cultural Heritage", "district_name": "Koppal", "latitude": 15.3372926, "longitude": 76.1621377, "name": "Gavimath", "slug": "gavimath"}, {"category": "Temples", "district_name": "Koppal", "latitude": 15.55, "longitude": 76.4, "name": "Kanakagiri Jain Temple", "slug": "kanakagiri-jain-temple"}, {"category": "Nature and Eco-Tourism", "district_name": "Mandya", "latitude": 12.42611111, "longitude": 76.57611111, "name": "Brindavan Gardens, KRS", "slug": "brindavan-gardens-krs"}, {"category": "Wildlife Sanctuaries", "district_name": "Mandya", "latitude": 12.4, "longitude": 76.65, "name": "Ranganathittu Bird Sanctuary", "slug": "ranganathittu-bird-sanctuary"}, {"category": "Historical Places", "district_name": "Mandya", "latitude": 12.414, "longitude": 76.704, "name": "Srirangapatna", "slug": "srirangapatna"}, {"category": "Temples", "district_name": "Mandya", "latitude": 12.65944444, "longitude": 76.64833333, "name": "Melukote", "slug": "melukote"}, {"category": "Historical Places", "district_name": "Mysuru", "latitude": 12.30388889, "longitude": 76.65444444, "name": "Mysore Palace", "slug": "mysore-palace"}, {"category": "Temples", "district_name": "Mysuru", "latitude": 12.273, "longitude": 76.67, "name": "Chamundi Hills", "slug": "chamundi-hills"}, {"category": "Nature and Eco-Tourism", "district_name": "Mysuru", "latitude": 12.3008, "longitude": 76.6677, "name": "Mysore Zoo (Sri Chamarajendra Zoological Gardens)", "slug": "mysore-zoo-sri-chamarajendra-zoological-gardens"}, {"category": "Historical Places", "district_name": "Mysuru", "latitude": 12.32113889, "longitude": 76.65827778, "name": "St. Philomena\u0027s Cathedral", "slug": "st-philomena-s-cathedral"}, {"category": "Forts", "district_name": "Raichur", "latitude": 16.2, "longitude": 77.35, "name": "Raichur Fort", "slug": "raichur-fort"}, {"category": "Forts", "district_name": "Raichur", "latitude": 16.02, "longitude": 76.43, "name": "Mudgal Fort", "slug": "mudgal-fort"}, {"category": "Historical Places", "district_name": "Raichur", "latitude": 15.96, "longitude": 76.65, "name": "Maski", "slug": "maski"}, {"category": "Adventure Tourism", "district_name": "Ramanagara", "latitude": 12.9195, "longitude": 77.2921, "name": "Savandurga", "slug": "savandurga"}, {"category": "Nature and Eco-Tourism", "district_name": "Ramanagara", "latitude": 12.25818, "longitude": 77.44866, "name": "Mekedatu", "slug": "mekedatu"}, {"category": "Hill Stations", "district_name": "Ramanagara", "latitude": 12.7167, "longitude": 77.2833, "name": "Ramadevara Betta", "slug": "ramadevara-betta"}, {"category": "Cultural Heritage", "district_name": "Ramanagara", "latitude": 12.653, "longitude": 77.205, "name": "Channapatna", "slug": "channapatna"}, {"category": "Waterfalls", "district_name": "Shivamogga", "latitude": 14.2286, "longitude": 74.8139, "name": "Jog Falls", "slug": "jog-falls"}, {"category": "Nature and Eco-Tourism", "district_name": "Shivamogga", "latitude": 13.5087, "longitude": 75.0959, "name": "Agumbe", "slug": "agumbe"}, {"category": "Adventure Tourism", "district_name": "Shivamogga", "latitude": 13.95, "longitude": 75.55, "name": "Sakrebailu Elephant Camp", "slug": "sakrebailu-elephant-camp"}, {"category": "Cultural Heritage", "district_name": "Shivamogga", "latitude": 13.6167, "longitude": 75.2833, "name": "Kuppalli (Kuvempu\u0027s home)", "slug": "kuppalli-kuvempu-s-home"}, {"category": "Hill Stations", "district_name": "Tumakuru", "latitude": 13.375, "longitude": 77.213, "name": "Devarayanadurga", "slug": "devarayanadurga"}, {"category": "Nature and Eco-Tourism", "district_name": "Tumakuru", "latitude": 13.4, "longitude": 77.2167, "name": "Namada Chilume", "slug": "namada-chilume"}, {"category": "Forts", "district_name": "Tumakuru", "latitude": 13.66, "longitude": 77.21, "name": "Madhugiri Fort", "slug": "madhugiri-fort"}, {"category": "Cultural Heritage", "district_name": "Tumakuru", "latitude": 13.321745, "longitude": 77.148596, "name": "Siddaganga Math", "slug": "siddaganga-math"}, {"category": "Temples", "district_name": "Udupi", "latitude": 13.33222222, "longitude": 74.74611111, "name": "Sri Krishna Temple, Udupi", "slug": "sri-krishna-temple-udupi"}, {"category": "Beaches", "district_name": "Udupi", "latitude": 13.3667, "longitude": 74.6833, "name": "St. Mary\u0027s Island", "slug": "st-mary-s-island"}, {"category": "Beaches", "district_name": "Udupi", "latitude": 13.2167, "longitude": 74.75, "name": "Kaup Beach and Lighthouse", "slug": "kaup-beach-and-lighthouse"}, {"category": "Waterfalls", "district_name": "Udupi", "latitude": 13.45, "longitude": 74.9833, "name": "Kudlu Theertha Falls", "slug": "kudlu-theertha-falls"}, {"category": "Temples", "district_name": "Uttara Kannada", "latitude": 14.09361667, "longitude": 74.483825, "name": "Murudeshwar Temple", "slug": "murudeshwar-temple"}, {"category": "Beaches", "district_name": "Uttara Kannada", "latitude": 14.5167, "longitude": 74.3167, "name": "Om Beach, Gokarna", "slug": "om-beach-gokarna"}, {"category": "Adventure Tourism", "district_name": "Uttara Kannada", "latitude": 14.5833, "longitude": 74.55, "name": "Yana Caves", "slug": "yana-caves"}, {"category": "Waterfalls", "district_name": "Uttara Kannada", "latitude": 14.40944444, "longitude": 74.7475, "name": "Unchalli Falls (Lushington Falls)", "slug": "unchalli-falls-lushington-falls"}, {"category": "Wildlife Sanctuaries", "district_name": "Uttara Kannada", "latitude": 15.25, "longitude": 74.6167, "name": "Dandeli Wildlife Sanctuary", "slug": "dandeli-wildlife-sanctuary"}, {"category": "Historical Places", "district_name": "Vijayapura", "latitude": 16.83003056, "longitude": 75.73609722, "name": "Gol Gumbaz", "slug": "gol-gumbaz"}, {"category": "Historical Places", "district_name": "Vijayapura", "latitude": 16.82694444, "longitude": 75.70194444, "name": "Ibrahim Rauza", "slug": "ibrahim-rauza"}, {"category": "Historical Places", "district_name": "Vijayapura", "latitude": 16.8167, "longitude": 75.7333, "name": "Malik-e-Maidan", "slug": "malik-e-maidan"}, {"category": "Cultural Heritage", "district_name": "Vijayapura", "latitude": 16.825, "longitude": 75.72, "name": "Jumma Masjid, Vijayapura", "slug": "jumma-masjid-vijayapura"}, {"category": "Temples", "district_name": "Vijayanagara", "latitude": 15.335167, "longitude": 76.458722, "name": "Virupaksha Temple, Hampi", "slug": "virupaksha-temple-hampi"}, {"category": "Cultural Heritage", "district_name": "Vijayanagara", "latitude": 15.3422, "longitude": 76.4758, "name": "Vittala Temple and Stone Chariot", "slug": "vittala-temple-and-stone-chariot"}, {"category": "Historical Places", "district_name": "Vijayanagara", "latitude": 15.3203, "longitude": 76.4713, "name": "Lotus Mahal and Zenana Enclosure", "slug": "lotus-mahal-and-zenana-enclosure"}, {"category": "Nature and Eco-Tourism", "district_name": "Vijayanagara", "latitude": 15.3, "longitude": 76.33333333, "name": "Tungabhadra Dam and Garden, Hosapete", "slug": "tungabhadra-dam-and-garden-hosapete"}, {"category": "Cultural Heritage", "district_name": "Vijayanagara", "latitude": 15.3527, "longitude": 76.4919, "name": "Anegundi", "slug": "anegundi"}, {"category": "Forts", "district_name": "Yadgir", "latitude": 16.77, "longitude": 77.13, "name": "Yadgir Fort", "slug": "yadgir-fort"}, {"category": "Historical Places", "district_name": "Yadgir", "latitude": 16.835433, "longitude": 76.932541, "name": "Kanaganahalli (Sannati) Buddhist Site", "slug": "kanaganahalli-sannati-buddhist-site"}, {"category": "Nature and Eco-Tourism", "district_name": "Yadgir", "latitude": 16.17833333, "longitude": 76.22444444, "name": "Narayanpur Dam (Basava Sagar)", "slug": "narayanpur-dam-basava-sagar"}];
+  var stays = [{"district_name": "Chikkamagaluru", "latitude": 13.39097222, "longitude": 75.72138889, "name": "Coffee Blossom Estate Stay", "price_per_night": 3200.0, "slug": "coffee-blossom-estate-stay"}, {"district_name": "Chikkamagaluru", "latitude": 13.39097222, "longitude": 75.72138889, "name": "Mullayanagiri Foothill Homestay", "price_per_night": 2400.0, "slug": "mullayanagiri-foothill-homestay"}, {"district_name": "Kodagu", "latitude": 12.459205, "longitude": 75.719668, "name": "Kodagu Mist Cottage", "price_per_night": 4500.0, "slug": "kodagu-mist-cottage"}, {"district_name": "Kodagu", "latitude": 12.459205, "longitude": 75.719668, "name": "Kaveri Riverside Stay", "price_per_night": 2800.0, "slug": "kaveri-riverside-stay"}, {"district_name": "Vijayanagara", "latitude": 15.335167, "longitude": 76.458722, "name": "Hampi Stone Heritage Home", "price_per_night": 2200.0, "slug": "hampi-stone-heritage-home"}, {"district_name": "Vijayanagara", "latitude": 15.335167, "longitude": 76.458722, "name": "Tungabhadra Farmstay", "price_per_night": 1800.0, "slug": "tungabhadra-farmstay"}, {"district_name": "Mysuru", "latitude": 12.30388889, "longitude": 76.65444444, "name": "Mysore Heritage Residency", "price_per_night": 3800.0, "slug": "mysore-heritage-residency"}, {"district_name": "Mysuru", "latitude": 12.30388889, "longitude": 76.65444444, "name": "Kabini Fringe Homestay", "price_per_night": 5200.0, "slug": "kabini-fringe-homestay"}, {"district_name": "Bagalkote", "latitude": 15.91833333, "longitude": 75.68416667, "name": "Badami Cliff View Stay", "price_per_night": 1600.0, "slug": "badami-cliff-view-stay"}, {"district_name": "Bagalkote", "latitude": 15.91833333, "longitude": 75.68416667, "name": "Pattadakal Village Homestay", "price_per_night": 1400.0, "slug": "pattadakal-village-homestay"}, {"district_name": "Belagavi", "latitude": 16.19166667, "longitude": 74.7765, "name": "Belagavi Gokak Farmhouse", "price_per_night": 1900.0, "slug": "belagavi-gokak-farmhouse"}, {"district_name": "Bidar", "latitude": 17.92444444, "longitude": 77.52666667, "name": "Bidar Bahmani Guest House", "price_per_night": 1500.0, "slug": "bidar-bahmani-guest-house"}, {"district_name": "Chamarajanagara", "latitude": 11.66166667, "longitude": 76.62722222, "name": "Bandipur Forest Edge Homestay", "price_per_night": 3600.0, "slug": "bandipur-forest-edge-homestay"}, {"district_name": "Chamarajanagara", "latitude": 11.66166667, "longitude": 76.62722222, "name": "Chamarajanagar Hill View Stay", "price_per_night": 2100.0, "slug": "chamarajanagar-hill-view-stay"}, {"district_name": "Chikkaballapura", "latitude": 13.38626, "longitude": 77.70093, "name": "Nandi Hills Sunrise Homestay", "price_per_night": 2600.0, "slug": "nandi-hills-sunrise-homestay"}, {"district_name": "Chitradurga", "latitude": 14.2315, "longitude": 76.3983, "name": "Chitradurga Fort View Lodge", "price_per_night": 1700.0, "slug": "chitradurga-fort-view-lodge"}, {"district_name": "Dakshina Kannada", "latitude": 12.95, "longitude": 74.8, "name": "Mangaluru Coastal Home", "price_per_night": 2900.0, "slug": "mangaluru-coastal-home"}, {"district_name": "Davanagere", "latitude": 14.51166667, "longitude": 75.80194444, "name": "Harihar Riverside Stay", "price_per_night": 1500.0, "slug": "harihar-riverside-stay"}, {"district_name": "Dharwad", "latitude": 15.3667, "longitude": 75.1333, "name": "Dharwad Music House", "price_per_night": 2000.0, "slug": "dharwad-music-house"}, {"district_name": "Gadag", "latitude": 15.38972222, "longitude": 75.71833333, "name": "Lakkundi Heritage Stay", "price_per_night": 1400.0, "slug": "lakkundi-heritage-stay"}, {"district_name": "Hassan", "latitude": 13.16293, "longitude": 75.860593, "name": "Belur Homestay", "price_per_night": 2300.0, "slug": "belur-homestay"}, {"district_name": "Hassan", "latitude": 13.16293, "longitude": 75.860593, "name": "Sakleshpur Estate Bungalow", "price_per_night": 3400.0, "slug": "sakleshpur-estate-bungalow"}, {"district_name": "Haveri", "latitude": 14.767, "longitude": 75.126, "name": "Hangal Courtyard Home", "price_per_night": 1300.0, "slug": "hangal-courtyard-home"}, {"district_name": "Kalaburagi", "latitude": 17.3405, "longitude": 76.8311, "name": "Kalaburagi Fort Residency", "price_per_night": 1700.0, "slug": "kalaburagi-fort-residency"}, {"district_name": "Kolar", "latitude": 13.1333, "longitude": 78.1333, "name": "Kolar Gold Fields Farmstay", "price_per_night": 1800.0, "slug": "kolar-gold-fields-farmstay"}, {"district_name": "Koppal", "latitude": 15.35, "longitude": 76.15, "name": "Koppal Heritage Home", "price_per_night": 1300.0, "slug": "koppal-heritage-home"}, {"district_name": "Mandya", "latitude": 12.42611111, "longitude": 76.57611111, "name": "Srirangapatna Island Stay", "price_per_night": 2500.0, "slug": "srirangapatna-island-stay"}, {"district_name": "Raichur", "latitude": 16.2, "longitude": 77.35, "name": "Raichur Tungabhadra Homestay", "price_per_night": 1400.0, "slug": "raichur-tungabhadra-homestay"}, {"district_name": "Ramanagara", "latitude": 12.9195, "longitude": 77.2921, "name": "Savandurga Rock Stay", "price_per_night": 2200.0, "slug": "savandurga-rock-stay"}, {"district_name": "Shivamogga", "latitude": 14.2286, "longitude": 74.8139, "name": "Jog Falls View Homestay", "price_per_night": 2000.0, "slug": "jog-falls-view-homestay"}, {"district_name": "Shivamogga", "latitude": 14.2286, "longitude": 74.8139, "name": "Agumbe Rainforest Stay", "price_per_night": 2600.0, "slug": "agumbe-rainforest-stay"}, {"district_name": "Tumakuru", "latitude": 13.375, "longitude": 77.213, "name": "Devarayanadurga Hill Stay", "price_per_night": 1900.0, "slug": "devarayanadurga-hill-stay"}, {"district_name": "Udupi", "latitude": 13.33222222, "longitude": 74.74611111, "name": "Udupi Temple Town Home", "price_per_night": 2400.0, "slug": "udupi-temple-town-home"}, {"district_name": "Uttara Kannada", "latitude": 14.09361667, "longitude": 74.483825, "name": "Gokarna Beach House", "price_per_night": 2800.0, "slug": "gokarna-beach-house"}, {"district_name": "Vijayapura", "latitude": 16.83003056, "longitude": 75.73609722, "name": "Vijayapura Adil Shahi Guest House", "price_per_night": 1600.0, "slug": "vijayapura-adil-shahi-guest-house"}, {"district_name": "Yadgir", "latitude": 16.77, "longitude": 77.13, "name": "Yadgir Farmstay", "price_per_night": 1200.0, "slug": "yadgir-farmstay"}, {"district_name": "Bengaluru Urban", "latitude": 12.9507, "longitude": 77.5848, "name": "Bengaluru Garden Homestay", "price_per_night": 4200.0, "slug": "bengaluru-garden-homestay"}, {"district_name": "Bengaluru Rural", "latitude": 13.2496, "longitude": 77.70939, "name": "Devanahalli Airport Stay", "price_per_night": 2900.0, "slug": "devanahalli-airport-stay"}];
+  var map = L.map('big-map').setView([15.0, 75.9], 6.5);
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OpenStreetMap contributors', maxZoom: 18 }).addTo(map);
+  var green = L.divIcon({ className:'', html:'<div style="width:14px;height:14px;border-radius:50%;background:#0f6b4f;border:2px solid #fff;box-shadow:0 1px 6px rgba(0,0,0,.4)"></div>', iconSize:[14,14] });
+  var blue = L.divIcon({ className:'', html:'<div style="width:12px;height:12px;border-radius:3px;background:#2b7bb9;border:2px solid #fff;box-shadow:0 1px 6px rgba(0,0,0,.4)"></div>', iconSize:[12,12] });
+  var layers = {};
+  dests.forEach(function (p) {
+    var m = L.marker([p.latitude, p.longitude], { icon: green }).addTo(map);
+    m.bindPopup('<b>' + p.name + '</b><br>' + p.category + ' · ' + p.district_name +
+                '<br><a href="../destination/' + p.slug + '">Open page →</a>');
+    (layers[p.category] = layers[p.category] || []).push(m);
+  });
+  stays.forEach(function (s) {
+    L.marker([s.latitude, s.longitude], { icon: blue }).addTo(map)
+      .bindPopup('<b>' + s.name + '</b><br>' + s.district_name + ' · ₹' + s.price_per_night +
+                 '<br><a href="../homestay/' + s.slug + '">Open page →</a>');
+  });
+  document.querySelectorAll('[data-filter]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      document.querySelectorAll('[data-filter]').forEach(function (b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      var f = btn.getAttribute('data-filter');
+      Object.keys(layers).forEach(function (cat) {
+        layers[cat].forEach(function (m) {
+          if (f === 'all' || f === cat) m.addTo(map); else map.removeLayer(m);
+        });
+      });
+    });
+  });
+</script>
+
+</body>
+</html>

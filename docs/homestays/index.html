@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Homestays - Karnataka Explore</title>
+<meta name="description" content="Explore Karnataka district by district: waterfalls, beaches, hill stations, temples, forts, homestays and local guides.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../static/css/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%230f6b4f'/><path d='M22 68 L42 36 L54 56 L64 44 L80 68 Z' fill='white'/></svg>">
+<script>
+  (function () {
+    try {
+      if (new URLSearchParams(location.search).get("theme")) return;
+      var saved = localStorage.getItem("kx-theme");
+      if (saved) document.documentElement.setAttribute("data-theme", saved);
+      else if (window.matchMedia("(prefers-color-scheme: dark)").matches)
+        document.documentElement.setAttribute("data-theme", "dark");
+    } catch (e) {}
+  })();
+</script>
+
+</head>
+<body><div style="background:#0f6b4f;color:#eaf5f0;font:600 13px/1.5 system-ui,sans-serif;padding:10px 18px;text-align:center;position:relative;z-index:100">Static preview of Karnataka Explore &mdash; every destination, homestay and guide is browsable. Booking, sign-in, payments and the admin console run in the Python app: <a href="https://github.com/vasanthhg-cloud/karnataka-explore" style="color:#fff;text-decoration:underline">see the repository</a>.</div>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-head">
+  <div class="wrap nav-wrap">
+    <a class="brand" href="../">
+      <span class="brand-mark" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 19l6-11 4 7 3-4 5 8z"/><circle cx="17" cy="6" r="2"/></svg>
+      </span>
+      <span class="brand-text"><b>Karnataka Explore</b><span>Discover Karnataka</span></span>
+    </a>
+
+    <nav class="nav" id="nav">
+      <a href="../" class="">Home</a>
+      <a href="../destinations/" class="">Destinations</a>
+      <a href="../districts/" class="">Districts</a>
+      <a href="../homestays/" class="active">Homestays</a>
+      <a href="../guides/" class="">Tour Guides</a>
+      <a href="../map/" class="">Tourism Map</a>
+      <a href="../itinerary/" class="">Plan a Trip</a>
+      <a href="../about/" class="">About Us</a>
+      <a href="../contact/" class="">Contact Us</a>
+      
+        <a class="mobile-auth" style="display:none" href="../login/">Login</a>
+        <a class="mobile-auth" style="display:none" href="../register/">Register</a>
+      
+    </nav>
+
+    <div class="nav-actions">
+      <div class="dropdown">
+        <button class="icon-btn" data-dropdown aria-label="Language" title="Language">EN</button>
+        <div class="dropdown-panel">
+          
+            <a href="../preview/">English ✓</a>
+          
+            <a href="../preview/">हिन्दी</a>
+          
+            <a href="../preview/">ಕನ್ನಡ</a>
+          
+        </div>
+      </div>
+      <button class="icon-btn" onclick="toggleTheme()" aria-label="Theme" title="Theme">
+        <span data-theme-icon aria-hidden="true">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.8A8.5 8.5 0 1 1 11.2 3a6.6 6.6 0 0 0 9.8 9.8z"/></svg>
+        </span>
+      </button>
+      
+        <a class="btn btn-ghost btn-sm" href="../login/">Login</a>
+        <a class="btn btn-primary btn-sm" href="../register/">Register</a>
+      
+      <button class="icon-btn nav-toggle" data-nav-toggle aria-label="Menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+
+  
+
+
+<main id="main">
+
+<section class="section tight" style="background:var(--bg-alt);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <nav class="breadcrumb"><a href="../">Home</a> / Homestays</nav>
+    <h1 style="font-size:clamp(1.8rem,3vw,2.6rem)">Homestays</h1>
+    <p class="muted" style="max-width:62ch">38 results. Filter by district, price and facilities, then pick your dates on the listing page.</p>
+  </div>
+</section>
+<section class="section">
+  <div class="wrap">
+    <form class="panel" method="get" style="margin-bottom:28px">
+      <div class="form-grid" style="grid-template-columns:1.5fr 1fr 1fr 1fr auto;align-items:end">
+        <div class="field" style="margin:0"><label for="q">Search</label>
+          <input class="input" id="q" name="q" value="" placeholder="Homestay, town or district"></div>
+        <div class="field" style="margin:0"><label for="district">District</label>
+          <select class="select" id="district" name="district">
+            <option value="">All districts</option>
+            <option value="bagalkote" >Bagalkote</option><option value="ballari" >Ballari</option><option value="belagavi" >Belagavi</option><option value="bengaluru-rural" >Bengaluru Rural</option><option value="bengaluru-urban" >Bengaluru Urban</option><option value="bidar" >Bidar</option><option value="chamarajanagara" >Chamarajanagara</option><option value="chikkaballapura" >Chikkaballapura</option><option value="chikkamagaluru" >Chikkamagaluru</option><option value="chitradurga" >Chitradurga</option><option value="dakshina-kannada" >Dakshina Kannada</option><option value="davanagere" >Davanagere</option><option value="dharwad" >Dharwad</option><option value="gadag" >Gadag</option><option value="hassan" >Hassan</option><option value="haveri" >Haveri</option><option value="kalaburagi" >Kalaburagi</option><option value="kodagu" >Kodagu</option><option value="kolar" >Kolar</option><option value="koppal" >Koppal</option><option value="mandya" >Mandya</option><option value="mysuru" >Mysuru</option><option value="raichur" >Raichur</option><option value="ramanagara" >Ramanagara</option><option value="shivamogga" >Shivamogga</option><option value="tumakuru" >Tumakuru</option><option value="udupi" >Udupi</option><option value="uttara-kannada" >Uttara Kannada</option><option value="vijayanagara" >Vijayanagara</option><option value="vijayapura" >Vijayapura</option><option value="yadgir" >Yadgir</option>
+          </select></div>
+        <div class="field" style="margin:0"><label for="max_price">Price range</label>
+          <select class="select" id="max_price" name="max_price">
+            <option value="">Any price</option>
+            
+              <option value="1500" >Up to ₹1,500</option>
+            
+              <option value="2500" >Up to ₹2,500</option>
+            
+              <option value="3500" >Up to ₹3,500</option>
+            
+              <option value="5000" >Up to ₹5,000</option>
+            
+          </select></div>
+        <div class="field" style="margin:0"><label for="sort">Sort by</label>
+          <select class="select" id="sort" name="sort">
+            <option value="rating" selected>Rating</option>
+            <option value="price_low" >Price: low to high</option>
+            <option value="price_high" >Price: high to low</option>
+          </select></div>
+        <button class="btn btn-primary" type="submit">Apply filters</button>
+      </div>
+      <div class="chips" style="margin-top:14px">
+        <a class="chip active" href="../homestays?q=">All facilities</a>
+        
+          <a class="chip " href="../homestays?q=&amp;facility=Free+Wi-Fi">Free Wi-Fi</a>
+        
+          <a class="chip " href="../homestays?q=&amp;facility=Parking">Parking</a>
+        
+          <a class="chip " href="../homestays?q=&amp;facility=Food">Food</a>
+        
+          <a class="chip " href="../homestays?q=&amp;facility=Swimming+Pool">Swimming Pool</a>
+        
+          <a class="chip " href="../homestays?q=&amp;facility=AC+Rooms">AC Rooms</a>
+        
+          <a class="chip " href="../homestays?q=&amp;facility=Family+Rooms">Family Rooms</a>
+        
+          <a class="chip " href="../homestays?q=&amp;facility=Nature+View">Nature View</a>
+        
+          <a class="chip " href="../homestays?q=&amp;facility=Campfire">Campfire</a>
+        
+          <a class="chip " href="../homestays?q=&amp;facility=Trekking">Trekking</a>
+        
+          <a class="chip " href="../homestays?q=&amp;facility=Local+Food">Local Food</a>
+        
+      </div>
+    </form>
+
+    
+      <div class="grid cols-3">
+<a class="card" href="../homestay/kodagu-mist-cottage/">
+  <div class="card-media">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Abbey_Falls_New.jpg/1280px-Abbey_Falls_New.jpg" alt="Kodagu Mist Cottage" loading="lazy">
+    <span class="badge blue">Kodagu</span>
+    <span class="price-tag">₹4,500 <small class="muted">/Nights</small></span>
+  </div>
+  <div class="card-body">
+    <h3>Kodagu Mist Cottage</h3>
+    <div class="meta">Guests 12 · 5 Rooms</div>
+    <p>A colonial-era planter&#39;s house restored with five guest rooms, a verandah facing the misty valley and an open kitchen serving Kodava pandi curry. Abbey Falls is a short walk down the estate road.</p>
+    <div class="card-foot">
+      <span class="stars">★★★★★ <small class="muted">4.7</small></span>
+      <span class="btn btn-soft btn-sm">View details</span>
+    </div>
+  </div>
+</a>
+
+<a class="card" href="../homestay/coffee-blossom-estate-stay/">
+  <div class="card-media">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Mullayanagiri1.JPG/1280px-Mullayanagiri1.JPG" alt="Coffee Blossom Estate Stay" loading="lazy">
+    <span class="badge blue">Chikkamagaluru</span>
+    <span class="price-tag">₹3,200 <small class="muted">/Nights</small></span>
+  </div>
+  <div class="card-body">
+    <h3>Coffee Blossom Estate Stay</h3>
+    <div class="meta">Guests 10 · 4 Rooms</div>
+    <p>A working coffee estate bungalow with four rooms looking over the Arabica slopes, ten minutes from the town. Meals are cooked by the family, filtered coffee comes from the estate, and the caretaker walks guests to the viewpoint at sunrise.</p>
+    <div class="card-foot">
+      <span class="stars">★★★★★ <small class="muted">4.6</small></span>
+      <span class="btn btn-soft btn-sm">View details</span>
+    </div>
+  </div>
+</a>
+
+<a class="card" href="../homestay/kabini-fringe-homestay/">
+  <div class="card-media">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Mysore_Palace_Morning.jpg/1280px-Mysore_Palace_Morning.jpg" alt="Kabini Fringe Homestay" loading="lazy">
+    <span class="badge blue">Mysuru</span>
+    <span class="price-tag">₹5,200 <small class="muted">/Nights</small></span>
+  </div>
+  <div class="card-body">
+    <h3>Kabini Fringe Homestay</h3>
+    <div class="meta">Guests 8 · 4 Rooms</div>
+    <p>At the edge of the Nagarahole buffer zone, with four cottages, a small pool and a naturalist who takes guests on bird walks and night drives to the forest gate.</p>
+    <div class="card-foot">
+      <span class="stars">★★★★★ <small class="muted">4.6</small></span>
+      <span class="btn btn-soft btn-sm">View details</span>
+    </div>
+  </div>
+</a>
+
+<a class="card" href="../homestay/agumbe-rainforest-stay/">
+  <div class="card-media">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Jog_Falls_05092016.jpg/1280px-Jog_Falls_05092016.jpg" alt="Agumbe Rainforest Stay" loading="lazy">
+    <span class="badge blue">Shivamogga</span>
+    <span class="price-tag">₹2,600 <small class="muted">/Nights</small></span>
+  </div>
+  <div class="card-body">
+    <h3>Agumbe Rainforest Stay</h3>
+    <div class="meta">Guests 9 · 4 Rooms</div>
+    <p>A rain-forest lodge run with a herpetologist, offering night walks, a king cobra research talk and the famous Agumbe sunset point a short drive away.</p>
+    <div class="card-foot">
+      <span class="stars">★★★★★ <small class="muted">4.6</small></span>
+      <span class="btn btn-soft btn-sm">View details</span>
+    </div>
+  </div>
+</a>
+
+<a class="card" href="../homestay/mysore-heritage-residency/">
+  <div class="card-media">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Mysore_Palace_Morning.jpg/1280px-Mysore_Palace_Morning.jpg" alt="Mysore Heritage Residency" loading="lazy">
+    <span class="badge blue">Mysuru</span>
+    <span class="price-tag">₹3,800 <small class="muted">/Nights</small></span>
+  </div>
+  <div class="card-body">
+    <h3>Mysore Heritage Residency</h3>
+    <div class="meta">Guests 14 · 6 Rooms</div>
+    <p>A restored 1930s house with high ceilings and rosewood furniture, a ten-minute walk from the palace. Breakfast is Mysore masala dosa and filter coffee, and the family keeps a small collection of old city photographs.</p>
+    <div class="card-foot">
+      <span class="stars">★★★★☆ <small class="muted">4.5</small></span>
+      <span class="btn btn-soft btn-sm">View details</span>
+    </div>
+  </div>
+</a>
+
+<a class="card" href="../homestay/belur-homestay/">
+  <div class="card-media">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/The_Courtyard_of_Chennakesava_Temple_-_Belur.jpg/1280px-The_Courtyard_of_Chennakesava_Temple_-_Belur.jpg" alt="Belur Homestay" loading="lazy">
+    <span class="badge blue">Hassan</span>
+    <span class="price-tag">₹2,300 <small class="muted">/Nights</small></span>
+  </div>
+  <div class="card-body">
+    <h3>Belur Homestay</h3>
+    <div class="meta">Guests 12 · 5 Rooms</div>
+    <p>A house opposite the Belur temple tank with five rooms, a terrace for evening light on the gopura, and a host family that has been guiding visitors through the Hoysala carvings for three generations.</p>
+    <div class="card-foot">
+      <span class="stars">★★★★☆ <small class="muted">4.5</small></span>
+      <span class="btn btn-soft btn-sm">View details</span>
+    </div>
+  </div>
+</a>
+
+<a class="card" href="../homestay/sakleshpur-estate-bungalow/">
+  <div class="card-media">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/The_Courtyard_of_Chennakesava_Temple_-_Belur.jpg/1280px-The_Courtyard_of_Chennakesava_Temple_-_Belur.jpg" alt="Sakleshpur Estate Bungalow" loading="lazy">
+    <span class="badge blue">Hassan</span>
+    <span class="price-tag">₹3,400 <small class="muted">/Nights</small></span>
+  </div>
+  <div class="card-body">
+    <h3>Sakleshpur Estate Bungalow</h3>
+    <div class="meta">Guests 10 · 4 Rooms</div>
+    <p>A planter&#39;s bungalow among coffee and pepper vines, with a fireplace, four large rooms and a cook who makes Coorgi and Malnad dishes. The railway trek to the old tunnel starts nearby.</p>
+    <div class="card-foot">
+      <span class="stars">★★★★☆ <small class="muted">4.5</small></span>
+      <span class="btn btn-soft btn-sm">View details</span>
+    </div>
+  </div>
+</a>
+
+<a class="card" href="../homestay/udupi-temple-town-home/">
+  <div class="card-media">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Udupi_Sri_Krishna_Matha_Temple.jpg/1280px-Udupi_Sri_Krishna_Matha_Temple.jpg" alt="Udupi Temple Town Home" loading="lazy">
+    <span class="badge blue">Udupi</span>
+    <span class="price-tag">₹2,400 <small class="muted">/Nights</small></span>
+  </div>
+  <div class="card-body">
+    <h3>Udupi Temple Town Home</h3>
+    <div class="meta">Guests 12 · 5 Rooms</div>
+    <p>A house on the temple street, a minute from the Sri Krishna Matha, with Udupi-style meals cooked at home and the beach at Malpe twenty minutes away.</p>
+    <div class="card-foot">
+      <span class="stars">★★★★☆ <small class="muted">4.5</small></span>
+      <span class="btn btn-soft btn-sm">View details</span>
+    </div>
+  </div>
+</a>
+
+<a class="card" href="../homestay/hampi-stone-heritage-home/">
+  <div class="card-media">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Complex_of_Virupaksha_Temple%2C_Hampi_%2804%29.jpg/1280px-Complex_of_Virupaksha_Temple%2C_Hampi_%2804%29.jpg" alt="Hampi Stone Heritage Home" loading="lazy">
+    <span class="badge blue">Vijayanagara</span>
+    <span class="price-tag">₹2,200 <small class="muted">/Nights</small></span>
+  </div>
+  <div class="card-body">
+    <h3>Hampi Stone Heritage Home</h3>
+    <div class="meta">Guests 10 · 4 Rooms</div>
+    <p>A granite house beside the bazaar with a rooftop that looks straight at the Virupaksha gopura. The family runs a small café serving jolada rotti thali and rents cycles for the ruins.</p>
+    <div class="card-foot">
+      <span class="stars">★★★★☆ <small class="muted">4.4</small></span>
+      <span class="btn btn-soft btn-sm">View details</span>
+    </div>
+  </div>
+</a>
+</div>
+      
+<nav class="pagination" aria-label="Pagination">
+  
+  
+    <span class="current">1</span>
+    
+  
+    <a href="../homestays?page=2">2</a>
+  
+    <a href="../homestays?page=3">3</a>
+  
+    <a href="../homestays?page=4">4</a>
+  
+    <a href="../homestays?page=5">5</a>
+  
+  <a href="../homestays?page=2">Next</a>
+</nav>
+
+      <p class="hint" style="text-align:center;margin-top:22px">Homestay records in this build are sample data for the project demo. Add verified listings from the admin dashboard.</p>
+    
+  </div>
+</section>
+
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="brand" href="../" style="color:#fff">
+          <span class="brand-mark" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 19l6-11 4 7 3-4 5 8z"/><circle cx="17" cy="6" r="2"/></svg>
+          </span>
+          <span class="brand-text"><b style="color:#fff">Karnataka Explore</b><span style="color:#9db8ac">Discover Karnataka</span></span>
+        </a>
+        <p style="margin-top:1rem;font-size:.9rem;color:#b6cdc2;max-width:34ch">Karnataka Explore is a tourism portal that brings the state&#39;s destinations, homestays and local guides into one place, district by district.</p>
+        <div class="socials">
+          <a href="#" aria-label="Instagram">◎</a><a href="#" aria-label="Facebook">f</a>
+          <a href="#" aria-label="YouTube">▷</a><a href="#" aria-label="X">✕</a>
+        </div>
+      </div>
+      <div>
+        <h4>Quick links</h4>
+        <ul>
+          <li><a href="../destinations/">Destinations</a></li>
+          <li><a href="../districts/">Districts</a></li>
+          <li><a href="../homestays/">Homestays</a></li>
+          <li><a href="../guides/">Tour Guides</a></li>
+          <li><a href="../map/">Tourism Map</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact us</h4>
+        <ul>
+          <li><a href="mailto:hello@karnatakaexplore.in">hello@karnatakaexplore.in</a></li>
+          <li><a href="tel:+91 80 2222 3344">+91 80 2222 3344</a></li>
+          <li><a href="../contact/">Contact Us</a></li>
+          <li><a href="../preview/">Admin Panel</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Travel notes, once a month</h4>
+        <p style="font-size:.9rem;color:#b6cdc2;margin-bottom:0">One email a month with routes, festivals and new stays.</p>
+        <form class="newsletter-form" method="post" onsubmit="alert('This is the static preview. Run the Flask app (python run.py) for sign-in, booking, payments and admin.');return false;" action="../preview/">
+          <input type="email" name="email" placeholder="you@example.com" required aria-label="Email">
+          <button class="btn btn-primary btn-sm" type="submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Karnataka Explore. All rights reserved.</span>
+      <span>A student project built with Flask, SQLite and OpenStreetMap. Demo project - payments are simulated and no money is deducted.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="../static/js/app.js"></script>
+
+</body>
+</html>
