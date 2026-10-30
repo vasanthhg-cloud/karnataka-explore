@@ -1,0 +1,55 @@
+{% extends "admin/base.html" %}
+{% block title %}{{ t('dashboard') }}{% endblock %}
+{% block content %}
+<div class="admin-top">
+  <div><h2>{{ t('dashboard') }}</h2><p class="muted" style="margin:0">Signed in as {{ admin_name }}</p></div>
+  <a class="btn btn-primary btn-sm" href="{{ url_for('admin.destination_new') }}">+ {{ t('add_new') }} destination</a>
+</div>
+
+<div class="grid cols-4" style="margin-bottom:26px">
+  <div class="stat-card"><span>{{ t('total_users') }}</span><b>{{ stats.users }}</b><small>visitor accounts</small></div>
+  <div class="stat-card"><span>{{ t('total_destinations') }}</span><b>{{ stats.destinations }}</b><small>across 31 districts</small></div>
+  <div class="stat-card"><span>{{ t('total_homestays') }}</span><b>{{ stats.homestays }}</b><small>stays listed</small></div>
+  <div class="stat-card"><span>{{ t('total_bookings') }}</span><b>{{ stats.bookings }}</b><small>{{ stats.guides }} guides</small></div>
+</div>
+<div class="grid cols-3" style="margin-bottom:26px">
+  <div class="stat-card"><span>{{ t('revenue') }}</span><b>{{ stats.revenue|money }}</b><small>simulated payments only</small></div>
+  <div class="stat-card"><span>Reviews to moderate</span><b>{{ stats.pending_reviews }}</b><small><a href="{{ url_for('admin.reviews') }}">{{ t('moderate') }} →</a></small></div>
+  <div class="stat-card"><span>{{ t('messages') }}</span><b>{{ stats.messages }}</b><small><a href="{{ url_for('admin.messages') }}">open inbox →</a></small></div>
+</div>
+
+<div class="split" style="grid-template-columns:1.4fr .9fr">
+  <div class="panel">
+    <h3>Recent bookings</h3>
+    <div class="table-wrap" style="border:0">
+      <table>
+        <thead><tr><th>{{ t('booking_id') }}</th><th>Item</th><th>User</th><th>{{ t('total') }}</th><th>{{ t('status') }}</th></tr></thead>
+        <tbody>
+        {% for b in recent %}
+          <tr><td><b>{{ b.booking_ref }}</b></td><td>{{ b.item_name }}</td><td>{{ b.full_name }}</td>
+              <td>{{ b.total|money }}</td>
+              <td><span class="badge {{ 'ok' if b.status == 'Confirmed' else ('danger' if b.status == 'Cancelled' else 'warn') }}">{{ b.status }}</span></td></tr>
+        {% else %}<tr><td colspan="5" class="muted">No bookings yet.</td></tr>{% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="panel">
+    <h3>Destinations by category</h3>
+    {% set maxc = by_category[0].c if by_category else 1 %}
+    {% for row in by_category %}
+      <div style="margin-bottom:10px">
+        <div style="display:flex;justify-content:space-between;font-size:.85rem"><span>{{ row.category }}</span><b>{{ row.c }}</b></div>
+        <div style="height:7px;background:var(--surface-2);border-radius:4px;overflow:hidden">
+          <div style="height:100%;width:{{ (row.c / maxc * 100)|round }}%;background:linear-gradient(90deg,var(--green-600),var(--blue-500))"></div>
+        </div>
+      </div>
+    {% endfor %}
+    <hr class="divider">
+    <h3>Top districts</h3>
+    {% for d in by_district[:6] %}
+      <div class="summary-row"><span>{{ d.name }}</span><b>{{ d.c }}</b></div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

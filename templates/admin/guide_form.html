@@ -1,0 +1,23 @@
+{% extends "admin/base.html" %}
+{% block title %}{{ t('edit') if g else t('add_new') }}{% endblock %}
+{% block content %}
+<div class="admin-top"><h2>{{ (t('edit') ~ ': ' ~ g.name) if g else (t('add_new') ~ ' guide') }}</h2>
+  <a class="btn btn-ghost btn-sm" href="{{ url_for('admin.guides') }}">← {{ t('back') }}</a></div>
+<form method="post" class="panel">
+  <div class="form-grid">
+    <div class="field"><label>Name</label><input class="input" name="name" value="{{ g.name if g }}" required></div>
+    <div class="field"><label>{{ t('district') }}</label>
+      <select class="select" name="district_id">
+        {% for dist in districts %}<option value="{{ dist.id }}" {{ 'selected' if g and g.district_id == dist.id }}>{{ dist.name }}</option>{% endfor %}
+      </select></div>
+    <div class="field"><label>Languages</label><input class="input" name="languages" value="{{ g.languages if g }}"></div>
+    <div class="field"><label>Experience (years)</label><input class="input" type="number" name="experience" value="{{ g.experience if g else 1 }}"></div>
+    <div class="field"><label>Fee per day (₹)</label><input class="input" type="number" name="fee_per_day" value="{{ g.fee_per_day if g else 1500 }}"></div>
+    <div class="field"><label>Phone</label><input class="input" name="phone" value="{{ g.phone if g }}"></div>
+    <div class="field"><label>Email</label><input class="input" name="email" value="{{ g.email if g }}"></div>
+    <div class="field full"><label>Profile</label><textarea class="input" name="bio" rows="4">{{ g.bio if g }}</textarea></div>
+    <div class="field"><label>&nbsp;</label><label class="checkbox"><input type="checkbox" name="active" {{ 'checked' if not g or g.active }}> Available for booking</label></div>
+  </div>
+  <button class="btn btn-primary">{{ t('save') }}</button>
+</form>
+{% endblock %}

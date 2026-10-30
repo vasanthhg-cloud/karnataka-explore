@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}{{ t('view_ticket') }} - {{ b.booking_ref }}{% endblock %}
+{% block content %}
+<section class="section">
+  <div class="wrap" style="max-width:880px">
+    <nav class="breadcrumb"><a href="{{ url_for('booking.my_bookings') }}">← {{ t('my_bookings') }}</a></nav>
+    <div class="ticket">
+      <div class="ticket-head">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;flex-wrap:wrap">
+          <div>
+            <span class="badge" style="background:rgba(255,255,255,.18);color:#fff">{{ b.status }}</span>
+            <h1 style="color:#fff;margin:.5rem 0 .2rem;font-size:1.7rem">{{ b.item_name }}</h1>
+            <p style="color:rgba(255,255,255,.82);margin:0">{{ b.district_name }}</p>
+          </div>
+          <div style="text-align:right">
+            <small style="color:rgba(255,255,255,.7);letter-spacing:.1em">BOOKING ID</small>
+            <div style="font-size:1.2rem;font-weight:800">{{ b.booking_ref }}</div>
+          </div>
+        </div>
+      </div>
+      <div class="ticket-body">
+        <div class="ticket-grid">
+          <div><span>{{ t('full_name') }}</span><b>{{ user_name }}</b></div>
+          <div><span>{{ t('booked_on') }}</span><b>{{ b.created_at|shortdate }}</b></div>
+          {% if b.kind == 'destination' %}
+            <div><span>{{ t('visit_date') }}</span><b>{{ b.visit_date }}</b></div>
+          {% elif b.kind == 'homestay' %}
+            <div><span>{{ t('checkin') }}</span><b>{{ b.checkin_date }}</b></div>
+            <div><span>{{ t('checkout') }}</span><b>{{ b.checkout_date }}</b></div>
+            <div><span>{{ t('nights') }} / {{ t('rooms') }}</span><b>{{ b.nights }} / {{ b.rooms }}</b></div>
+          {% else %}
+            <div><span>{{ t('visit_date') }}</span><b>{{ b.visit_date }}</b></div>
+            <div><span>Days</span><b>{{ b.nights }}</b></div>
+          {% endif %}
+          <div><span>{{ t('visitors') }}</span><b>{{ b.visitors }}</b></div>
+          <div><span>{{ t('total') }}</span><b>{{ b.total|money }}</b></div>
+          <div><span>{{ t('payment_status') }}</span><b>{{ b.payment_status }}</b></div>
+          <div><span>{{ t('txn_id') }}</span><b>{{ b.txn_id or '-' }}</b></div>
+        </div>
+        <div class="qr-box" style="margin-top:24px">
+          <img src="{{ url_for('booking.qr_png', data=request.url_root.rstrip('/') ~ url_for('booking.verify', ref=b.booking_ref)) }}" alt="QR code" width="110" height="110">
+          <div>
+            <b>Scan to verify this booking</b>
+            <p class="hint" style="margin:0">Opens {{ request.url_root.rstrip('/') }}/verify/{{ b.booking_ref }}</p>
+          </div>
+        </div>
+        <div class="actions" style="margin-top:24px">
+          {% if b.payment_status == 'Paid' %}
+            <a class="btn btn-primary" href="{{ url_for('booking.ticket_pdf', booking_id=b.id) }}">{{ t('download_ticket') }}</a>
+          {% endif %}
+          <a class="btn btn-ghost" href="#" onclick="window.print();return false;">{{ t('print_ticket') }}</a>
+          <a class="btn btn-ghost" href="{{ url_for('booking.my_bookings') }}">{{ t('back') }}</a>
+        </div>
+        <p class="hint" style="margin-top:1rem">{{ t('demo_notice') }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

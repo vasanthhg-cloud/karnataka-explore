@@ -1,0 +1,41 @@
+{% extends "admin/base.html" %}
+{% block title %}{{ t('edit') if h else t('add_new') }}{% endblock %}
+{% block content %}
+<div class="admin-top">
+  <h2>{{ (t('edit') ~ ': ' ~ h.name) if h else (t('add_new') ~ ' homestay') }}</h2>
+  <a class="btn btn-ghost btn-sm" href="{{ url_for('admin.homestays') }}">← {{ t('back') }}</a>
+</div>
+<form method="post" enctype="multipart/form-data" class="panel">
+  <div class="form-grid">
+    <div class="field"><label>Name</label><input class="input" name="name" value="{{ h.name if h }}" required></div>
+    <div class="field"><label>Slug</label><input class="input" name="slug" value="{{ h.slug if h }}"></div>
+    <div class="field"><label>{{ t('district') }}</label>
+      <select class="select" name="district_id" required>
+        {% for dist in districts %}<option value="{{ dist.id }}" {{ 'selected' if h and h.district_id == dist.id }}>{{ dist.name }}</option>{% endfor %}
+      </select></div>
+    <div class="field"><label>Price per night (₹)</label><input class="input" type="number" name="price_per_night" value="{{ h.price_per_night if h }}"></div>
+    <div class="field"><label>Rooms available</label><input class="input" type="number" name="rooms_available" value="{{ h.rooms_available if h else 1 }}"></div>
+    <div class="field"><label>Max guests</label><input class="input" type="number" name="max_guests" value="{{ h.max_guests if h else 2 }}"></div>
+    <div class="field"><label>{{ t('checkin') }}</label><input class="input" name="checkin_time" value="{{ h.checkin_time if h else '12:00 PM' }}"></div>
+    <div class="field"><label>{{ t('checkout') }}</label><input class="input" name="checkout_time" value="{{ h.checkout_time if h else '11:00 AM' }}"></div>
+    <div class="field full"><label>Description</label><textarea class="input" name="description" rows="4" required>{{ h.description if h }}</textarea></div>
+    <div class="field full"><label>Full address</label><input class="input" name="address" value="{{ h.address if h }}"></div>
+    <div class="field"><label>Latitude</label><input class="input" name="latitude" value="{{ h.latitude if h }}"></div>
+    <div class="field"><label>Longitude</label><input class="input" name="longitude" value="{{ h.longitude if h }}"></div>
+    <div class="field full"><label>{{ t('facilities') }} (separate with commas)</label>
+      <input class="input" name="facilities" value="{{ h.facilities if h }}" placeholder="Free Wi-Fi, Parking, Food"></div>
+    <div class="field"><label>Contact name</label><input class="input" name="contact_name" value="{{ h.contact_name if h }}"></div>
+    <div class="field"><label>Contact phone</label><input class="input" name="contact_phone" value="{{ h.contact_phone if h }}"></div>
+    <div class="field"><label>Contact email</label><input class="input" name="contact_email" value="{{ h.contact_email if h }}"></div>
+    <div class="field"><label>Upload photograph</label><input class="input" type="file" name="photo" accept="image/*"></div>
+    <div class="field"><label>&nbsp;</label>
+      <label class="checkbox"><input type="checkbox" name="active" {{ 'checked' if not h or h.active }}> Visible on the site</label></div>
+  </div>
+  <button class="btn btn-primary">{{ t('save') }}</button>
+</form>
+{% if images %}
+<div class="panel" style="margin-top:22px"><h3>Photographs</h3>
+  <div class="gallery">{% for img in images %}<img src="{{ img.image_url }}" style="border-radius:12px" alt="">{% endfor %}</div>
+</div>
+{% endif %}
+{% endblock %}

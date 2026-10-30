@@ -1,0 +1,25 @@
+{% extends "admin/base.html" %}
+{% block title %}Administrators{% endblock %}
+{% block content %}
+<div class="admin-top"><div><h2>Administrators</h2><p class="muted" style="margin:0">Only these accounts can open the console</p></div></div>
+<div class="split">
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Last login</th></tr></thead>
+      <tbody>
+      {% for a in admins %}
+        <tr><td><b>{{ a.full_name }}</b></td><td>{{ a.email }}</td><td>{{ a.role }}</td>
+          <td><small>{{ a.last_login or 'never' }}</small></td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <form method="post" class="panel">
+    <h3>Add an administrator</h3>
+    <div class="field"><label>Full name</label><input class="input" name="full_name"></div>
+    <div class="field"><label>Email</label><input class="input" type="email" name="email" required></div>
+    <div class="field"><label>Password</label><input class="input" type="password" name="password" minlength="8" required></div>
+    <button class="btn btn-primary">{{ t('add_new') }}</button>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}{{ t('forgot_password') }}{% endblock %}
+{% block content %}
+<section class="section"><div class="wrap"><div class="auth-card">
+  <h1 style="font-size:1.6rem">{{ t('forgot_password') }}</h1>
+  <p class="muted">Enter the email you registered with. In a production build a reset link would be emailed; in this demo you will be taken to a reset form directly.</p>
+  <form method="post">
+    <div class="field"><label for="email">{{ t('email') }}</label><input class="input" id="email" type="email" name="email" required></div>
+    <button class="btn btn-primary btn-block">{{ t('submit') }}</button>
+  </form>
+  <p class="center" style="margin-top:1rem"><a href="{{ url_for('auth.login') }}">← {{ t('back') }}</a></p>
+</div></div></section>
+{% endblock %}

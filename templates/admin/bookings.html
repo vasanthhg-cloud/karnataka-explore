@@ -1,0 +1,44 @@
+{% extends "admin/base.html" %}
+{% block title %}{{ t('bookings') }}{% endblock %}
+{% block content %}
+<div class="admin-top">
+  <div><h2>{{ t('bookings') }}</h2><p class="muted" style="margin:0">All visitor bookings, newest first</p></div>
+  <form method="get" class="actions">
+    <input class="input" name="q" value="{{ q }}" placeholder="Booking ID, name or email" style="width:240px">
+    <select class="select" name="status" style="width:150px">
+      <option value="">All statuses</option>
+      {% for s in ['Pending','Confirmed','Cancelled','Completed'] %}
+        <option value="{{ s }}" {{ 'selected' if status == s }}>{{ s }}</option>{% endfor %}
+    </select>
+    <button class="btn btn-ghost btn-sm">{{ t('search') }}</button>
+  </form>
+</div>
+<div class="table-wrap">
+  <table>
+    <thead><tr><th>{{ t('booking_id') }}</th><th>Traveller</th><th>Item</th><th>Date</th>
+      <th>{{ t('total') }}</th><th>{{ t('payment_status') }}</th><th>{{ t('txn_id') }}</th><th>{{ t('status') }}</th></tr></thead>
+    <tbody>
+    {% for b in bookings %}
+      <tr>
+        <td><b>{{ b.booking_ref }}</b><br><small class="muted">{{ b.created_at|shortdate }}</small></td>
+        <td>{{ b.full_name }}<br><small class="muted">{{ b.email }}</small></td>
+        <td>{{ b.item_name }}<br><small class="muted">{{ b.kind }}</small></td>
+        <td>{{ b.visit_date or b.checkin_date or '-' }}</td>
+        <td>{{ b.total|money }}</td>
+        <td><span class="badge {{ 'ok' if b.payment_status == 'Paid' else ('danger' if b.payment_status == 'Failed' else 'warn') }}">{{ b.payment_status }}</span></td>
+        <td><small>{{ b.txn_id or '-' }}</small></td>
+        <td>
+          <form method="post" action="{{ url_for('admin.booking_status', booking_id=b.id) }}" style="display:flex;gap:.3rem">
+            <select class="select" name="status" style="width:130px;padding:.35rem .5rem;font-size:.82rem">
+              {% for s in ['Pending','Confirmed','Cancelled','Completed'] %}
+                <option {{ 'selected' if b.status == s }}>{{ s }}</option>{% endfor %}
+            </select>
+            <button class="btn btn-soft btn-sm">{{ t('save') }}</button>
+          </form>
+        </td>
+      </tr>
+    {% else %}<tr><td colspan="8" class="muted">No bookings yet.</td></tr>{% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

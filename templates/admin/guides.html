@@ -1,0 +1,25 @@
+{% extends "admin/base.html" %}
+{% block title %}{{ t('nav_guides') }}{% endblock %}
+{% block content %}
+<div class="admin-top">
+  <div><h2>{{ t('nav_guides') }}</h2><p class="muted" style="margin:0">Sample guide records for the demo</p></div>
+  <a class="btn btn-primary btn-sm" href="{{ url_for('admin.guide_new') }}">+ {{ t('add_new') }}</a>
+</div>
+<div class="table-wrap">
+  <table>
+    <thead><tr><th>Name</th><th>{{ t('district') }}</th><th>Languages</th><th>Experience</th><th>{{ t('per_day') }}</th><th>{{ t('rating') }}</th><th>{{ t('actions') }}</th></tr></thead>
+    <tbody>
+    {% for g in guides %}
+      <tr><td><b>{{ g.name }}</b><br><small class="muted">{{ g.phone }}</small></td>
+        <td>{{ g.district_name or '-' }}</td><td>{{ g.languages }}</td><td>{{ g.experience }} yrs</td>
+        <td>{{ g.fee_per_day|money }}</td><td>{{ g.rating }}</td>
+        <td><div class="actions">
+          <a class="btn btn-soft btn-sm" href="{{ url_for('admin.guide_edit', guide_id=g.id) }}">{{ t('edit') }}</a>
+          <form method="post" action="{{ url_for('admin.guide_delete', guide_id=g.id) }}" data-confirm="Remove {{ g.name }}?">
+            <button class="btn btn-danger btn-sm">{{ t('delete') }}</button></form>
+        </div></td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

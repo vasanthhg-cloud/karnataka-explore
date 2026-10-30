@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}{{ t('profile') }} - {{ site_name }}{% endblock %}
+{% block content %}
+<section class="section">
+  <div class="wrap split">
+    <div>
+      <h1 style="font-size:clamp(1.7rem,2.8vw,2.4rem)">{{ t('profile') }}</h1>
+      <form class="panel" method="post">
+        <div class="form-grid">
+          <div class="field full"><label for="full_name">{{ t('full_name') }}</label>
+            <input class="input" id="full_name" name="full_name" value="{{ user.full_name }}" required></div>
+          <div class="field"><label>{{ t('email') }}</label>
+            <input class="input" value="{{ user.email }}" disabled></div>
+          <div class="field"><label for="mobile">{{ t('mobile') }}</label>
+            <input class="input" id="mobile" name="mobile" value="{{ user.mobile }}" pattern="[0-9]{10}" required></div>
+          <div class="field"><label for="district">{{ t('district') }}</label>
+            <select class="select" id="district" name="district">
+              {% for d in districts %}<option value="{{ d.name }}" {{ 'selected' if user.district == d.name }}>{{ d.name }}</option>{% endfor %}
+            </select></div>
+          <div class="field"><label for="gender">{{ t('gender') }}</label>
+            <select class="select" id="gender" name="gender">
+              {% for g in ['Prefer not to say','Female','Male','Other'] %}
+                <option {{ 'selected' if user.gender == g }}>{{ g }}</option>
+              {% endfor %}
+            </select></div>
+        </div>
+        <button class="btn btn-primary">{{ t('update') }}</button>
+      </form>
+    </div>
+    <aside class="panel">
+      <h3>{{ user.full_name }}</h3>
+      <p class="muted">Member since {{ user.created_at|shortdate }}</p>
+      <hr class="divider">
+      <div class="summary-row"><span>{{ t('my_bookings') }}</span><b>{{ bookings_count }}</b></div>
+      <a class="btn btn-soft btn-block" href="{{ url_for('booking.my_bookings') }}">{{ t('my_bookings') }}</a>
+      <a class="btn btn-ghost btn-block" style="margin-top:.5rem" href="{{ url_for('booking.wishlist') }}">{{ t('wishlist') }}</a>
+      <a class="btn btn-ghost btn-block" style="margin-top:.5rem" href="{{ url_for('auth.logout') }}">{{ t('logout') }}</a>
+    </aside>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}{{ t('pay_now') }} - {{ b.booking_ref }}{% endblock %}
+{% block content %}
+<section class="section">
+  <div class="wrap split">
+    <div>
+      <nav class="breadcrumb"><a href="{{ url_for('booking.my_bookings') }}">← {{ t('my_bookings') }}</a></nav>
+      <h1 style="font-size:clamp(1.6rem,2.6vw,2.2rem)">{{ t('pay_now') }}</h1>
+      <div class="notice" style="margin-bottom:1.2rem">
+        <span>⚠</span>
+        <div><b>{{ t('demo_payment_title') }}</b><br><span style="font-weight:500">{{ t('demo_payment_body') }}</span></div>
+      </div>
+
+      <form class="panel" method="post">
+        <h3>{{ t('payment_method') }}</h3>
+        <div class="pay-methods" style="margin-bottom:1.2rem">
+          <label class="pay-method"><input type="radio" name="method" value="upi" checked> UPI</label>
+          <label class="pay-method"><input type="radio" name="method" value="debit"> {{ t('debit_card') }}</label>
+          <label class="pay-method"><input type="radio" name="method" value="credit"> {{ t('credit_card') }}</label>
+          <label class="pay-method"><input type="radio" name="method" value="netbanking"> {{ t('net_banking') }}</label>
+        </div>
+        <p class="hint" style="margin-bottom:1rem">No card number, UPI PIN, OTP or bank password is collected anywhere in this project. Choose an outcome to simulate the gateway.</p>
+        <div class="actions">
+          <button class="btn btn-primary" type="submit" name="outcome" value="success">{{ t('simulate_success') }}</button>
+          <button class="btn btn-danger" type="submit" name="outcome" value="failure">{{ t('simulate_failure') }}</button>
+        </div>
+      </form>
+    </div>
+
+    <aside class="panel sticky">
+      <h3>{{ t('booking_summary') }}</h3>
+      <div class="summary-row"><span>{{ t('booking_id') }}</span><b>{{ b.booking_ref }}</b></div>
+      <div class="summary-row"><span>Item</span><span>{{ b.item_name }}</span></div>
+      {% if b.kind == 'destination' %}
+        <div class="summary-row"><span>{{ t('visit_date') }}</span><span>{{ b.visit_date }}</span></div>
+        <div class="summary-row"><span>{{ t('visitors') }}</span><span>{{ b.visitors }}</span></div>
+      {% elif b.kind == 'homestay' %}
+        <div class="summary-row"><span>{{ t('checkin') }}</span><span>{{ b.checkin_date }}</span></div>
+        <div class="summary-row"><span>{{ t('checkout') }}</span><span>{{ b.checkout_date }}</span></div>
+        <div class="summary-row"><span>{{ t('nights') }} × {{ t('rooms') }}</span><span>{{ b.nights }} × {{ b.rooms }}</span></div>
+      {% else %}
+        <div class="summary-row"><span>{{ t('visit_date') }}</span><span>{{ b.visit_date }}</span></div>
+        <div class="summary-row"><span>Days</span><span>{{ b.nights }}</span></div>
+      {% endif %}
+      <hr class="divider">
+      <div class="summary-row"><span>{{ t('subtotal') }}</span><span>{{ b.subtotal|money }}</span></div>
+      <div class="summary-row"><span>{{ t('taxes') }}</span><span>{{ b.tax|money }}</span></div>
+      <div class="summary-row total"><span>{{ t('total') }}</span><span>{{ b.total|money }}</span></div>
+    </aside>
+  </div>
+</section>
+{% endblock %}

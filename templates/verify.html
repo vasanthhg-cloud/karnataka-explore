@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Verify {{ ref }}{% endblock %}
+{% block content %}
+<section class="section">
+  <div class="wrap" style="max-width:620px">
+    <h1 style="font-size:1.7rem">Booking verification</h1>
+    {% if booking %}
+      <div class="panel">
+        <span class="badge ok">Valid booking</span>
+        <h2 style="margin-top:.8rem">{{ item_name }}</h2>
+        <p class="muted">{{ district }}</p>
+        <div class="ticket-grid">
+          <div><span>{{ t('booking_id') }}</span><b>{{ booking.booking_ref }}</b></div>
+          <div><span>Traveller</span><b>{{ booking.full_name }}</b></div>
+          <div><span>{{ t('visit_date') }}</span><b>{{ booking.visit_date or booking.checkin_date }}</b></div>
+          <div><span>{{ t('status') }}</span><b>{{ booking.status }}</b></div>
+          <div><span>{{ t('payment_status') }}</span><b>{{ booking.payment_status }}</b></div>
+          <div><span>{{ t('total') }}</span><b>{{ booking.total|money }}</b></div>
+        </div>
+      </div>
+    {% else %}
+      <div class="notice">No booking matches the reference {{ ref }}.</div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

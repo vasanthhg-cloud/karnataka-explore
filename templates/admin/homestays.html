@@ -1,0 +1,38 @@
+{% extends "admin/base.html" %}
+{% block title %}{{ t('nav_homestays') }}{% endblock %}
+{% block content %}
+<div class="admin-top">
+  <div><h2>{{ t('nav_homestays') }}</h2>
+    <p class="muted" style="margin:0">{{ info.total }} records · sample listings must be replaced with verified data before launch</p></div>
+  <div class="actions">
+    <form method="get" style="display:flex;gap:.4rem">
+      <input class="input" name="q" value="{{ q }}" placeholder="Search" style="width:200px">
+      <button class="btn btn-ghost btn-sm">{{ t('search') }}</button>
+    </form>
+    <a class="btn btn-primary btn-sm" href="{{ url_for('admin.homestay_new') }}">+ {{ t('add_new') }}</a>
+  </div>
+</div>
+<div class="table-wrap">
+  <table>
+    <thead><tr><th>Name</th><th>{{ t('district') }}</th><th>Price</th><th>Rooms</th><th>Guests</th><th>Data</th><th>{{ t('actions') }}</th></tr></thead>
+    <tbody>
+    {% for h in stays %}
+      <tr>
+        <td><b>{{ h.name }}</b></td>
+        <td>{{ h.district_name }}</td>
+        <td>{{ h.price_per_night|money }}</td>
+        <td>{{ h.rooms_available }}</td>
+        <td>{{ h.max_guests }}</td>
+        <td>{% if h.is_sample %}<span class="badge warn">Sample</span>{% else %}<span class="badge ok">Verified</span>{% endif %}</td>
+        <td><div class="actions">
+          <a class="btn btn-soft btn-sm" href="{{ url_for('admin.homestay_edit', stay_id=h.id) }}">{{ t('edit') }}</a>
+          <form method="post" action="{{ url_for('admin.homestay_delete', stay_id=h.id) }}" data-confirm="Delete {{ h.name }}?">
+            <button class="btn btn-danger btn-sm">{{ t('delete') }}</button></form>
+        </div></td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% include 'partials/_pagination.html' %}
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "admin/base.html" %}
+{% block title %}{{ t('nav_destinations') }}{% endblock %}
+{% block content %}
+<div class="admin-top">
+  <div><h2>{{ t('nav_destinations') }}</h2><p class="muted" style="margin:0">{{ info.total }} records</p></div>
+  <div class="actions">
+    <form method="get" style="display:flex;gap:.4rem">
+      <input class="input" name="q" value="{{ q }}" placeholder="Search" style="width:220px">
+      <button class="btn btn-ghost btn-sm">{{ t('search') }}</button>
+    </form>
+    <a class="btn btn-primary btn-sm" href="{{ url_for('admin.destination_new') }}">+ {{ t('add_new') }}</a>
+  </div>
+</div>
+<div class="table-wrap">
+  <table>
+    <thead><tr><th>Name</th><th>{{ t('district') }}</th><th>{{ t('category') }}</th><th>Entry</th><th>Photos</th><th>{{ t('status') }}</th><th>{{ t('actions') }}</th></tr></thead>
+    <tbody>
+    {% for d in destinations %}
+      <tr>
+        <td><b>{{ d.name }}</b><br><small class="muted">{{ d.slug }}</small></td>
+        <td>{{ d.district_name }}</td>
+        <td>{{ d.category }}</td>
+        <td>{{ d.ticket_price|money if d.ticket_price else 'Free' }}</td>
+        <td>{{ d.image and '1+' or '0' }}</td>
+        <td><span class="badge {{ 'ok' if d.active else 'danger' }}">{{ 'Live' if d.active else 'Hidden' }}</span>
+            {% if d.featured %}<span class="badge blue">Featured</span>{% endif %}</td>
+        <td><div class="actions">
+          <a class="btn btn-soft btn-sm" href="{{ url_for('admin.destination_edit', dest_id=d.id) }}">{{ t('edit') }}</a>
+          <form method="post" action="{{ url_for('admin.destination_delete', dest_id=d.id) }}" data-confirm="Delete {{ d.name }}?">
+            <button class="btn btn-danger btn-sm">{{ t('delete') }}</button></form>
+        </div></td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% include 'partials/_pagination.html' %}
+{% endblock %}

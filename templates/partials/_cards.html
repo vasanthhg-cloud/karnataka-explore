@@ -1,0 +1,37 @@
+{% macro dest_card(d) %}
+<a class="card" href="{{ url_for('public.destination_detail', slug=d.slug) }}">
+  <div class="card-media">
+    {% if d.image %}<img src="{{ d.image }}" alt="{{ d.name }}" loading="lazy">{% else %}<div style="height:100%;display:grid;place-items:center;color:var(--ink-mute)">No photo</div>{% endif %}
+    <span class="badge cat">{{ category_label(d.category) }}</span>
+    <span class="price-tag">{% if d.ticket_price %}{{ d.ticket_price|money }}{% else %}Free entry{% endif %}</span>
+  </div>
+  <div class="card-body">
+    <div class="meta">{{ district_label(d.district_name) }}{% if d.region %} · {{ d.region }}{% endif %}</div>
+    <h3>{{ d.name }}</h3>
+    <p>{{ d.description }}</p>
+    <div class="card-foot">
+      <span class="stars">{{ d.rating|stars }} <small class="muted">{{ d.rating or 'New' }}</small></span>
+      <span class="btn btn-soft btn-sm">{{ t('view_details') }}</span>
+    </div>
+  </div>
+</a>
+{% endmacro %}
+
+{% macro stay_card(h) %}
+<a class="card" href="{{ url_for('public.homestay_detail', slug=h.slug) }}">
+  <div class="card-media">
+    {% if h.image %}<img src="{{ h.image }}" alt="{{ h.name }}" loading="lazy">{% endif %}
+    <span class="badge blue">{{ district_label(h.district_name) }}</span>
+    <span class="price-tag">{{ h.price_per_night|money }} <small class="muted">/{{ t('nights') }}</small></span>
+  </div>
+  <div class="card-body">
+    <h3>{{ h.name }}</h3>
+    <div class="meta">{{ t('guests') }} {{ h.max_guests }} · {{ h.rooms_available }} {{ t('rooms') }}</div>
+    <p>{{ h.description }}</p>
+    <div class="card-foot">
+      <span class="stars">{{ (h.review_avg or h.rating)|stars }} <small class="muted">{{ h.review_avg or h.rating }}</small></span>
+      <span class="btn btn-soft btn-sm">{{ t('view_details') }}</span>
+    </div>
+  </div>
+</a>
+{% endmacro %}

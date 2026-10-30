@@ -1,0 +1,57 @@
+{% extends "admin/base.html" %}
+{% block title %}{{ t('edit') if d else t('add_new') }}{% endblock %}
+{% block content %}
+<div class="admin-top">
+  <h2>{{ (t('edit') ~ ': ' ~ d.name) if d else (t('add_new') ~ ' destination') }}</h2>
+  <a class="btn btn-ghost btn-sm" href="{{ url_for('admin.destinations') }}">← {{ t('back') }}</a>
+</div>
+<form method="post" enctype="multipart/form-data" class="panel">
+  <div class="form-grid">
+    <div class="field"><label>Name</label><input class="input" name="name" value="{{ d.name if d }}" required></div>
+    <div class="field"><label>Slug (URL)</label><input class="input" name="slug" value="{{ d.slug if d }}" placeholder="auto from name"></div>
+    <div class="field"><label>{{ t('district') }}</label>
+      <select class="select" name="district_id" required>
+        {% for dist in districts %}<option value="{{ dist.id }}" {{ 'selected' if d and d.district_id == dist.id }}>{{ dist.name }}</option>{% endfor %}
+      </select></div>
+    <div class="field"><label>{{ t('category') }}</label>
+      <select class="select" name="category">
+        {% for c in categories %}<option {{ 'selected' if d and d.category == c }}>{{ c }}</option>{% endfor %}
+      </select></div>
+    <div class="field full"><label>Description</label><textarea class="input" name="description" rows="5" required>{{ d.description if d }}</textarea></div>
+    <div class="field"><label>{{ t('location') }}</label><input class="input" name="location" value="{{ d.location if d }}"></div>
+    <div class="field"><label>Latitude</label><input class="input" name="latitude" value="{{ d.latitude if d }}"></div>
+    <div class="field"><label>Longitude</label><input class="input" name="longitude" value="{{ d.longitude if d }}"></div>
+    <div class="field"><label>{{ t('best_time') }}</label><input class="input" name="best_time" value="{{ d.best_time if d }}"></div>
+    <div class="field"><label>{{ t('entry_fee') }}</label><input class="input" name="entry_fee" value="{{ d.entry_fee if d }}"></div>
+    <div class="field"><label>{{ t('timings') }}</label><input class="input" name="timings" value="{{ d.timings if d }}"></div>
+    <div class="field"><label>{{ t('duration') }}</label><input class="input" name="duration" value="{{ d.duration if d }}"></div>
+    <div class="field"><label>Ticket price (₹, 0 = free)</label><input class="input" name="ticket_price" type="number" step="1" value="{{ d.ticket_price if d else 0 }}"></div>
+    <div class="field"><label>{{ t('activities') }} (separate with |)</label><input class="input" name="activities" value="{{ d.activities if d }}"></div>
+    <div class="field"><label>{{ t('nearby') }} (separate with |)</label><input class="input" name="nearby" value="{{ d.nearby if d }}"></div>
+    <div class="field full"><label>{{ t('travel_info') }}</label><textarea class="input" name="travel_info" rows="3">{{ d.travel_info if d }}</textarea></div>
+    <div class="field"><label>Upload photograph</label><input class="input" type="file" name="photo" accept="image/*">
+      <div class="hint">JPG, PNG or WebP up to 8 MB. Added to the gallery.</div></div>
+    <div class="field"><label>&nbsp;</label>
+      <label class="checkbox"><input type="checkbox" name="featured" {{ 'checked' if d and d.featured }}> Featured on the home page</label>
+      <label class="checkbox" style="margin-top:.4rem"><input type="checkbox" name="active" {{ 'checked' if not d or d.active }}> Visible on the site</label></div>
+  </div>
+  <button class="btn btn-primary">{{ t('save') }}</button>
+</form>
+
+{% if images %}
+<div class="panel" style="margin-top:22px">
+  <h3>Gallery ({{ images|length }})</h3>
+  <div class="gallery">
+    {% for img in images %}
+    <div style="position:relative">
+      <img src="{{ img.image_url }}" alt="" style="border-radius:12px;aspect-ratio:4/3;object-fit:cover;width:100%">
+      <form method="post" action="{{ url_for('admin.image_delete', image_id=img.id) }}" style="position:absolute;top:8px;right:8px">
+        <input type="hidden" name="back" value="{{ request.path }}">
+        <button class="btn btn-danger btn-sm" data-confirm="Remove this photo?">✕</button>
+      </form>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
+{% endblock %}

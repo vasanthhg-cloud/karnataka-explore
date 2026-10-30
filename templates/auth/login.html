@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}{{ t('login') }} - {{ site_name }}{% endblock %}
+{% block content %}
+<section class="section">
+  <div class="wrap">
+    <div class="auth-card">
+      <span class="eyebrow">{{ t('sign_in') }}</span>
+      <h1 style="font-size:1.8rem">{{ t('login') }}</h1>
+      <p class="muted">Welcome back. Your bookings and wishlist are waiting.</p>
+      <form method="post">
+        <div class="field"><label for="identity">{{ t('email') }} / {{ t('mobile') }}</label>
+          <input class="input" id="identity" name="identity" required autocomplete="username"></div>
+        <div class="field"><label for="password">{{ t('password') }}</label>
+          <div class="pw-wrap">
+            <input class="input" id="password" type="password" name="password" required autocomplete="current-password">
+            <button type="button" class="pw-toggle" data-pw-toggle>Show</button>
+          </div></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;flex-wrap:wrap;gap:.5rem">
+          <label class="checkbox"><input type="checkbox" name="remember"> {{ t('remember_me') }}</label>
+          <a href="{{ url_for('auth.forgot_password') }}" style="font-size:.86rem">{{ t('forgot_password') }}</a>
+        </div>
+        <button class="btn btn-primary btn-block" type="submit">{{ t('sign_in') }}</button>
+      </form>
+      <p class="muted center" style="margin-top:1.2rem">{{ t('new_here') }} <a href="{{ url_for('auth.register') }}">{{ t('create_account') }}</a></p>
+      <div class="notice info" style="margin-top:1rem;font-size:.84rem">
+        Demo account: demo@karnatakaexplore.in / Demo@1234 · Admin: /admin/login
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

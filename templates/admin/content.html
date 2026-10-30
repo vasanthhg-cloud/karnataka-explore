@@ -1,0 +1,14 @@
+{% extends "admin/base.html" %}
+{% block title %}Website content{% endblock %}
+{% block content %}
+<div class="admin-top"><div><h2>Website content</h2><p class="muted" style="margin:0">Text blocks used across the public pages</p></div></div>
+<form method="post" class="panel">
+  <div class="field"><label>Travel tips (one per line)</label>
+    <textarea class="input" name="travel_tips" rows="6">{{ values.travel_tips }}</textarea></div>
+  <div class="field"><label>Emergency contacts (one per line)</label>
+    <textarea class="input" name="emergency" rows="6">{{ values.emergency }}</textarea></div>
+  <div class="field"><label>Home page notice (optional)</label>
+    <textarea class="input" name="home_notice" rows="3">{{ values.home_notice }}</textarea></div>
+  <button class="btn btn-primary">{{ t('save') }}</button>
+</form>
+{% endblock %}

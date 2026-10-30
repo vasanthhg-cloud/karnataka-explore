@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}{{ t('tourism_map') }} - {{ site_name }}{% endblock %}
+{% block head %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+{% endblock %}
+{% block content %}
+<section class="section tight" style="background:var(--bg-alt);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <nav class="breadcrumb"><a href="{{ url_for('public.index') }}">{{ t('nav_home') }}</a> / {{ t('nav_map') }}</nav>
+    <h1 style="font-size:clamp(1.8rem,3vw,2.6rem)">{{ t('tourism_map') }}</h1>
+    <p class="muted">Click any pin for the place name and a link to its full page. Toggle layers on the right.</p>
+  </div>
+</section>
+<section class="section">
+  <div class="wrap">
+    <div class="chips" style="margin-bottom:18px">
+      <button class="chip active" data-filter="all">All</button>
+      {% for c in categories %}<button class="chip" data-filter="{{ c }}">{{ category_label(c) }}</button>{% endfor %}
+    </div>
+    <div id="big-map" class="map-embed" style="height:640px"></div>
+    <p class="hint" style="margin-top:12px">Map data © OpenStreetMap contributors. Homestay pins are shown in blue.</p>
+  </div>
+</section>
+{% endblock %}
+{% block scripts %}
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  var dests = {{ points|tojson }};
+  var stays = {{ stays|tojson }};
+  var map = L.map('big-map').setView([15.0, 75.9], 6.5);
+  L.tileLayer('{{ config.MAP_TILE_URL }}', { attribution: '{{ config.MAP_ATTRIBUTION|safe }}', maxZoom: 18 }).addTo(map);
+  var green = L.divIcon({ className:'', html:'<div style="width:14px;height:14px;border-radius:50%;background:#0f6b4f;border:2px solid #fff;box-shadow:0 1px 6px rgba(0,0,0,.4)"></div>', iconSize:[14,14] });
+  var blue = L.divIcon({ className:'', html:'<div style="width:12px;height:12px;border-radius:3px;background:#2b7bb9;border:2px solid #fff;box-shadow:0 1px 6px rgba(0,0,0,.4)"></div>', iconSize:[12,12] });
+  var layers = {};
+  dests.forEach(function (p) {
+    var m = L.marker([p.latitude, p.longitude], { icon: green }).addTo(map);
+    m.bindPopup('<b>' + p.name + '</b><br>' + p.category + ' · ' + p.district_name +
+                '<br><a href="/destination/' + p.slug + '">Open page →</a>');
+    (layers[p.category] = layers[p.category] || []).push(m);
+  });
+  stays.forEach(function (s) {
+    L.marker([s.latitude, s.longitude], { icon: blue }).addTo(map)
+      .bindPopup('<b>' + s.name + '</b><br>' + s.district_name + ' · ₹' + s.price_per_night +
+                 '<br><a href="/homestay/' + s.slug + '">Open page →</a>');
+  });
+  document.querySelectorAll('[data-filter]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      document.querySelectorAll('[data-filter]').forEach(function (b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      var f = btn.getAttribute('data-filter');
+      Object.keys(layers).forEach(function (cat) {
+        layers[cat].forEach(function (m) {
+          if (f === 'all' || f === cat) m.addTo(map); else map.removeLayer(m);
+        });
+      });
+    });
+  });
+</script>
+{% endblock %}

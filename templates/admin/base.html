@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="{{ lang }}" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}Admin - {{ site_name }}{% endblock %}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<script>(function(){try{var s=localStorage.getItem("kx-theme");if(s)document.documentElement.setAttribute("data-theme",s);}catch(e){}})();</script>
+<style>
+  .admin-shell { display:grid; grid-template-columns:250px minmax(0,1fr); min-height:100vh; }
+  .admin-side { background:var(--green-900); color:#cfe3d9; padding:22px 16px; position:sticky; top:0; height:100vh; overflow-y:auto; }
+  .admin-side h1 { font-size:1rem; color:#fff; letter-spacing:-.01em; margin:0 0 1.2rem; padding:0 .6rem; }
+  .admin-side a { display:flex; align-items:center; gap:.6rem; padding:.62rem .7rem; border-radius:10px;
+    color:#bcd6ca; font-size:.9rem; font-weight:600; margin-bottom:.15rem; }
+  .admin-side a:hover { background:rgba(255,255,255,.09); color:#fff; }
+  .admin-side a.active { background:rgba(255,255,255,.16); color:#fff; }
+  .admin-side .sep { height:1px; background:rgba(255,255,255,.12); margin:.9rem .4rem; }
+  .admin-main { padding:26px 30px 60px; background:var(--bg-alt); }
+  .admin-top { display:flex; justify-content:space-between; align-items:center; gap:1rem; margin-bottom:24px; flex-wrap:wrap; }
+  .admin-top h2 { margin:0; font-size:1.45rem; }
+  @media (max-width:900px) {
+    .admin-shell { grid-template-columns:1fr; }
+    .admin-side { position:static; height:auto; display:flex; flex-wrap:wrap; gap:.2rem; }
+    .admin-side h1, .admin-side .sep { width:100%; }
+    .admin-main { padding:18px; }
+  }
+</style>
+</head>
+<body>
+<div class="admin-shell">
+  <aside class="admin-side">
+    <h1>{{ site_name }}<br><small style="font-weight:500;color:#8fb3a4">Admin console</small></h1>
+    <a href="{{ url_for('admin.dashboard') }}" class="{{ 'active' if current_path == '/admin/' }}">▦ {{ t('dashboard') }}</a>
+    <a href="{{ url_for('admin.destinations') }}" class="{{ 'active' if '/destinations' in current_path }}">▲ {{ t('nav_destinations') }}</a>
+    <a href="{{ url_for('admin.homestays') }}" class="{{ 'active' if '/homestays' in current_path }}">⌂ {{ t('nav_homestays') }}</a>
+    <a href="{{ url_for('admin.guides') }}" class="{{ 'active' if '/guides' in current_path }}">☺ {{ t('nav_guides') }}</a>
+    <div class="sep"></div>
+    <a href="{{ url_for('admin.bookings') }}" class="{{ 'active' if '/bookings' in current_path }}">▤ {{ t('bookings') }}</a>
+    <a href="{{ url_for('admin.payments') }}" class="{{ 'active' if '/payments' in current_path }}">₹ {{ t('payments') }}</a>
+    <a href="{{ url_for('admin.users') }}" class="{{ 'active' if '/users' in current_path }}">◍ {{ t('users') }}</a>
+    <div class="sep"></div>
+    <a href="{{ url_for('admin.reviews') }}" class="{{ 'active' if '/reviews' in current_path }}">★ {{ t('reviews') }}</a>
+    <a href="{{ url_for('admin.messages') }}" class="{{ 'active' if '/messages' in current_path }}">✉ {{ t('messages') }}</a>
+    <a href="{{ url_for('admin.content') }}" class="{{ 'active' if '/content' in current_path }}">✎ Content</a>
+    <a href="{{ url_for('admin.admins') }}" class="{{ 'active' if '/admins' in current_path }}">⚙ Admins</a>
+    <div class="sep"></div>
+    <a href="{{ url_for('public.index') }}">↗ View site</a>
+    <a href="{{ url_for('admin.logout') }}">⎋ {{ t('logout') }}</a>
+  </aside>
+  <main class="admin-main">
+    {% include 'partials/_flash.html' %}
+    {% block content %}{% endblock %}
+  </main>
+</div>
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
